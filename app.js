@@ -6,11 +6,11 @@
   const CATEGORIES = ['All', 'Fresh', 'Pantry', 'Spices', 'Frozen', 'Drinks', 'Snacks'];
 
   const CAT_TILES = [
-    { label: 'Fresh',  bg: 'linear-gradient(135deg,#6e8b4a,#3f5028)' },
+    { label: 'Fresh',  bg: "url('assets/fresh.jpg') center/cover" },
     { label: 'Pantry', bg: 'linear-gradient(135deg,#e6a531,#b87c1b)' },
-    { label: 'Spices', bg: 'linear-gradient(135deg,#c45a2c,#8a1a39)' },
-    { label: 'Frozen', bg: 'linear-gradient(135deg,#4a6d8c,#2a3f55)' },
-    { label: 'Drinks', bg: 'linear-gradient(135deg,#b8244c,#8a1a39)' },
+    { label: 'Spices', bg: "url('assets/spices.avif') center/cover" },
+    { label: 'Frozen', bg: "url('assets/frozen.webp') center/cover" },
+    { label: 'Drinks', bg: "url('assets/drinks.jpg') center/cover" },
     { label: 'Snacks', bg: 'linear-gradient(135deg,#e0457d,#b8244c)' },
   ];
 

@@ -252,18 +252,20 @@ body {
 .gh-catSection { max-width: 1280px; margin: 0 auto; padding: 64px 24px 32px; }
 .gh-catGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
 .gh-catTile {
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  background: transparent; border: none; cursor: pointer; padding: 8px;
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px;
+  background: transparent; border: none; cursor: pointer; padding: 0;
   text-decoration: none; color: inherit;
 }
 .gh-catCircle {
-  width: 96px; height: 96px; border-radius: 50%;
+  aspect-ratio: 1 / 1; width: 100%; border-radius: 18px;
   box-shadow: var(--sh-2); transition: all 200ms cubic-bezier(0.4,0,0.2,1);
+  background-position: center; background-size: cover; background-repeat: no-repeat;
 }
 .gh-catTile:hover .gh-catCircle { transform: translateY(-3px); box-shadow: var(--sh-3); }
 .gh-catLabel {
   font-family: var(--ff-display); font-size: 13px;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-1);
+  text-align: center;
 }
 
 /* ============ Product grid ============ */
@@ -499,7 +501,7 @@ body {
   .gh-catSection { padding: 48px 20px 24px; }
   .gh-prodSection { padding: 32px 20px 64px; }
   .gh-sectionTitle { font-size: 28px; }
-  .gh-catCircle { width: 76px; height: 76px; }
+  .gh-catCircle { border-radius: 14px; }
   .gh-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
   .gh-pBody { padding: 12px 14px 14px; }
   .gh-pName { font-size: 15px; }
@@ -521,5 +523,4 @@ body {
 @media (max-width: 480px) {
   .gh-catGrid { grid-template-columns: repeat(2, 1fr); }
   .gh-heroCtas .gh-btn { flex: 1; justify-content: center; }
-  .gh-catCircle { width: 64px; height: 64px; }
 }

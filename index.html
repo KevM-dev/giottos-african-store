@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Giottos African Store — Norwich</title>
-  <meta name="description" content="The neighbourhood African grocery in Norwich — pantry staples, fresh produce, spices and frozen meats, sourced from across the continent.">
+  <meta name="description" content="The neighbourhood African grocery in Norwich — pantry staples, fresh produce, spices and frozen meats, sourced from across the continent. Come and visit us.">
   <meta name="theme-color" content="#b8244c">
   <link rel="icon" href="assets/logo-raspberry.png">
   <link rel="stylesheet" href="styles.css">
@@ -14,24 +14,17 @@
 <!-- ============ Header ============ -->
 <header class="gh-header">
   <div class="gh-headerInner">
-    <a href="#" class="gh-logoPill">Giottos</a>
+    <a href="index.html" class="gh-logoPill">Giottos</a>
     <div class="gh-logoSub">African Store</div>
-    <div class="gh-search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input id="search" type="search" placeholder="Search egusi, palm oil, garri…" aria-label="Search products">
-    </div>
-    <button class="gh-iconBtn" type="button" title="Account" aria-label="Account">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>Account</span>
-    </button>
-    <button class="gh-iconBtn" type="button" id="basketBtn" title="Basket" aria-label="Open basket">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-      <span>Basket</span>
-      <span class="gh-cartCount" id="cartCount" hidden>0</span>
-    </button>
-  </div>
-  <div class="gh-catBar">
-    <div class="gh-catBarInner" id="catBar"></div>
+    <nav class="gh-nav" aria-label="Primary">
+      <a href="index.html" class="gh-navLink is-active">Home</a>
+      <a href="shop.html" class="gh-navLink">What's in</a>
+      <a href="visit.html" class="gh-navLink">Visit</a>
+    </nav>
+    <a class="gh-iconBtn" href="tel:+441603000000" title="Call the shop" aria-label="Call the shop">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>Call us</span>
+    </a>
   </div>
 </header>
 
@@ -43,14 +36,14 @@
       <div class="gh-heroKicker">★ Fresh truck arrives every Friday</div>
       <h1 class="gh-heroTitle">
         Taste of <em>home</em>,
-        <br>delivered weekly.
+        <br>right here in Norwich.
       </h1>
       <p class="gh-heroSub">
-        Fresh produce, pantry staples and spices sourced from across Africa — packed in our shop in Norwich, on your doorstep the next morning.
+        Fresh produce, pantry staples and spices sourced from across Africa — on our shelves at 355B Aylsham Road. Pop in, have a look, ask for what you can't find.
       </p>
       <div class="gh-heroCtas">
-        <button class="gh-btn gh-btnPrimary" type="button" id="shopFreshBtn">Shop fresh →</button>
-        <button class="gh-btn gh-btnSecondary" type="button">Visit the store</button>
+        <a class="gh-btn gh-btnPrimary" href="shop.html">See what's in →</a>
+        <a class="gh-btn gh-btnSecondary" href="visit.html">Find the shop</a>
       </div>
     </div>
     <div class="gh-heroImg">
@@ -63,19 +56,9 @@
 <section class="gh-catSection">
   <div class="gh-sectionHead">
     <h2 class="gh-sectionTitle">Shop by category</h2>
-    <a href="#" class="gh-sectionLink">View all →</a>
+    <a href="shop.html" class="gh-sectionLink">View all →</a>
   </div>
   <div class="gh-catGrid" id="catGrid"></div>
-</section>
-
-<!-- ============ Product grid ============ -->
-<section class="gh-prodSection" id="prodSection">
-  <div class="gh-sectionHead">
-    <h2 class="gh-sectionTitle" id="prodTitle">This week's pick</h2>
-    <a href="#" class="gh-sectionLink">All products →</a>
-  </div>
-  <div class="gh-grid" id="prodGrid"></div>
-  <div class="gh-empty" id="prodEmpty" hidden></div>
 </section>
 
 <!-- ============ Origin banner ============ -->
@@ -94,6 +77,60 @@
   </div>
 </section>
 
+<!-- ============ Contact card ============ -->
+<section class="gh-contact" id="contact">
+  <div class="gh-contactInner">
+    <div class="gh-contactCard">
+      <div class="gh-contactLeft">
+        <div class="gh-contactKicker">Get in touch</div>
+        <h2 class="gh-contactTitle">Got a question?<br><em>Just ask.</em></h2>
+        <p class="gh-contactSub">After a specific ingredient, planning a big shop, or want to know what's on this week's truck? Drop us a line — we usually get back the same day.</p>
+        <div class="gh-contactMeta">
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:+441603000000">01603 000 000</a></p>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:hello@giottos.co.uk">hello@giottos.co.uk</a></p>
+          </div>
+          <div>
+            <h4>Open</h4>
+            <p>Mon – Sat · 8am – 9pm<br>Sun · 10am – 6pm</p>
+          </div>
+        </div>
+      </div>
+      <form class="gh-contactForm" id="contactForm" novalidate>
+        <label class="gh-fieldLabel">
+          <span>Your name</span>
+          <input type="text" name="name" id="cfName" required autocomplete="name">
+        </label>
+        <label class="gh-fieldLabel">
+          <span>Your email</span>
+          <input type="email" name="email" id="cfEmail" required autocomplete="email">
+        </label>
+        <label class="gh-fieldLabel">
+          <span>Message</span>
+          <textarea name="message" id="cfMessage" rows="5" required placeholder="Hi Giottos, I was wondering…"></textarea>
+        </label>
+        <button type="submit" class="gh-btn gh-btnPrimary">Send message →</button>
+        <p class="gh-formNote">Opens in your email app so we can reply straight back.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Visit teaser ============ -->
+<section class="gh-visitTeaser">
+  <div class="gh-visitTeaserInner">
+    <div>
+      <h2 class="gh-visitTeaserTitle">Come and visit.</h2>
+      <p class="gh-visitTeaserSub">355B Aylsham Road, Norwich NR3 2RX · Mon – Sat 8am – 9pm · Sun 10am – 6pm</p>
+    </div>
+    <a href="visit.html" class="gh-btn gh-btnPrimary">Find the shop →</a>
+  </div>
+</section>
+
 <!-- ============ Footer ============ -->
 <footer class="gh-footer">
   <div class="gh-footerInner">
@@ -103,12 +140,12 @@
         <p class="gh-footerBlurb">The neighbourhood African grocery — pantry staples, fresh produce, spices and frozen meats, right here in Norwich.</p>
       </div>
       <div class="gh-footerCol">
-        <h4>Shop</h4>
-        <a href="#">Fresh produce</a>
-        <a href="#">Pantry staples</a>
-        <a href="#">Spices &amp; seasoning</a>
-        <a href="#">Frozen</a>
-        <a href="#">Drinks &amp; snacks</a>
+        <h4>What's in</h4>
+        <a href="shop.html?cat=Fresh">Fresh produce</a>
+        <a href="shop.html?cat=Pantry">Pantry staples</a>
+        <a href="shop.html?cat=Spices">Spices &amp; seasoning</a>
+        <a href="shop.html?cat=Frozen">Frozen</a>
+        <a href="shop.html?cat=Drinks">Drinks &amp; snacks</a>
       </div>
       <div class="gh-footerCol">
         <h4>Visit us</h4>
@@ -116,41 +153,20 @@
         <p>Mon – Sat · 8am – 9pm<br>Sunday · 10am – 6pm</p>
       </div>
       <div class="gh-footerCol">
-        <h4>Help</h4>
-        <a href="#">Delivery &amp; areas</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact us</a>
-        <a href="#">About Giottos</a>
+        <h4>Helpful</h4>
+        <a href="visit.html">Find the shop</a>
+        <a href="tel:+441603000000">Call us</a>
+        <a href="mailto:hello@giottos.co.uk">Email us</a>
+        <a href="visit.html">About Giottos</a>
       </div>
     </div>
     <div class="gh-footerBase">
       <span>© <span id="year"></span> Giottos African Store</span>
-      <span class="gh-credit">Site by <a href="https://kevwebdesign.com" target="_blank" rel="noopener">Kevin Labs</a></span>
+      <span class="gh-credit">Site by <a href="https://kevwebdesign.com" target="_blank" rel="noopener">Kevin&amp;Co</a></span>
       <span>Made in Norwich</span>
     </div>
   </div>
 </footer>
-
-<!-- ============ Basket drawer ============ -->
-<div class="gh-drawerOverlay" id="drawerOverlay"></div>
-<aside class="gh-drawer" id="drawer" aria-hidden="true" aria-label="Basket">
-  <div class="gh-drawerHead">
-    <h3>Your basket</h3>
-    <button class="gh-drawerClose" type="button" id="drawerClose" aria-label="Close basket">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-  </div>
-  <div class="gh-drawerBody" id="drawerBody"></div>
-  <div class="gh-drawerFoot" id="drawerFoot" hidden>
-    <div class="gh-totalRow">
-      <span class="gh-totalLbl">Subtotal</span>
-      <span class="gh-totalVal" id="drawerTotal">£0.00</span>
-    </div>
-    <button class="gh-btn gh-btnPrimary gh-checkoutBtn" type="button">Checkout →</button>
-  </div>
-</aside>
-
-<div class="gh-toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="app.js"></script>
 </body>

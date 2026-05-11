@@ -73,7 +73,7 @@ body {
 .gh-header { background: var(--brand-raspberry); color: var(--brand-cream); position: sticky; top: 0; z-index: 50; }
 .gh-headerInner {
   max-width: 1280px; margin: 0 auto; padding: 14px 24px;
-  display: flex; align-items: center; gap: 20px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .gh-logoPill {
   background: var(--brand-cream); padding: 8px 24px; border-radius: 9999px;
@@ -85,11 +85,22 @@ body {
   font-family: var(--ff-display); font-size: 14px; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--brand-cream); white-space: nowrap;
 }
+.gh-nav {
+  flex: 1; display: flex; gap: 24px; align-items: center; min-width: 0;
+}
+.gh-navLink {
+  font-family: var(--ff-display); font-size: 14px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--brand-cream); text-decoration: none;
+  padding: 6px 0; border-bottom: 2px solid transparent;
+  transition: border-color 160ms, opacity 160ms;
+}
+.gh-navLink:hover { opacity: 0.85; }
+.gh-navLink.is-active { border-bottom-color: var(--brand-cream); }
 .gh-search {
-  flex: 1; max-width: 520px; min-width: 0;
+  width: 100%; max-width: 560px;
   background: rgba(255,239,227,0.12); border: 1px solid rgba(255,239,227,0.22);
-  border-radius: 9999px; padding: 10px 18px;
-  display: flex; align-items: center; gap: 10px;
+  border-radius: 9999px; padding: 12px 20px;
+  display: flex; align-items: center; gap: 12px;
   color: var(--brand-cream);
   transition: border-color 160ms, background 160ms;
 }
@@ -99,6 +110,14 @@ body {
   color: var(--brand-cream); font-family: var(--ff-body); font-size: 15px;
 }
 .gh-search input::placeholder { color: rgba(248,239,227,0.6); }
+.gh-searchLight {
+  background: var(--bg-elev); border: 1px solid var(--border-2);
+  color: var(--fg-1); box-shadow: var(--sh-1);
+  margin: 24px auto 0;
+}
+.gh-searchLight:focus-within { background: var(--bg-elev); border-color: var(--brand-raspberry); }
+.gh-searchLight input { color: var(--fg-1); }
+.gh-searchLight input::placeholder { color: var(--fg-3); }
 .gh-iconBtn {
   background: transparent; border: none; color: var(--brand-cream); cursor: pointer;
   display: inline-flex; align-items: center; gap: 8px;
@@ -106,12 +125,8 @@ body {
   letter-spacing: 0.1em; padding: 8px 10px; border-radius: 8px;
   transition: background 160ms;
 }
+.gh-iconBtn { text-decoration: none; }
 .gh-iconBtn:hover { background: rgba(255,239,227,0.1); }
-.gh-cartCount {
-  background: var(--acc-mustard); color: var(--acc-cocoa);
-  border-radius: 9999px; padding: 1px 8px; font-size: 11px; font-weight: 800;
-  font-family: var(--ff-body); letter-spacing: 0;
-}
 .gh-catBar { background: var(--bg-tint); border-bottom: 1px solid var(--border-1); }
 .gh-catBarInner {
   max-width: 1280px; margin: 0 auto; padding: 12px 24px;
@@ -176,6 +191,34 @@ body {
   text-transform: uppercase; color: rgba(248,239,227,0.6); padding: 22px;
 }
 
+/* ============ Page hero (shop / visit) ============ */
+.gh-pageHero {
+  background:
+    radial-gradient(ellipse at 70% 40%, rgba(230,165,49,0.18), transparent 60%),
+    linear-gradient(180deg, var(--bg-tint) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border-1);
+}
+.gh-pageHeroInner {
+  max-width: 1280px; margin: 0 auto; padding: 56px 24px 40px;
+  text-align: center;
+}
+.gh-pageHeroKicker {
+  font-family: var(--ff-display); font-size: 13px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--brand-raspberry); margin-bottom: 14px;
+}
+.gh-pageHeroTitle {
+  font-family: var(--ff-display); font-weight: 700;
+  font-size: clamp(40px, 5vw, 72px); line-height: 0.98;
+  text-transform: uppercase; letter-spacing: 0.01em; margin: 0 0 16px;
+  color: var(--fg-1);
+}
+.gh-pageHeroTitle em {
+  font-family: var(--ff-script); font-style: normal; font-weight: 400;
+  color: var(--brand-raspberry); text-transform: none; letter-spacing: -0.01em;
+  display: inline-block; padding: 0 4px;
+}
+.gh-pageHeroSub { font-size: 17px; color: var(--fg-2); max-width: 600px; margin: 0 auto; }
+
 /* ============ Buttons ============ */
 .gh-btn {
   font-family: var(--ff-display); font-weight: 600; font-size: 14px;
@@ -202,6 +245,8 @@ body {
   white-space: nowrap;
 }
 .gh-sectionLink:hover { color: var(--brand-raspberry-dk); text-decoration: underline; text-underline-offset: 4px; }
+.gh-sectionNote { color: var(--fg-3); }
+.gh-sectionNote:hover { color: var(--fg-3); text-decoration: none; }
 
 /* ============ Category strip ============ */
 .gh-catSection { max-width: 1280px; margin: 0 auto; padding: 64px 24px 32px; }
@@ -209,6 +254,7 @@ body {
 .gh-catTile {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   background: transparent; border: none; cursor: pointer; padding: 8px;
+  text-decoration: none; color: inherit;
 }
 .gh-catCircle {
   width: 96px; height: 96px; border-radius: 50%;
@@ -257,17 +303,13 @@ body {
 .gh-pDesc { font-family: var(--ff-body); font-size: 13px; color: var(--fg-2); line-height: 1.4; flex: 1; margin: 0; }
 .gh-pFoot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; gap: 8px; }
 .gh-pPrice { font-family: var(--ff-display); font-weight: 700; font-size: 22px; color: var(--brand-raspberry); }
-.gh-pAdd {
-  background: var(--brand-raspberry); color: var(--brand-cream); border: none;
-  border-radius: 9999px; padding: 8px 16px; cursor: pointer;
-  font-family: var(--ff-display); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-  transition: all 160ms ease; box-shadow: var(--sh-1), var(--sh-inset);
-  white-space: nowrap;
+.gh-prodFootnote {
+  margin: 32px 0 0; padding: 18px 22px;
+  background: var(--bg-tint); border: 1px solid var(--border-1); border-radius: 14px;
+  font-size: 14px; color: var(--fg-2); text-align: center;
 }
-.gh-pAdd:hover { background: var(--brand-raspberry-dk); }
-.gh-pAdd:active { transform: scale(0.95); }
-.gh-pAdd.is-added { background: var(--acc-sage); animation: gh-bounce 400ms cubic-bezier(0.34,1.56,0.64,1); }
-@keyframes gh-bounce { 0% { transform: scale(0.9); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.gh-prodFootnote a { color: var(--brand-raspberry); text-decoration: none; font-weight: 700; }
+.gh-prodFootnote a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ============ Origin banner ============ */
 .gh-origin { background: var(--bg-tint); border-block: 1px solid var(--border-1); }
@@ -301,6 +343,102 @@ body {
   text-transform: uppercase; color: rgba(248,239,227,0.7);
 }
 
+/* ============ Visit us ============ */
+.gh-visit { background: var(--bg); scroll-margin-top: 120px; }
+.gh-visitInner { max-width: 1280px; margin: 0 auto; padding: 64px 24px; }
+.gh-visitTitle {
+  font-family: var(--ff-display); font-weight: 700; font-size: 44px;
+  text-transform: uppercase; letter-spacing: 0.02em; color: var(--fg-1); margin: 0 0 12px;
+}
+.gh-visitSub { font-size: 17px; color: var(--fg-2); max-width: 520px; margin: 0 0 32px; }
+.gh-visitGrid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  padding: 28px; background: var(--bg-elev);
+  border: 1px solid var(--border-1); border-radius: 18px; box-shadow: var(--sh-2);
+}
+.gh-visitGrid h4 {
+  font-family: var(--ff-display); font-size: 13px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--brand-raspberry); margin: 0 0 8px;
+}
+.gh-visitGrid p { margin: 0; font-size: 15px; color: var(--fg-1); line-height: 1.55; }
+.gh-visitGrid a { color: var(--fg-1); text-decoration: none; }
+.gh-visitGrid a:hover { color: var(--brand-raspberry); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ============ Contact card (home page) ============ */
+.gh-contact { background: var(--bg); }
+.gh-contactInner { max-width: 1280px; margin: 0 auto; padding: 64px 24px; }
+.gh-contactCard {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px;
+  background: var(--bg-elev); border: 1px solid var(--border-1); border-radius: 22px;
+  box-shadow: var(--sh-3); padding: 44px;
+  position: relative; overflow: hidden;
+}
+.gh-contactCard::before {
+  content: ""; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 69, 125, 0.18), transparent 70%);
+  pointer-events: none;
+}
+.gh-contactKicker {
+  font-family: var(--ff-display); font-size: 13px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--brand-raspberry); margin-bottom: 14px;
+}
+.gh-contactTitle {
+  font-family: var(--ff-display); font-weight: 700; font-size: 42px;
+  text-transform: uppercase; letter-spacing: 0.02em; line-height: 1;
+  color: var(--fg-1); margin: 0 0 16px;
+}
+.gh-contactTitle em {
+  font-family: var(--ff-script); font-style: normal; font-weight: 400;
+  color: var(--brand-raspberry); text-transform: none; letter-spacing: -0.01em;
+}
+.gh-contactSub { font-size: 16px; color: var(--fg-2); margin: 0 0 28px; max-width: 460px; }
+.gh-contactMeta {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  border-top: 1px solid var(--border-1); padding-top: 24px;
+}
+.gh-contactMeta h4 {
+  font-family: var(--ff-display); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--brand-raspberry); margin: 0 0 6px;
+}
+.gh-contactMeta p { margin: 0; font-size: 14px; color: var(--fg-1); line-height: 1.5; }
+.gh-contactMeta a { color: var(--fg-1); text-decoration: none; }
+.gh-contactMeta a:hover { color: var(--brand-raspberry); text-decoration: underline; text-underline-offset: 3px; }
+
+.gh-contactForm { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.gh-fieldLabel { display: flex; flex-direction: column; gap: 6px; }
+.gh-fieldLabel > span {
+  font-family: var(--ff-display); font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--fg-2);
+}
+.gh-fieldLabel input, .gh-fieldLabel textarea {
+  font-family: var(--ff-body); font-size: 15px; color: var(--fg-1);
+  background: var(--bg); border: 1px solid var(--border-1); border-radius: 12px;
+  padding: 12px 14px; outline: none;
+  transition: border-color 160ms, box-shadow 160ms;
+}
+.gh-fieldLabel input:focus, .gh-fieldLabel textarea:focus {
+  border-color: var(--brand-raspberry);
+  box-shadow: 0 0 0 3px rgba(184, 36, 76, 0.12);
+}
+.gh-fieldLabel textarea { resize: vertical; min-height: 110px; font-family: var(--ff-body); }
+.gh-contactForm .gh-btn { align-self: flex-start; margin-top: 4px; }
+.gh-formNote { font-size: 12px; color: var(--fg-3); margin: 4px 0 0; }
+
+/* ============ Visit teaser (home page) ============ */
+.gh-visitTeaser { background: var(--bg-tint); border-block: 1px solid var(--border-1); }
+.gh-visitTeaserInner {
+  max-width: 1280px; margin: 0 auto; padding: 48px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.gh-visitTeaserTitle {
+  font-family: var(--ff-display); font-weight: 700; font-size: 32px;
+  text-transform: uppercase; letter-spacing: 0.02em; color: var(--fg-1); margin: 0 0 6px;
+}
+.gh-visitTeaserSub { color: var(--fg-2); margin: 0; font-size: 15px; }
+.gh-visitTeaser .gh-btnPrimary { text-decoration: none; }
+
 /* ============ Footer ============ */
 .gh-footer { background: var(--acc-cocoa); color: var(--fg-on-dark); padding: 64px 24px 32px; }
 .gh-footerInner { max-width: 1280px; margin: 0 auto; }
@@ -328,71 +466,6 @@ body {
 .gh-credit a { color: var(--brand-cream); text-decoration: none; }
 .gh-credit a:hover { color: var(--brand-pink-soft); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ============ Basket drawer ============ */
-.gh-drawerOverlay {
-  position: fixed; inset: 0; background: rgba(42,17,23,0.45);
-  opacity: 0; pointer-events: none; transition: opacity 200ms ease; z-index: 100;
-}
-.gh-drawerOverlay.is-open { opacity: 1; pointer-events: all; }
-.gh-drawer {
-  position: fixed; top: 0; right: 0; height: 100vh; width: 420px; max-width: 90vw;
-  background: var(--bg); box-shadow: var(--sh-4); z-index: 101;
-  transform: translateX(100%); transition: transform 280ms cubic-bezier(0.4,0,0.2,1);
-  display: flex; flex-direction: column;
-}
-.gh-drawer.is-open { transform: translateX(0); }
-.gh-drawerHead {
-  padding: 22px 24px; display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid var(--border-1);
-}
-.gh-drawerHead h3 {
-  font-family: var(--ff-display); font-size: 20px; text-transform: uppercase;
-  letter-spacing: 0.06em; margin: 0; font-weight: 700;
-}
-.gh-drawerClose {
-  background: transparent; border: none; cursor: pointer; color: var(--fg-2);
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 160ms;
-}
-.gh-drawerClose:hover { background: var(--bg-tint); color: var(--fg-1); }
-.gh-drawerBody { flex: 1; overflow-y: auto; padding: 16px 24px; }
-.gh-drawerEmpty { padding: 40px 12px; text-align: center; }
-.gh-drawerEmpty p { color: var(--fg-3); font-size: 15px; margin: 0; }
-.gh-lineItem { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-1); align-items: center; }
-.gh-lineItem:last-child { border-bottom: none; }
-.gh-lineThumb { width: 56px; height: 56px; border-radius: 10px; flex-shrink: 0; }
-.gh-lineGrow { flex: 1; min-width: 0; }
-.gh-lineName { font-family: var(--ff-body); font-weight: 700; font-size: 14px; color: var(--fg-1); }
-.gh-lineMeta { font-family: var(--ff-display); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); margin-top: 2px; }
-.gh-lineQty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
-.gh-qtyBtn {
-  width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-2);
-  background: var(--bg-elev); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--ff-display); color: var(--fg-2); font-size: 14px;
-}
-.gh-qtyVal { font-family: var(--ff-display); font-size: 13px; min-width: 18px; text-align: center; }
-.gh-linePrice { font-family: var(--ff-display); font-weight: 700; font-size: 16px; color: var(--brand-raspberry); }
-.gh-drawerFoot { padding: 20px 24px; border-top: 1px solid var(--border-1); background: var(--bg-elev); }
-.gh-totalRow { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
-.gh-totalLbl { font-family: var(--ff-display); font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-2); }
-.gh-totalVal { font-family: var(--ff-display); font-weight: 700; font-size: 26px; color: var(--brand-raspberry); }
-.gh-checkoutBtn { width: 100%; justify-content: center; }
-
-/* Toast */
-.gh-toast {
-  position: fixed; bottom: 24px; left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--acc-cocoa); color: var(--brand-cream);
-  padding: 14px 22px; border-radius: 9999px; box-shadow: var(--sh-3);
-  font-family: var(--ff-display); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
-  opacity: 0; pointer-events: none;
-  transition: all 260ms cubic-bezier(0.34,1.56,0.64,1);
-  z-index: 200;
-}
-.gh-toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
 /* ============ Responsive ============ */
 @media (max-width: 1024px) {
   .gh-catGrid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -401,11 +474,23 @@ body {
 }
 
 @media (max-width: 768px) {
-  .gh-headerInner { flex-wrap: wrap; padding: 12px 16px; gap: 12px; }
+  .gh-headerInner { padding: 12px 16px; gap: 10px; }
   .gh-logoSub { display: none; }
-  .gh-search { order: 99; flex-basis: 100%; max-width: none; }
+  .gh-nav { order: 99; flex-basis: 100%; gap: 18px; justify-content: center; }
+  .gh-navLink { font-size: 13px; letter-spacing: 0.08em; }
   .gh-iconBtn span { display: none; }
   .gh-catBarInner { padding: 10px 16px; gap: 20px; }
+
+  .gh-pageHeroInner { padding: 40px 20px 28px; }
+  .gh-pageHeroSub { font-size: 15px; }
+
+  .gh-visitTeaserInner { padding: 36px 20px; flex-direction: column; align-items: flex-start; text-align: left; gap: 18px; }
+  .gh-visitTeaserTitle { font-size: 26px; }
+
+  .gh-contactInner { padding: 48px 20px; }
+  .gh-contactCard { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+  .gh-contactTitle { font-size: 30px; }
+  .gh-contactMeta { grid-template-columns: 1fr 1fr; gap: 16px; }
 
   .gh-heroInner { grid-template-columns: 1fr; padding: 56px 20px; gap: 32px; }
   .gh-heroImg { aspect-ratio: 4/3; max-width: 480px; }
@@ -423,6 +508,10 @@ body {
 
   .gh-originInner { grid-template-columns: 1fr; padding: 48px 20px; gap: 28px; }
   .gh-originTitle { font-size: 30px; }
+
+  .gh-visitInner { padding: 48px 20px; }
+  .gh-visitTitle { font-size: 30px; }
+  .gh-visitGrid { grid-template-columns: 1fr; gap: 24px; padding: 22px; }
 
   .gh-footer { padding: 48px 20px 24px; }
   .gh-footerCols { grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; }

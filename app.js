@@ -1,4 +1,4 @@
-// Giottos African Store — storefront app (vanilla JS)
+// Giottos African Store — storefront app (vanilla JS, multi-page)
 (() => {
   'use strict';
 
@@ -33,25 +33,21 @@
 
   // ---------- State ----------
   const state = {
-    cart: [],          // { id, name, origin, size, price, qty, bg }
-    drawerOpen: false,
     query: '',
     activeCat: 'All',
   };
 
-  let toastTimer = null;
-
   // ---------- Utils ----------
-  const $  = (sel) => document.querySelector(sel);
-  const $$ = (sel) => document.querySelectorAll(sel);
+  const $ = (sel) => document.querySelector(sel);
   const fmtPrice = (n) => `£${n.toFixed(2)}`;
   const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 
-  // ---------- Render: category bar ----------
+  // ---------- Render: category bar (shop page) ----------
   function renderCatBar() {
     const bar = $('#catBar');
+    if (!bar) return;
     bar.innerHTML = '';
     CATEGORIES.forEach((c) => {
       const btn = document.createElement('button');
@@ -68,37 +64,34 @@
     });
   }
 
-  // ---------- Render: category tiles ----------
+  // ---------- Render: category tiles (home page — link to shop) ----------
   function renderCatTiles() {
     const grid = $('#catGrid');
+    if (!grid) return;
     grid.innerHTML = '';
     CAT_TILES.forEach((c) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'gh-catTile';
-      btn.innerHTML = `<div class="gh-catCircle" style="background:${c.bg}"></div><span class="gh-catLabel">${escapeHtml(c.label)}</span>`;
-      btn.addEventListener('click', () => {
-        state.activeCat = c.label;
-        renderCatBar();
-        renderProducts();
-        scrollToProducts();
-      });
-      grid.appendChild(btn);
+      const a = document.createElement('a');
+      a.href = `shop.html?cat=${encodeURIComponent(c.label)}`;
+      a.className = 'gh-catTile';
+      a.innerHTML = `<div class="gh-catCircle" style="background:${c.bg}"></div><span class="gh-catLabel">${escapeHtml(c.label)}</span>`;
+      grid.appendChild(a);
     });
   }
 
   // ---------- Render: countries ----------
   function renderCountries() {
     const list = $('#countryList');
+    if (!list) return;
     list.innerHTML = COUNTRIES.map((c) => `<span class="gh-countryChip">${escapeHtml(c)}</span>`).join('');
   }
 
-  // ---------- Render: product grid ----------
+  // ---------- Render: product grid (shop page) ----------
   function renderProducts() {
     const grid = $('#prodGrid');
+    if (!grid) return;
     const empty = $('#prodEmpty');
     const title = $('#prodTitle');
-    title.textContent = (state.activeCat && state.activeCat !== 'All') ? state.activeCat : "This week's pick";
+    if (title) title.textContent = (state.activeCat && state.activeCat !== 'All') ? state.activeCat : 'All products';
 
     const q = state.query.trim().toLowerCase();
     const filtered = PRODUCTS.filter((p) => {
@@ -115,14 +108,16 @@
     if (filtered.length === 0) {
       grid.hidden = true;
       grid.innerHTML = '';
-      empty.hidden = false;
-      empty.innerHTML = q
-        ? `<p>Nothing matches "${escapeHtml(state.query)}". Try "egusi", "palm oil", or "ugu".</p>`
-        : `<p>No products in this category just now — check back Friday.</p>`;
+      if (empty) {
+        empty.hidden = false;
+        empty.innerHTML = q
+          ? `<p>Nothing matches "${escapeHtml(state.query)}". Try "egusi", "palm oil", or "ugu".</p>`
+          : `<p>No products in this category just now — check back Friday.</p>`;
+      }
       return;
     }
 
-    empty.hidden = true;
+    if (empty) empty.hidden = true;
     grid.hidden = false;
     grid.innerHTML = filtered.map((p) => {
       const badgeCls = p.badge === 'Sale' ? 'is-sale' : p.badge === 'Fresh' ? 'is-fresh' : '';
@@ -141,152 +136,58 @@
             <p class="gh-pDesc">${escapeHtml(p.desc)}</p>
             <div class="gh-pFoot">
               <span class="gh-pPrice">${fmtPrice(p.price)}</span>
-              <button type="button" class="gh-pAdd" data-add="${p.id}">+ Add</button>
             </div>
           </div>
         </article>`;
     }).join('');
-
-    grid.querySelectorAll('[data-add]').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const id = e.currentTarget.getAttribute('data-add');
-        const p = PRODUCTS.find((x) => x.id === id);
-        if (!p) return;
-        addToCart(p);
-        const b = e.currentTarget;
-        b.classList.add('is-added');
-        b.textContent = 'Added ✓';
-        setTimeout(() => {
-          b.classList.remove('is-added');
-          b.textContent = '+ Add';
-        }, 600);
-      });
-    });
-  }
-
-  // ---------- Cart ----------
-  function addToCart(p) {
-    const existing = state.cart.find((i) => i.id === p.id);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      state.cart.push({
-        id: p.id, name: p.name, origin: p.origin, size: p.size,
-        price: p.price, qty: 1, bg: p.bg,
-      });
-    }
-    showToast(`${p.name} added`);
-    renderCartCount();
-    renderDrawer();
-  }
-
-  function incItem(id) {
-    const it = state.cart.find((i) => i.id === id);
-    if (!it) return;
-    it.qty += 1;
-    renderCartCount();
-    renderDrawer();
-  }
-
-  function decItem(id) {
-    const idx = state.cart.findIndex((i) => i.id === id);
-    if (idx === -1) return;
-    state.cart[idx].qty -= 1;
-    if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
-    renderCartCount();
-    renderDrawer();
-  }
-
-  function renderCartCount() {
-    const n = state.cart.reduce((s, i) => s + i.qty, 0);
-    const el = $('#cartCount');
-    if (n > 0) {
-      el.hidden = false;
-      el.textContent = String(n);
-    } else {
-      el.hidden = true;
-    }
-  }
-
-  // ---------- Drawer ----------
-  function openDrawer() {
-    state.drawerOpen = true;
-    $('#drawer').classList.add('is-open');
-    $('#drawer').setAttribute('aria-hidden', 'false');
-    $('#drawerOverlay').classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDrawer() {
-    state.drawerOpen = false;
-    $('#drawer').classList.remove('is-open');
-    $('#drawer').setAttribute('aria-hidden', 'true');
-    $('#drawerOverlay').classList.remove('is-open');
-    document.body.style.overflow = '';
-  }
-
-  function renderDrawer() {
-    const body = $('#drawerBody');
-    const foot = $('#drawerFoot');
-
-    if (state.cart.length === 0) {
-      body.innerHTML = `<div class="gh-drawerEmpty"><p>Your basket's empty.<br>Start with this week's fresh arrivals — ugu, ewedu, ripe plantain.</p></div>`;
-      foot.hidden = true;
-      return;
-    }
-
-    body.innerHTML = state.cart.map((it) => `
-      <div class="gh-lineItem" data-id="${it.id}">
-        <div class="gh-lineThumb" style="background:${it.bg}"></div>
-        <div class="gh-lineGrow">
-          <div class="gh-lineName">${escapeHtml(it.name)}</div>
-          <div class="gh-lineMeta">From ${escapeHtml(it.origin)} · ${escapeHtml(it.size)}</div>
-          <div class="gh-lineQty">
-            <button type="button" class="gh-qtyBtn" data-dec="${it.id}" aria-label="Decrease">−</button>
-            <span class="gh-qtyVal">${it.qty}</span>
-            <button type="button" class="gh-qtyBtn" data-inc="${it.id}" aria-label="Increase">+</button>
-          </div>
-        </div>
-        <div class="gh-linePrice">${fmtPrice(it.price * it.qty)}</div>
-      </div>`).join('');
-
-    body.querySelectorAll('[data-inc]').forEach((b) => b.addEventListener('click', () => incItem(b.getAttribute('data-inc'))));
-    body.querySelectorAll('[data-dec]').forEach((b) => b.addEventListener('click', () => decItem(b.getAttribute('data-dec'))));
-
-    const total = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
-    $('#drawerTotal').textContent = fmtPrice(total);
-    foot.hidden = false;
-  }
-
-  // ---------- Toast ----------
-  function showToast(msg) {
-    const t = $('#toast');
-    t.textContent = msg;
-    t.classList.add('is-show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('is-show'), 2000);
   }
 
   // ---------- Scroll helper ----------
   function scrollToProducts() {
-    $('#prodSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const sec = $('#prodSection');
+    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ---------- Read ?cat= from URL (shop page) ----------
+  function applyCatFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('cat');
+    if (!raw) return;
+    const match = CATEGORIES.find((c) => c.toLowerCase() === raw.toLowerCase());
+    if (match) state.activeCat = match;
+  }
+
+  // ---------- Contact form ----------
+  function bindContactForm() {
+    const form = $('#contactForm');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = ($('#cfName').value || '').trim();
+      const email = ($('#cfEmail').value || '').trim();
+      const message = ($('#cfMessage').value || '').trim();
+      if (!name || !email || !message) {
+        form.reportValidity();
+        return;
+      }
+      const subject = `Enquiry from ${name}`;
+      const body = `${message}\n\n—\nFrom: ${name} <${email}>`;
+      const mailto = `mailto:hello@giottos.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
   }
 
   // ---------- Bindings ----------
   function bind() {
-    $('#search').addEventListener('input', (e) => {
-      state.query = e.target.value;
-      renderProducts();
-    });
+    const search = $('#search');
+    if (search) {
+      search.addEventListener('input', (e) => {
+        state.query = e.target.value;
+        renderProducts();
+      });
+    }
 
-    $('#basketBtn').addEventListener('click', openDrawer);
-    $('#drawerClose').addEventListener('click', closeDrawer);
-    $('#drawerOverlay').addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && state.drawerOpen) closeDrawer();
-    });
-
-    $('#shopFreshBtn').addEventListener('click', scrollToProducts);
+    bindContactForm();
 
     const yr = $('#year');
     if (yr) yr.textContent = new Date().getFullYear();
@@ -294,12 +195,11 @@
 
   // ---------- Boot ----------
   document.addEventListener('DOMContentLoaded', () => {
+    applyCatFromUrl();
     renderCatBar();
     renderCatTiles();
     renderCountries();
     renderProducts();
-    renderCartCount();
-    renderDrawer();
     bind();
   });
 })();

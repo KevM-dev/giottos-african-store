@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <pattern id="mud" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="transparent"></rect>
+      
+      <path d="M30 8 L52 30 L30 52 L8 30 Z" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+      
+      <circle cx="30" cy="30" r="2" fill="currentColor"></circle>
+      
+      <path d="M0 0 L6 0 M0 0 L0 6" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+      <path d="M60 0 L54 0 M60 0 L60 6" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+      <path d="M0 60 L6 60 M0 60 L0 54" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+      <path d="M60 60 L54 60 M60 60 L60 54" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#mud)" color="#b8244c"></rect>
+</svg>

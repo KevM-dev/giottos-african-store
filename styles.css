@@ -3,7 +3,7 @@
    Tokens + components + responsive
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Oswald:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Pacifico&family=Oswald:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap");
 
 :root {
   /* Brand */
@@ -76,14 +76,21 @@ body {
   display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .gh-logoPill {
-  background: var(--brand-cream); padding: 8px 24px; border-radius: 9999px;
-  font-family: var(--ff-script); color: var(--brand-raspberry);
-  font-size: 28px; line-height: 1; letter-spacing: -0.01em;
-  text-decoration: none; white-space: nowrap;
+  display: inline-flex; flex-direction: column; align-items: center;
+  background: #f4e4cc;
+  border: 1.5px solid var(--brand-pink);
+  padding: 6px 22px 7px; border-radius: 9999px;
+  text-decoration: none; line-height: 1; white-space: nowrap;
+  box-shadow: var(--sh-inset);
+}
+.gh-logoMark {
+  font-family: "Kaushan Script", var(--ff-script); color: var(--brand-pink);
+  font-size: 30px; line-height: 1.05; letter-spacing: -0.01em;
 }
 .gh-logoSub {
-  font-family: var(--ff-display); font-size: 14px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--brand-cream); white-space: nowrap;
+  font-family: var(--ff-display); color: var(--brand-pink);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  line-height: 1; margin-top: 1px;
 }
 .gh-nav {
   flex: 1; display: flex; gap: 24px; align-items: center; min-width: 0;
@@ -159,10 +166,39 @@ body {
   background-image: radial-gradient(rgba(255,239,227,0.06) 1px, transparent 1px);
   background-size: 3px 3px; mix-blend-mode: overlay; opacity: 0.6;
 }
+.gh-heroProduce {
+  position: absolute; inset: 0; overflow: hidden;
+  pointer-events: none; z-index: 1;
+}
+.gh-veg {
+  position: absolute; display: inline-block;
+  opacity: 0.32; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+  animation: gh-veg-float 14s ease-in-out infinite;
+  will-change: transform;
+}
+.gh-veg--1  { top:  8%; left:  4%; font-size: 56px; animation-delay:  0s;    animation-duration: 13s; }
+.gh-veg--2  { top: 70%; left:  6%; font-size: 48px; animation-delay: -2.5s;  animation-duration: 15s; }
+.gh-veg--3  { top: 28%; left: 22%; font-size: 36px; animation-delay: -5s;    animation-duration: 12s; }
+.gh-veg--4  { top: 82%; left: 32%; font-size: 50px; animation-delay: -1.2s;  animation-duration: 17s; }
+.gh-veg--5  { top:  6%; left: 42%; font-size: 40px; animation-delay: -4s;    animation-duration: 14s; }
+.gh-veg--6  { top: 58%; left: 48%; font-size: 44px; animation-delay: -6s;    animation-duration: 16s; }
+.gh-veg--7  { top: 18%; right: 30%; font-size: 38px; animation-delay: -3s;   animation-duration: 13s; }
+.gh-veg--8  { top: 86%; right: 26%; font-size: 32px; animation-delay: -7s;   animation-duration: 18s; }
+.gh-veg--9  { top: 12%; right: 5%; font-size: 46px; animation-delay: -1.8s;  animation-duration: 15s; }
+.gh-veg--10 { top: 72%; right: 8%; font-size: 52px; animation-delay: -4.6s;  animation-duration: 14s; }
+@keyframes gh-veg-float {
+  0%   { transform: translateY(0) rotate(-6deg); }
+  50%  { transform: translateY(-28px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(-6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gh-veg { animation: none; }
+}
 .gh-heroInner {
   position: relative; max-width: 1280px; margin: 0 auto;
   padding: 80px 24px;
   display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center;
+  z-index: 2;
 }
 .gh-heroKicker {
   font-family: var(--ff-display); font-size: 13px; letter-spacing: 0.18em;
@@ -257,7 +293,7 @@ body {
   text-decoration: none; color: inherit;
 }
 .gh-catCircle {
-  aspect-ratio: 1 / 1; width: 100%; border-radius: 18px;
+  aspect-ratio: 1 / 1; width: 100%; border-radius: 50%;
   box-shadow: var(--sh-2); transition: all 200ms cubic-bezier(0.4,0,0.2,1);
   background-position: center; background-size: cover; background-repeat: no-repeat;
 }
@@ -457,7 +493,7 @@ body {
   font-size: 14px; padding: 4px 0; margin: 0;
 }
 .gh-footerCol a:hover { color: var(--brand-cream); }
-.gh-footerWordmark { font-family: var(--ff-script); color: var(--brand-cream); font-size: 32px; line-height: 1; margin-bottom: 12px; }
+.gh-footerWordmark { font-family: "Kaushan Script", var(--ff-script); color: var(--brand-cream); font-size: 32px; line-height: 1; margin-bottom: 12px; }
 .gh-footerBlurb { color: var(--fg-on-dark-muted); font-size: 14px; max-width: 280px; line-height: 1.55; }
 .gh-footerBase {
   padding-top: 24px; display: flex; justify-content: space-between; align-items: center;
@@ -477,7 +513,8 @@ body {
 
 @media (max-width: 768px) {
   .gh-headerInner { padding: 12px 16px; gap: 10px; }
-  .gh-logoSub { display: none; }
+  .gh-logoMark { font-size: 26px; }
+  .gh-logoSub { font-size: 10px; letter-spacing: 0.16em; }
   .gh-nav { order: 99; flex-basis: 100%; gap: 18px; justify-content: center; }
   .gh-navLink { font-size: 13px; letter-spacing: 0.08em; }
   .gh-iconBtn span { display: none; }
@@ -501,7 +538,7 @@ body {
   .gh-catSection { padding: 48px 20px 24px; }
   .gh-prodSection { padding: 32px 20px 64px; }
   .gh-sectionTitle { font-size: 28px; }
-  .gh-catCircle { border-radius: 14px; }
+  .gh-catCircle { border-radius: 50%; }
   .gh-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
   .gh-pBody { padding: 12px 14px 14px; }
   .gh-pName { font-size: 15px; }

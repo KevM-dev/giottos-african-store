@@ -321,6 +321,12 @@ body {
   position: absolute; inset: 0; transition: transform 280ms ease;
   display: flex; align-items: center; justify-content: center;
 }
+.gh-pimgBg--photo {
+  background-color: var(--bg-tint);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .gh-pcard:hover .gh-pimgBg { transform: scale(1.04); }
 .gh-pimgLabel {
   font-family: var(--ff-display); font-size: 12px; color: rgba(248,239,227,0.75);

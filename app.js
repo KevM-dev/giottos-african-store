@@ -22,13 +22,26 @@
     { id: 'p3',  name: 'Pure red palm oil',        cat: 'Pantry', origin: 'Ghana',    size: '1L',     price: 6.50, desc: 'Unrefined, cold-pressed, no additives.',               badge: null,    bg: 'linear-gradient(135deg,#b8244c,#8a1a39)' },
     { id: 'p4',  name: 'Garri Ijebu',              cat: 'Pantry', origin: 'Nigeria',  size: '1kg',    price: 3.20, desc: 'Fine-grain cassava flour, slightly sour.',             badge: null,    bg: 'linear-gradient(135deg,#f4ead8,#d9b89d)' },
     { id: 'p5',  name: 'Suya pepper blend',        cat: 'Spices', origin: 'Nigeria',  size: '100g',   price: 3.80, desc: 'Our own ground mix: peanut, ginger, chilli.',          badge: 'Sale',  bg: 'linear-gradient(135deg,#c45a2c,#8a1a39)' },
-    { id: 'p6',  name: 'Plantain (ripe)',          cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Sweet for dodo, fry low and slow.',                    badge: null,    bg: 'linear-gradient(135deg,#e6a531,#b87c1b)' },
+    { id: 'p6',  name: 'Plantain (ripe)',          cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Sweet for dodo, fry low and slow.',                    badge: null,    image: 'assets/products/ripe-plantain.webp' },
     { id: 'p7',  name: 'Cocoa powder',             cat: 'Pantry', origin: 'Ghana',    size: '250g',   price: 5.40, desc: 'Single-origin, lightly bittersweet.',                  badge: null,    bg: 'linear-gradient(135deg,#4a2618,#1f1a18)' },
     { id: 'p8',  name: 'Cassava leaves (frozen)',  cat: 'Frozen', origin: 'DRC',      size: '500g',   price: 4.80, desc: 'Pre-pounded, ready for saka saka.',                    badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#2a3f1c)' },
     { id: 'p9',  name: 'Hibiscus (zobo) petals',   cat: 'Drinks', origin: 'Senegal',  size: '250g',   price: 4.60, desc: 'For zobo, bissap, sorrel — steep with ginger.',        badge: null,    bg: 'linear-gradient(135deg,#b8244c,#4a2618)' },
     { id: 'p10', name: 'Chin chin',                cat: 'Snacks', origin: 'Nigeria',  size: '300g',   price: 3.40, desc: 'Crunchy fried dough — a tin of these never lasts.',    badge: 'New',   bg: 'linear-gradient(135deg,#e6a531,#c45a2c)' },
     { id: 'p11', name: 'Bottle gourd (calabash)',  cat: 'Fresh',  origin: 'Kenya',    size: 'each',   price: 4.20, desc: 'Whole, fresh — great in stews.',                       badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#4a6d8c)' },
     { id: 'p12', name: 'Berbere spice',            cat: 'Spices', origin: 'Ethiopia', size: '120g',   price: 4.90, desc: 'Warm, smoky — the soul of doro wat.',                  badge: null,    bg: 'linear-gradient(135deg,#c45a2c,#b8244c)' },
+    { id: 'p13', name: 'Golden Sella basmati rice', cat: 'Pantry', origin: 'India',    size: '5kg',    price: 12.50, desc: 'Aged long-grain — fluffy, fragrant, the jollof staple.', badge: null,    image: 'assets/products/golden-sella-basmati-rice.webp' },
+    { id: 'p14', name: 'Tilda pure basmati rice',   cat: 'Pantry', origin: 'India',    size: '5kg',    price: 14.00, desc: 'Classic Tilda — pure long-grain basmati, every grain separate.', badge: null, image: 'assets/products/tilda-basmati-rice.webp' },
+    { id: 'p15', name: 'AAA Dragon jasmine rice',   cat: 'Pantry', origin: 'Thailand', size: '10kg',   price: 19.50, desc: 'Fragrant jasmine — soft, slightly sticky, an everyday staple.',  badge: null, image: 'assets/products/aaa-dragon-rice.webp' },
+    { id: 'p16', name: 'Indomie chicken noodles',   cat: 'Pantry', origin: 'Nigeria',  size: '40-pack', price: 18.00, desc: 'The cult favourite — flies off the shelf on payday.',          badge: 'Hot', image: 'assets/products/indomie.webp' },
+    { id: 'p17', name: 'Supermalt original',        cat: 'Drinks', origin: 'Denmark',  size: '24×330ml', price: 22.00, desc: 'Rich, malty, non-alcoholic — Sunday lunch in a bottle.',      badge: null, image: 'assets/products/supermalt-original.webp' },
+    { id: 'p18', name: 'Fanta (African glass)',     cat: 'Drinks', origin: 'Nigeria',  size: '6×33cl', price: 7.20,  desc: 'Imported glass bottles — that proper sweet West-African Fanta.', badge: null, image: 'assets/products/african-fanta.webp' },
+    { id: 'p19', name: 'Nestlé Milo',               cat: 'Drinks', origin: 'Ghana',    size: '500g',   price: 6.80,  desc: 'Chocolate-malt classic — hot or iced, breakfast or after school.', badge: null, image: 'assets/products/nestle-milo.webp' },
+    { id: 'p20', name: 'Agege bread',               cat: 'Pantry', origin: 'Nigeria',  size: 'loaf',   price: 3.50, desc: 'Soft, slightly sweet Lagos-style loaf — eaten with ewa or akara.', badge: 'Fresh', image: 'assets/products/agege-bread.webp' },
+    { id: 'p21', name: 'Scotch bonnet chillies',    cat: 'Fresh',  origin: 'Ghana',    size: '200g',   price: 2.40, desc: 'Fierce, fruity heat — the soul of jollof and pepper soup.',     badge: 'Fresh', image: 'assets/products/chillies.png' },
+    { id: 'p22', name: 'Frozen goat meat (bone-in)', cat: 'Frozen', origin: 'Nigeria', size: '1kg',    price: 11.50, desc: 'Cut for stew — bone gives the broth its depth.',               badge: null,    image: 'assets/products/goat-meat-bone-in.webp' },
+    { id: 'p23', name: 'Frozen goat meat (boneless)', cat: 'Frozen', origin: 'Nigeria', size: '1kg',   price: 13.80, desc: 'Lean cubes — fast for suya, asun, or stir-fry.',               badge: null,    image: 'assets/products/goat-meat-boneless.webp' },
+    { id: 'p24', name: 'Green plantain',            cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Firm and starchy — for boli, kelewele, or chips.',              badge: null,    image: 'assets/products/green-plantain.webp' },
+    { id: 'p25', name: 'Puna yam',                  cat: 'Fresh',  origin: 'Ghana',    size: 'tuber',  price: 7.50, desc: 'Whole West-African yam — pound it, fry it, boil it.',           badge: null,    image: 'assets/products/yam.webp' },
   ];
 
   // ---------- State ----------
@@ -122,12 +135,13 @@
     grid.innerHTML = filtered.map((p) => {
       const badgeCls = p.badge === 'Sale' ? 'is-sale' : p.badge === 'Fresh' ? 'is-fresh' : '';
       const badge = p.badge ? `<span class="gh-pBadge ${badgeCls}">${escapeHtml(p.badge)}</span>` : '';
+      const visual = p.image
+        ? `<div class="gh-pimgBg gh-pimgBg--photo" style="background-image:url('${p.image}')" role="img" aria-label="${escapeHtml(p.name)}"></div>`
+        : `<div class="gh-pimgBg" style="background:${p.bg}"><span class="gh-pimgLabel">${escapeHtml(p.name)}</span></div>`;
       return `
         <article class="gh-pcard" data-id="${p.id}">
           <div class="gh-pimg">
-            <div class="gh-pimgBg" style="background:${p.bg}">
-              <span class="gh-pimgLabel">${escapeHtml(p.name)}</span>
-            </div>
+            ${visual}
             ${badge}
           </div>
           <div class="gh-pBody">

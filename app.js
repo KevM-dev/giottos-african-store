@@ -26,7 +26,7 @@
     { id: 'p7',  name: 'Cocoa powder',             cat: 'Pantry', origin: 'Ghana',    size: '250g',   price: 5.40, desc: 'Single-origin, lightly bittersweet.',                  badge: null,    bg: 'linear-gradient(135deg,#4a2618,#1f1a18)' },
     { id: 'p8',  name: 'Cassava leaves (frozen)',  cat: 'Frozen', origin: 'DRC',      size: '500g',   price: 4.80, desc: 'Pre-pounded, ready for saka saka.',                    badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#2a3f1c)' },
     { id: 'p9',  name: 'Hibiscus (zobo) petals',   cat: 'Drinks', origin: 'Senegal',  size: '250g',   price: 4.60, desc: 'For zobo, bissap, sorrel — steep with ginger.',        badge: null,    bg: 'linear-gradient(135deg,#b8244c,#4a2618)' },
-    { id: 'p10', name: 'Chin chin',                cat: 'Snacks', origin: 'Nigeria',  size: '300g',   price: 3.40, desc: 'Crunchy fried dough — a tin of these never lasts.',    badge: 'New',   bg: 'linear-gradient(135deg,#e6a531,#c45a2c)' },
+    { id: 'p10', name: 'Chin chin',                cat: 'Snacks', origin: 'Nigeria',  size: '300g',   price: 3.40, desc: 'Crunchy fried dough — a tin of these never lasts.',    badge: 'New',   image: 'assets/products/chin-chin.webp' },
     { id: 'p11', name: 'Bottle gourd (calabash)',  cat: 'Fresh',  origin: 'Kenya',    size: 'each',   price: 4.20, desc: 'Whole, fresh — great in stews.',                       badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#4a6d8c)' },
     { id: 'p12', name: 'Berbere spice',            cat: 'Spices', origin: 'Ethiopia', size: '120g',   price: 4.90, desc: 'Warm, smoky — the soul of doro wat.',                  badge: null,    bg: 'linear-gradient(135deg,#c45a2c,#b8244c)' },
     { id: 'p13', name: 'Golden Sella basmati rice', cat: 'Pantry', origin: 'India',    size: '5kg',    price: 12.50, desc: 'Aged long-grain — fluffy, fragrant, the jollof staple.', badge: null,    image: 'assets/products/golden-sella-basmati-rice.webp' },
@@ -42,6 +42,11 @@
     { id: 'p23', name: 'Frozen goat meat (boneless)', cat: 'Frozen', origin: 'Nigeria', size: '1kg',   price: 13.80, desc: 'Lean cubes — fast for suya, asun, or stir-fry.',               badge: null,    image: 'assets/products/goat-meat-boneless.webp' },
     { id: 'p24', name: 'Green plantain',            cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Firm and starchy — for boli, kelewele, or chips.',              badge: null,    image: 'assets/products/green-plantain.webp' },
     { id: 'p25', name: 'Puna yam',                  cat: 'Fresh',  origin: 'Ghana',    size: 'tuber',  price: 7.50, desc: 'Whole West-African yam — pound it, fry it, boil it.',           badge: null,    image: 'assets/products/yam.webp' },
+    { id: 'p26', name: 'Cocoyam',                   cat: 'Fresh',  origin: 'Nigeria',  size: 'each',   price: 3.50, desc: 'Earthy and starchy — great in pepper soup or boiled as a side.',  badge: null,    image: 'assets/products/cocoyam.webp' },
+    { id: 'p27', name: 'Frozen tilapia',            cat: 'Frozen', origin: 'Ghana',    size: '1kg',    price: 9.50, desc: 'Whole frozen fish — grill, fry, or go into a light stew.',        badge: null,    image: 'assets/products/frozen-fish.webp' },
+    { id: 'p28', name: 'Frozen turkey',             cat: 'Frozen', origin: 'Nigeria',  size: '1kg',    price: 10.50, desc: 'Turkey cuts — peppersoup, stew, or jollof on a big cook day.',   badge: null,    image: 'assets/products/frozen-turkey.jpg' },
+    { id: 'p29', name: 'Long bell pepper',          cat: 'Fresh',  origin: 'Ghana',    size: '200g',   price: 1.80, desc: 'Sweet and mild heat — roast into stew base or eat fresh.',        badge: 'Fresh', image: 'assets/products/long-bell-pepper.webp' },
+    { id: 'p30', name: 'Fresh tomatoes',            cat: 'Fresh',  origin: 'Nigeria',  size: '500g',   price: 2.20, desc: 'Plum tomatoes off the Friday truck — the stew starts here.',      badge: 'Fresh', image: 'assets/products/tomatoes.webp' },
   ];
 
   // ---------- State ----------

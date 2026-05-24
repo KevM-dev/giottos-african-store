@@ -227,6 +227,67 @@ body {
   text-transform: uppercase; color: rgba(248,239,227,0.6); padding: 22px;
 }
 
+/* ============ Deal slideshow ============ */
+.gh-dealSlider {
+  aspect-ratio: 4/5; border-radius: 22px; box-shadow: var(--sh-4);
+  position: relative; overflow: hidden; background: var(--acc-cocoa);
+}
+.gh-dealSlide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.gh-dealSlide.is-active { opacity: 1; pointer-events: auto; }
+.gh-dealSlideImg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.gh-dealOverlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,8,14,0.88) 0%, rgba(26,8,14,0.3) 50%, rgba(26,8,14,0.05) 100%);
+}
+.gh-dealContent {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: space-between; padding: 20px;
+}
+.gh-dealBadge {
+  display: inline-flex; align-items: center;
+  background: var(--brand-raspberry); color: var(--brand-cream);
+  font-family: var(--ff-display); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 40px;
+  align-self: flex-start;
+}
+.gh-dealInfo { display: flex; flex-direction: column; gap: 4px; }
+.gh-dealName {
+  font-family: var(--ff-display); font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;
+  color: var(--brand-cream); line-height: 1;
+}
+.gh-dealPrices { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+.gh-dealWas {
+  font-family: var(--ff-body); font-size: 16px; color: rgba(248,239,227,0.5);
+  text-decoration: line-through;
+}
+.gh-dealNow {
+  font-family: var(--ff-display); font-size: clamp(34px, 4.5vw, 48px);
+  color: var(--acc-mustard); line-height: 1;
+}
+.gh-dealSub {
+  font-family: var(--ff-body); font-size: 13px; color: rgba(248,239,227,0.55);
+  margin-top: 2px;
+}
+.gh-dealDots {
+  position: absolute; bottom: 16px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 7px;
+}
+.gh-dealDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(248,239,227,0.35); border: none; cursor: pointer;
+  padding: 0; transition: background 0.3s, transform 0.3s;
+}
+.gh-dealDot.is-active { background: var(--brand-cream); transform: scale(1.25); }
+
 /* ============ Page hero (shop / visit) ============ */
 .gh-pageHero {
   background:

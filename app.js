@@ -19,8 +19,8 @@
   const PRODUCTS = [
     { id: 'p1',  name: 'Egusi seed, ground',       cat: 'Pantry', origin: 'Nigeria',  size: '500g',   price: 4.20, desc: 'Roasted and milled in-house every Tuesday.',           badge: 'New',   bg: 'linear-gradient(135deg,#e6a531,#c45a2c)' },
     { id: 'p2',  name: 'Fresh ugu leaves',         cat: 'Fresh',  origin: 'Nigeria',  size: 'bunch',  price: 2.80, desc: 'Off the Friday truck — best in two days.',            badge: 'Fresh', bg: 'linear-gradient(135deg,#6e8b4a,#3f5028)' },
-    { id: 'p3',  name: 'Pure red palm oil',        cat: 'Pantry', origin: 'Ghana',    size: '1L',     price: 6.50, desc: 'Unrefined, cold-pressed, no additives.',               badge: null,    bg: 'linear-gradient(135deg,#b8244c,#8a1a39)' },
-    { id: 'p4',  name: 'Garri Ijebu',              cat: 'Pantry', origin: 'Nigeria',  size: '1kg',    price: 3.20, desc: 'Fine-grain cassava flour, slightly sour.',             badge: null,    bg: 'linear-gradient(135deg,#f4ead8,#d9b89d)' },
+    { id: 'p3',  name: 'Pure red palm oil',        cat: 'Pantry', origin: 'Ghana',    size: '1L',     price: 6.50, desc: 'Unrefined, cold-pressed, no additives.',               badge: null,    image: 'assets/products/palm-oil.webp' },
+    { id: 'p4',  name: 'Garri Ijebu',              cat: 'Pantry', origin: 'Nigeria',  size: '1kg',    price: 3.20, desc: 'Fine-grain cassava flour, slightly sour.',             badge: null,    image: 'assets/products/garri.png' },
     { id: 'p5',  name: 'Suya pepper blend',        cat: 'Spices', origin: 'Nigeria',  size: '100g',   price: 3.80, desc: 'Our own ground mix: peanut, ginger, chilli.',          badge: 'Sale',  bg: 'linear-gradient(135deg,#c45a2c,#8a1a39)' },
     { id: 'p6',  name: 'Plantain (ripe)',          cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Sweet for dodo, fry low and slow.',                    badge: null,    image: 'assets/products/ripe-plantain.webp' },
     { id: 'p7',  name: 'Cocoa powder',             cat: 'Pantry', origin: 'Ghana',    size: '250g',   price: 5.40, desc: 'Single-origin, lightly bittersweet.',                  badge: null,    bg: 'linear-gradient(135deg,#4a2618,#1f1a18)' },
@@ -47,6 +47,15 @@
     { id: 'p28', name: 'Frozen turkey',             cat: 'Frozen', origin: 'Nigeria',  size: '1kg',    price: 10.50, desc: 'Turkey cuts — peppersoup, stew, or jollof on a big cook day.',   badge: null,    image: 'assets/products/frozen-turkey.jpg' },
     { id: 'p29', name: 'Long bell pepper',          cat: 'Fresh',  origin: 'Ghana',    size: '200g',   price: 1.80, desc: 'Sweet and mild heat — roast into stew base or eat fresh.',        badge: 'Fresh', image: 'assets/products/long-bell-pepper.webp' },
     { id: 'p30', name: 'Fresh tomatoes',            cat: 'Fresh',  origin: 'Nigeria',  size: '500g',   price: 2.20, desc: 'Plum tomatoes off the Friday truck — the stew starts here.',      badge: 'Fresh', image: 'assets/products/tomatoes.webp' },
+    { id: 'p31', name: 'JUMBO jollof rice seasoning', cat: 'Spices', origin: 'Nigeria', size: '100g',  price: 2.50, desc: 'All-in-one jollof spice blend — tomato, bay leaf, thyme.',          badge: null,    image: 'assets/products/jumbo-jollof-rice-seasoning.jpg' },
+    { id: 'p32', name: 'Maggi seasoning cubes',     cat: 'Spices', origin: 'Nigeria',  size: '100-pack', price: 3.80, desc: 'The universal West-African kitchen staple — stock, stew, soup.', badge: null,    image: 'assets/products/maggi-seasoning.webp' },
+  ];
+
+  // ---------- Deals (hero slideshow) ----------
+  const DEALS = [
+    { name: 'Plantain (ripe)', sub: '3-pack · While stocks last', was: 2.20, now: 1.80, image: 'assets/products/ripe-plantain.webp' },
+    { name: 'Cocoyam',         sub: 'each · 20% off this week',   was: 3.50, now: 2.80, image: 'assets/products/cocoyam.webp' },
+    { name: 'Puna yam',        sub: 'whole tuber · 20% off',      was: 7.50, now: 6.00, image: 'assets/products/yam.webp' },
   ];
 
   // ---------- State ----------
@@ -196,6 +205,61 @@
     });
   }
 
+  // ---------- Render: deal slider (home page) ----------
+  function initDealSlider() {
+    const slider = $('#dealSlider');
+    const dotsEl = $('#dealDots');
+    if (!slider || !dotsEl || !DEALS.length) return;
+
+    let current = 0;
+
+    DEALS.forEach((deal, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'gh-dealSlide' + (i === 0 ? ' is-active' : '');
+      slide.setAttribute('role', 'group');
+      slide.setAttribute('aria-label', `Deal ${i + 1} of ${DEALS.length}`);
+      slide.innerHTML = `
+        <div class="gh-dealSlideImg" style="background-image:url('${escapeHtml(deal.image)}')"></div>
+        <div class="gh-dealOverlay"></div>
+        <div class="gh-dealContent">
+          <span class="gh-dealBadge">★ This week's deal</span>
+          <div class="gh-dealInfo">
+            <div class="gh-dealName">${escapeHtml(deal.name)}</div>
+            <div class="gh-dealPrices">
+              <span class="gh-dealWas">${fmtPrice(deal.was)}</span>
+              <span class="gh-dealNow">${fmtPrice(deal.now)}</span>
+            </div>
+            <span class="gh-dealSub">${escapeHtml(deal.sub)}</span>
+          </div>
+        </div>`;
+      slider.insertBefore(slide, dotsEl);
+
+      if (DEALS.length > 1) {
+        const dot = document.createElement('button');
+        dot.className = 'gh-dealDot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', `Deal ${i + 1}`);
+        dot.dataset.idx = i;
+        dot.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(dot);
+      }
+    });
+
+    const slides = slider.querySelectorAll('.gh-dealSlide');
+    const dots = dotsEl.querySelectorAll('.gh-dealDot');
+
+    function goTo(idx) {
+      slides[current].classList.remove('is-active');
+      if (dots[current]) dots[current].classList.remove('is-active');
+      current = idx;
+      slides[current].classList.add('is-active');
+      if (dots[current]) dots[current].classList.add('is-active');
+    }
+
+    if (DEALS.length > 1) {
+      setInterval(() => goTo((current + 1) % DEALS.length), 4000);
+    }
+  }
+
   // ---------- Bindings ----------
   function bind() {
     const search = $('#search');
@@ -219,6 +283,7 @@
     renderCatTiles();
     renderCountries();
     renderProducts();
+    initDealSlider();
     bind();
   });
 })();

@@ -192,16 +192,14 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = ($('#cfName').value || '').trim();
-      const email = ($('#cfEmail').value || '').trim();
       const message = ($('#cfMessage').value || '').trim();
-      if (!name || !email || !message) {
+      if (!name || !message) {
         form.reportValidity();
         return;
       }
-      const subject = `Enquiry from ${name}`;
-      const body = `${message}\n\n—\nFrom: ${name} <${email}>`;
-      const mailto = `mailto:hello@giottos.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
+      const text = `Hi Giottos, my name is ${name}.\n\n${message}`;
+      const url = `https://wa.me/441603000000?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
     });
   }
 

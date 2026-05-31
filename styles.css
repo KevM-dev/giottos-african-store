@@ -440,7 +440,7 @@ body {
 }
 .gh-originImage {
   aspect-ratio: 5/3; border-radius: 22px; box-shadow: var(--sh-3); overflow: hidden;
-  background: linear-gradient(135deg, #c45a2c 0%, #b8244c 60%, #4a2618 100%);
+  background: url('assets/inside-shop.png') center/cover no-repeat;
   display: flex; align-items: flex-end; padding: 24px;
 }
 .gh-originImageLabel {
@@ -529,6 +529,21 @@ body {
 .gh-fieldLabel textarea { resize: vertical; min-height: 110px; font-family: var(--ff-body); }
 .gh-contactForm .gh-btn { align-self: flex-start; margin-top: 4px; }
 .gh-formNote { font-size: 12px; color: var(--fg-3); margin: 4px 0 0; }
+
+/* ============ Star rating ============ */
+.gh-stars { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+.gh-starsIcons {
+  font-size: 18px; letter-spacing: 2px;
+  background: linear-gradient(to right, var(--acc-mustard) 92%, rgba(230,165,49,0.22) 92%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gh-starsLabel { font-size: 14px; }
+.gh-starsLabel strong { font-weight: 700; }
+.gh-hero .gh-starsLabel { color: rgba(248,239,227,0.7); }
+.gh-hero .gh-starsLabel strong { color: var(--brand-cream); }
+.gh-visitTeaser .gh-starsLabel { color: var(--fg-2); }
+.gh-visitTeaser .gh-starsLabel strong { color: var(--fg-1); }
 
 /* ============ Visit teaser (home page) ============ */
 .gh-visitTeaser { background: var(--bg-tint); border-block: 1px solid var(--border-1); }

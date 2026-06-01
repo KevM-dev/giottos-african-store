@@ -2,16 +2,27 @@
 (() => {
   'use strict';
 
+  // ---------- Contact (assembled at runtime so the raw number never sits in the HTML) ----------
+  const CONTACT = (() => {
+    const cc = '44';                          // UK country code
+    const national = ['742', '323', '3050'].join(''); // 7423233050 (no leading 0)
+    return {
+      tel: 'tel:+' + cc + national,           // +447423233050
+      wa: 'https://wa.me/' + cc + national,    // wa.me/447423233050
+      display: '0' + national.slice(0, 4) + ' ' + national.slice(4), // 07423 233050
+    };
+  })();
+
   // ---------- Data ----------
   const CATEGORIES = ['All', 'Fresh', 'Pantry', 'Spices', 'Frozen', 'Drinks', 'Snacks'];
 
   const CAT_TILES = [
     { label: 'Fresh',  bg: "url('assets/fresh.jpg') center/cover" },
-    { label: 'Pantry', bg: 'linear-gradient(135deg,#e6a531,#b87c1b)' },
+    { label: 'Pantry', bg: "url('assets/pantry.webp') center/cover" },
     { label: 'Spices', bg: "url('assets/spices.avif') center/cover" },
     { label: 'Frozen', bg: "url('assets/frozen.webp') center/cover" },
     { label: 'Drinks', bg: "url('assets/drinks.jpg') center/cover" },
-    { label: 'Snacks', bg: 'linear-gradient(135deg,#e0457d,#b8244c)' },
+    { label: 'Snacks', bg: "url('assets/snacks.webp') center/cover" },
   ];
 
   const COUNTRIES = ['Nigeria', 'Ghana', 'Kenya', 'Cameroon', 'Senegal', 'Ethiopia', 'South Africa', 'DRC', 'Uganda', "Côte d'Ivoire"];
@@ -198,7 +209,7 @@
         return;
       }
       const text = `Hi Giottos, my name is ${name}.\n\n${message}`;
-      const url = `https://wa.me/441603000000?text=${encodeURIComponent(text)}`;
+      const url = `${CONTACT.wa}?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
     });
   }
@@ -268,10 +279,47 @@
       });
     }
 
+    hydrateContacts();
     bindContactForm();
+    bindFab();
 
     const yr = $('#year');
     if (yr) yr.textContent = new Date().getFullYear();
+  }
+
+  // ---------- Fill phone / WhatsApp links + visible number at runtime ----------
+  function hydrateContacts() {
+    document.querySelectorAll('[data-tel]').forEach((el) => el.setAttribute('href', CONTACT.tel));
+    document.querySelectorAll('[data-wa]').forEach((el) => el.setAttribute('href', CONTACT.wa));
+    document.querySelectorAll('[data-phone]').forEach((el) => { el.textContent = CONTACT.display; });
+  }
+
+  // ---------- Floating contact button ----------
+  function bindFab() {
+    const fab = $('#fab');
+    const toggle = $('#fabToggle');
+    if (!fab || !toggle) return;
+
+    const close = () => {
+      fab.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    const open = () => {
+      fab.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    };
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fab.classList.contains('is-open') ? close() : open();
+    });
+    // Close when tapping outside or pressing Escape
+    document.addEventListener('click', (e) => {
+      if (!fab.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
   }
 
   // ---------- Boot ----------

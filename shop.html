@@ -7,7 +7,7 @@
   <meta name="description" content="See what's on the shelves at Giottos African Store, Norwich — fresh produce, pantry staples, spices, frozen and snacks from across the continent.">
   <meta name="theme-color" content="#b8244c">
   <link rel="icon" href="assets/logo-raspberry.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
       <a href="shop.html" class="gh-navLink is-active">What's in</a>
       <a href="visit.html" class="gh-navLink">Visit</a>
     </nav>
-    <a class="gh-iconBtn" href="tel:+441603000000" title="Call the shop" aria-label="Call the shop">
+    <a class="gh-iconBtn" data-tel title="Call the shop" aria-label="Call the shop">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       <span>Call us</span>
     </a>
@@ -54,7 +54,7 @@
   </div>
   <div class="gh-grid" id="prodGrid"></div>
   <div class="gh-empty" id="prodEmpty" hidden></div>
-  <p class="gh-prodFootnote">Can't see what you're after? Give us a ring on <a href="tel:+441603000000">01603 000 000</a> — if it's on the truck this week, we'll set it aside.</p>
+  <p class="gh-prodFootnote">Can't see what you're after? Give us a ring on <a data-tel data-phone></a> — if it's on the truck this week, we'll set it aside.</p>
 </section>
 
 <!-- ============ Footer ============ -->
@@ -81,7 +81,7 @@
       <div class="gh-footerCol">
         <h4>Helpful</h4>
         <a href="visit.html">Find the shop</a>
-        <a href="tel:+441603000000">Call us</a>
+        <a data-tel>Call us</a>
         <a href="mailto:hello@giottos.co.uk">Email us</a>
         <a href="visit.html">About Giottos</a>
       </div>
@@ -94,6 +94,24 @@
   </div>
 </footer>
 
-<script src="app.js"></script>
+<!-- ============ Floating contact button ============ -->
+<div class="gh-fab" id="fab">
+  <div class="gh-fabActions">
+    <a class="gh-fabAction gh-fabAction--wa" data-wa target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+      <span class="gh-fabLabel">WhatsApp</span>
+      <span class="gh-fabIcon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05.18C5.5.18.16 5.51.16 12.07c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.49-8.42"/></svg></span>
+    </a>
+    <a class="gh-fabAction gh-fabAction--call" data-tel aria-label="Call the shop">
+      <span class="gh-fabLabel">Call us</span>
+      <span class="gh-fabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+    </a>
+  </div>
+  <button class="gh-fabToggle" id="fabToggle" type="button" aria-expanded="false" aria-label="Contact us">
+    <svg class="gh-fabToggleChat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+    <svg class="gh-fabToggleClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+<script src="app.js?v=4"></script>
 </body>
 </html>

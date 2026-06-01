@@ -441,7 +441,7 @@ body {
 }
 .gh-originImage {
   aspect-ratio: 5/3; border-radius: 22px; box-shadow: var(--sh-3); overflow: hidden;
-  background: url('assets/inside-shop.png') center/cover no-repeat;
+  background: url('assets/inside-shop.webp') center/cover no-repeat;
   display: flex; align-items: flex-end; padding: 24px;
 }
 .gh-originImageLabel {

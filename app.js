@@ -1,98 +1,1213 @@
 // Giottos African Store — storefront app (vanilla JS, multi-page)
 (() => {
-  'use strict';
+  "use strict";
 
   // ---------- Contact (assembled at runtime so the raw number never sits in the HTML) ----------
   const CONTACT = (() => {
-    const cc = '44';                          // UK country code
-    const national = ['742', '323', '3050'].join(''); // 7423233050 (no leading 0)
+    const cc = "44"; // UK country code
+    const national = ["742", "323", "3050"].join(""); // 7423233050 (no leading 0)
     return {
-      tel: 'tel:+' + cc + national,           // +447423233050
-      wa: 'https://wa.me/' + cc + national,    // wa.me/447423233050
-      display: '0' + national.slice(0, 4) + ' ' + national.slice(4), // 07423 233050
+      tel: "tel:+" + cc + national, // +447423233050
+      wa: "https://wa.me/" + cc + national, // wa.me/447423233050
+      display: "0" + national.slice(0, 4) + " " + national.slice(4), // 07423 233050
     };
   })();
 
   // ---------- Data ----------
-  const CATEGORIES = ['All', 'Fresh', 'Pantry', 'Spices', 'Frozen', 'Drinks', 'Snacks'];
-
-  const CAT_TILES = [
-    { label: 'Fresh',  bg: "url('assets/fresh.jpg') center/cover" },
-    { label: 'Pantry', bg: "url('assets/pantry.webp') center/cover" },
-    { label: 'Spices', bg: "url('assets/spices.avif') center/cover" },
-    { label: 'Frozen', bg: "url('assets/frozen.webp') center/cover" },
-    { label: 'Drinks', bg: "url('assets/drinks.jpg') center/cover" },
-    { label: 'Snacks', bg: "url('assets/snacks.webp') center/cover" },
+  const CATEGORIES = [
+    "All",
+    "Fresh",
+    "Pantry",
+    "Spices",
+    "Frozen",
+    "Drinks",
+    "Snacks",
   ];
 
-  const COUNTRIES = ['Nigeria', 'Ghana', 'Kenya', 'Cameroon', 'Senegal', 'Ethiopia', 'South Africa', 'DRC', 'Uganda', "Côte d'Ivoire"];
+  const CAT_TILES = [
+    { label: "Fresh", bg: "url('assets/fresh.jpg') center/cover" },
+    { label: "Pantry", bg: "url('assets/pantry.webp') center/cover" },
+    { label: "Spices", bg: "url('assets/spices.avif') center/cover" },
+    { label: "Frozen", bg: "url('assets/frozen.webp') center/cover" },
+    { label: "Drinks", bg: "url('assets/drinks.jpg') center/cover" },
+    { label: "Snacks", bg: "url('assets/snacks.webp') center/cover" },
+  ];
+
+  const COUNTRIES = [
+    "Nigeria",
+    "Ghana",
+    "Kenya",
+    "Cameroon",
+    "Senegal",
+    "Ethiopia",
+    "South Africa",
+    "DRC",
+    "Uganda",
+    "Côte d'Ivoire",
+  ];
 
   const PRODUCTS = [
-    { id: 'p1',  name: 'Egusi seed, ground',       cat: 'Pantry', origin: 'Nigeria',  size: '500g',   price: 4.20, desc: 'Roasted and milled in-house every Tuesday.',           badge: 'New',   bg: 'linear-gradient(135deg,#e6a531,#c45a2c)' },
-    { id: 'p2',  name: 'Fresh ugu leaves',         cat: 'Fresh',  origin: 'Nigeria',  size: 'bunch',  price: 2.80, desc: 'Off the Friday truck — best in two days.',            badge: 'Fresh', bg: 'linear-gradient(135deg,#6e8b4a,#3f5028)' },
-    { id: 'p3',  name: 'Pure red palm oil',        cat: 'Pantry', origin: 'Ghana',    size: '1L',     price: 6.50, desc: 'Unrefined, cold-pressed, no additives.',               badge: null,    image: 'assets/products/palm-oil.webp' },
-    { id: 'p4',  name: 'Garri Ijebu',              cat: 'Pantry', origin: 'Nigeria',  size: '1kg',    price: 3.20, desc: 'Fine-grain cassava flour, slightly sour.',             badge: null,    image: 'assets/products/garri.webp' },
-    { id: 'p5',  name: 'Suya pepper blend',        cat: 'Spices', origin: 'Nigeria',  size: '100g',   price: 3.80, desc: 'Our own ground mix: peanut, ginger, chilli.',          badge: 'Sale',  bg: 'linear-gradient(135deg,#c45a2c,#8a1a39)' },
-    { id: 'p6',  name: 'Plantain (ripe)',          cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Sweet for dodo, fry low and slow.',                    badge: null,    image: 'assets/products/ripe-plantain.webp' },
-    { id: 'p7',  name: 'Cocoa powder',             cat: 'Pantry', origin: 'Ghana',    size: '250g',   price: 5.40, desc: 'Single-origin, lightly bittersweet.',                  badge: null,    bg: 'linear-gradient(135deg,#4a2618,#1f1a18)' },
-    { id: 'p8',  name: 'Cassava leaves (frozen)',  cat: 'Frozen', origin: 'DRC',      size: '500g',   price: 4.80, desc: 'Pre-pounded, ready for saka saka.',                    badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#2a3f1c)' },
-    { id: 'p9',  name: 'Hibiscus (zobo) petals',   cat: 'Drinks', origin: 'Senegal',  size: '250g',   price: 4.60, desc: 'For zobo, bissap, sorrel — steep with ginger.',        badge: null,    bg: 'linear-gradient(135deg,#b8244c,#4a2618)' },
-    { id: 'p10', name: 'Chin chin',                cat: 'Snacks', origin: 'Nigeria',  size: '300g',   price: 3.40, desc: 'Crunchy fried dough — a tin of these never lasts.',    badge: 'New',   image: 'assets/products/chin-chin.webp' },
-    { id: 'p11', name: 'Bottle gourd (calabash)',  cat: 'Fresh',  origin: 'Kenya',    size: 'each',   price: 4.20, desc: 'Whole, fresh — great in stews.',                       badge: null,    bg: 'linear-gradient(135deg,#6e8b4a,#4a6d8c)' },
-    { id: 'p12', name: 'Berbere spice',            cat: 'Spices', origin: 'Ethiopia', size: '120g',   price: 4.90, desc: 'Warm, smoky — the soul of doro wat.',                  badge: null,    bg: 'linear-gradient(135deg,#c45a2c,#b8244c)' },
-    { id: 'p13', name: 'Golden Sella basmati rice', cat: 'Pantry', origin: 'India',    size: '5kg',    price: 12.50, desc: 'Aged long-grain — fluffy, fragrant, the jollof staple.', badge: null,    image: 'assets/products/golden-sella-basmati-rice.webp' },
-    { id: 'p14', name: 'Tilda pure basmati rice',   cat: 'Pantry', origin: 'India',    size: '5kg',    price: 14.00, desc: 'Classic Tilda — pure long-grain basmati, every grain separate.', badge: null, image: 'assets/products/tilda-basmati-rice.webp' },
-    { id: 'p15', name: 'AAA Dragon jasmine rice',   cat: 'Pantry', origin: 'Thailand', size: '10kg',   price: 19.50, desc: 'Fragrant jasmine — soft, slightly sticky, an everyday staple.',  badge: null, image: 'assets/products/aaa-dragon-rice.webp' },
-    { id: 'p16', name: 'Indomie chicken noodles',   cat: 'Pantry', origin: 'Nigeria',  size: '40-pack', price: 18.00, desc: 'The cult favourite — flies off the shelf on payday.',          badge: 'Hot', image: 'assets/products/indomie.webp' },
-    { id: 'p17', name: 'Supermalt original',        cat: 'Drinks', origin: 'Denmark',  size: '24×330ml', price: 22.00, desc: 'Rich, malty, non-alcoholic — Sunday lunch in a bottle.',      badge: null, image: 'assets/products/supermalt-original.webp' },
-    { id: 'p18', name: 'Fanta (African glass)',     cat: 'Drinks', origin: 'Nigeria',  size: '6×33cl', price: 7.20,  desc: 'Imported glass bottles — that proper sweet West-African Fanta.', badge: null, image: 'assets/products/african-fanta.webp' },
-    { id: 'p19', name: 'Nestlé Milo',               cat: 'Drinks', origin: 'Ghana',    size: '500g',   price: 6.80,  desc: 'Chocolate-malt classic — hot or iced, breakfast or after school.', badge: null, image: 'assets/products/nestle-milo.webp' },
-    { id: 'p20', name: 'Agege bread',               cat: 'Pantry', origin: 'Nigeria',  size: 'loaf',   price: 3.50, desc: 'Soft, slightly sweet Lagos-style loaf — eaten with ewa or akara.', badge: 'Fresh', image: 'assets/products/agege-bread.webp' },
-    { id: 'p21', name: 'Scotch bonnet chillies',    cat: 'Fresh',  origin: 'Ghana',    size: '200g',   price: 2.40, desc: 'Fierce, fruity heat — the soul of jollof and pepper soup.',     badge: 'Fresh', image: 'assets/products/chillies.webp' },
-    { id: 'p22', name: 'Frozen goat meat (bone-in)', cat: 'Frozen', origin: 'Nigeria', size: '1kg',    price: 11.50, desc: 'Cut for stew — bone gives the broth its depth.',               badge: null,    image: 'assets/products/goat-meat-bone-in.webp' },
-    { id: 'p23', name: 'Frozen goat meat (boneless)', cat: 'Frozen', origin: 'Nigeria', size: '1kg',   price: 13.80, desc: 'Lean cubes — fast for suya, asun, or stir-fry.',               badge: null,    image: 'assets/products/goat-meat-boneless.webp' },
-    { id: 'p24', name: 'Green plantain',            cat: 'Fresh',  origin: 'Cameroon', size: '3-pack', price: 2.20, desc: 'Firm and starchy — for boli, kelewele, or chips.',              badge: null,    image: 'assets/products/green-plantain.webp' },
-    { id: 'p25', name: 'Puna yam',                  cat: 'Fresh',  origin: 'Ghana',    size: 'tuber',  price: 7.50, desc: 'Whole West-African yam — pound it, fry it, boil it.',           badge: null,    image: 'assets/products/yam.webp' },
-    { id: 'p26', name: 'Cocoyam',                   cat: 'Fresh',  origin: 'Nigeria',  size: 'each',   price: 3.50, desc: 'Earthy and starchy — great in pepper soup or boiled as a side.',  badge: null,    image: 'assets/products/cocoyam.webp' },
-    { id: 'p27', name: 'Frozen tilapia',            cat: 'Frozen', origin: 'Ghana',    size: '1kg',    price: 9.50, desc: 'Whole frozen fish — grill, fry, or go into a light stew.',        badge: null,    image: 'assets/products/frozen-fish.webp' },
-    { id: 'p28', name: 'Frozen turkey',             cat: 'Frozen', origin: 'Nigeria',  size: '1kg',    price: 10.50, desc: 'Turkey cuts — peppersoup, stew, or jollof on a big cook day.',   badge: null,    image: 'assets/products/frozen-turkey.jpg' },
-    { id: 'p29', name: 'Long bell pepper',          cat: 'Fresh',  origin: 'Ghana',    size: '200g',   price: 1.80, desc: 'Sweet and mild heat — roast into stew base or eat fresh.',        badge: 'Fresh', image: 'assets/products/long-bell-pepper.webp' },
-    { id: 'p30', name: 'Fresh tomatoes',            cat: 'Fresh',  origin: 'Nigeria',  size: '500g',   price: 2.20, desc: 'Plum tomatoes off the Friday truck — the stew starts here.',      badge: 'Fresh', image: 'assets/products/tomatoes.webp' },
-    { id: 'p31', name: 'JUMBO jollof rice seasoning', cat: 'Spices', origin: 'Nigeria', size: '100g',  price: 2.50, desc: 'All-in-one jollof spice blend — tomato, bay leaf, thyme.',          badge: null,    image: 'assets/products/jumbo-jollof-rice-seasoning.jpg' },
-    { id: 'p32', name: 'Maggi seasoning cubes',     cat: 'Spices', origin: 'Nigeria',  size: '100-pack', price: 3.80, desc: 'The universal West-African kitchen staple — stock, stew, soup.', badge: null,    image: 'assets/products/maggi-seasoning.webp' },
+    {
+      id: "p1",
+      name: "Egusi seed, ground",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "500g",
+      price: 4.2,
+      desc: "Roasted and milled in-house every Tuesday.",
+      badge: "New",
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p2",
+      name: "Fresh ugu leaves",
+      cat: "Fresh",
+      origin: "Nigeria",
+      size: "bunch",
+      price: 2.8,
+      desc: "Off the Friday truck — best in two days.",
+      badge: "Fresh",
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p3",
+      name: "Pure red palm oil",
+      cat: "Pantry",
+      origin: "Ghana",
+      size: "1L",
+      price: 6.5,
+      desc: "Unrefined, cold-pressed, no additives.",
+      badge: null,
+      image: "assets/products/palm-oil.webp",
+    },
+    {
+      id: "p4",
+      name: "Garri Ijebu",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 3.2,
+      desc: "Fine-grain cassava flour, slightly sour.",
+      badge: null,
+      image: "assets/products/garri.webp",
+    },
+    {
+      id: "p5",
+      name: "Suya pepper blend",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "100g",
+      price: 3.8,
+      desc: "Our own ground mix: peanut, ginger, chilli.",
+      badge: "Sale",
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p6",
+      name: "Plantain (ripe)",
+      cat: "Fresh",
+      origin: "Cameroon",
+      size: "3-pack",
+      price: 2.2,
+      desc: "Sweet for dodo, fry low and slow.",
+      badge: null,
+      image: "assets/products/ripe-plantain.webp",
+    },
+    {
+      id: "p7",
+      name: "Cocoa powder",
+      cat: "Pantry",
+      origin: "Ghana",
+      size: "250g",
+      price: 5.4,
+      desc: "Single-origin, lightly bittersweet.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p8",
+      name: "Cassava leaves (frozen)",
+      cat: "Frozen",
+      origin: "DRC",
+      size: "500g",
+      price: 4.8,
+      desc: "Pre-pounded, ready for saka saka.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p9",
+      name: "Hibiscus (zobo) petals",
+      cat: "Drinks",
+      origin: "Senegal",
+      size: "250g",
+      price: 4.6,
+      desc: "For zobo, bissap, sorrel — steep with ginger.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p10",
+      name: "Chin chin",
+      cat: "Snacks",
+      origin: "Nigeria",
+      size: "300g",
+      price: 3.4,
+      desc: "Crunchy fried dough — a tin of these never lasts.",
+      badge: "New",
+      image: "assets/products/chin-chin.webp",
+    },
+    {
+      id: "p11",
+      name: "Bottle gourd (calabash)",
+      cat: "Fresh",
+      origin: "Kenya",
+      size: "each",
+      price: 4.2,
+      desc: "Whole, fresh — great in stews.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p12",
+      name: "Berbere spice",
+      cat: "Spices",
+      origin: "Ethiopia",
+      size: "120g",
+      price: 4.9,
+      desc: "Warm, smoky — the soul of doro wat.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p13",
+      name: "Golden Sella basmati rice",
+      cat: "Pantry",
+      origin: "India",
+      size: "5kg",
+      price: 12.5,
+      desc: "Aged long-grain — fluffy, fragrant, the jollof staple.",
+      badge: null,
+      image: "assets/products/golden-sella-basmati-rice.webp",
+    },
+    {
+      id: "p14",
+      name: "Tilda pure basmati rice",
+      cat: "Pantry",
+      origin: "India",
+      size: "5kg",
+      price: 14.0,
+      desc: "Classic Tilda — pure long-grain basmati, every grain separate.",
+      badge: null,
+      image: "assets/products/tilda-basmati-rice.webp",
+    },
+    {
+      id: "p15",
+      name: "AAA Dragon jasmine rice",
+      cat: "Pantry",
+      origin: "Thailand",
+      size: "10kg",
+      price: 19.5,
+      desc: "Fragrant jasmine — soft, slightly sticky, an everyday staple.",
+      badge: null,
+      image: "assets/products/aaa-dragon-rice.webp",
+    },
+    {
+      id: "p16",
+      name: "Indomie chicken noodles",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "40-pack",
+      price: 18.0,
+      desc: "The cult favourite — flies off the shelf on payday.",
+      badge: "Hot",
+      image: "assets/products/indomie.webp",
+    },
+    {
+      id: "p17",
+      name: "Supermalt original",
+      cat: "Drinks",
+      origin: "Denmark",
+      size: "24×330ml",
+      price: 22.0,
+      desc: "Rich, malty, non-alcoholic — Sunday lunch in a bottle.",
+      badge: null,
+      image: "assets/products/supermalt-original.webp",
+    },
+    {
+      id: "p18",
+      name: "Fanta (African glass)",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "6×33cl",
+      price: 7.2,
+      desc: "Imported glass bottles — that proper sweet West-African Fanta.",
+      badge: null,
+      image: "assets/products/african-fanta.webp",
+    },
+    {
+      id: "p19",
+      name: "Nestlé Milo",
+      cat: "Drinks",
+      origin: "Ghana",
+      size: "500g",
+      price: 6.8,
+      desc: "Chocolate-malt classic — hot or iced, breakfast or after school.",
+      badge: null,
+      image: "assets/products/nestle-milo.webp",
+    },
+    {
+      id: "p20",
+      name: "Agege bread",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "loaf",
+      price: 3.5,
+      desc: "Soft, slightly sweet Lagos-style loaf — eaten with ewa or akara.",
+      badge: "Fresh",
+      image: "assets/products/agege-bread.webp",
+    },
+    {
+      id: "p21",
+      name: "Scotch bonnet chillies",
+      cat: "Fresh",
+      origin: "Ghana",
+      size: "200g",
+      price: 2.4,
+      desc: "Fierce, fruity heat — the soul of jollof and pepper soup.",
+      badge: "Fresh",
+      image: "assets/products/chillies.webp",
+    },
+    {
+      id: "p22",
+      name: "Frozen goat meat (bone-in)",
+      cat: "Frozen",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 11.5,
+      desc: "Cut for stew — bone gives the broth its depth.",
+      badge: null,
+      image: "assets/products/goat-meat-bone-in.webp",
+    },
+    {
+      id: "p23",
+      name: "Frozen goat meat (boneless)",
+      cat: "Frozen",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 13.8,
+      desc: "Lean cubes — fast for suya, asun, or stir-fry.",
+      badge: null,
+      image: "assets/products/goat-meat-boneless.webp",
+    },
+    {
+      id: "p24",
+      name: "Green plantain",
+      cat: "Fresh",
+      origin: "Cameroon",
+      size: "3-pack",
+      price: 2.2,
+      desc: "Firm and starchy — for boli, kelewele, or chips.",
+      badge: null,
+      image: "assets/products/green-plantain.webp",
+    },
+    {
+      id: "p25",
+      name: "Puna yam",
+      cat: "Fresh",
+      origin: "Ghana",
+      size: "tuber",
+      price: 7.5,
+      desc: "Whole West-African yam — pound it, fry it, boil it.",
+      badge: null,
+      image: "assets/products/yam.webp",
+    },
+    {
+      id: "p26",
+      name: "Cocoyam",
+      cat: "Fresh",
+      origin: "Nigeria",
+      size: "each",
+      price: 3.5,
+      desc: "Earthy and starchy — great in pepper soup or boiled as a side.",
+      badge: null,
+      image: "assets/products/cocoyam.webp",
+    },
+    {
+      id: "p27",
+      name: "Frozen tilapia",
+      cat: "Frozen",
+      origin: "Ghana",
+      size: "1kg",
+      price: 9.5,
+      desc: "Whole frozen fish — grill, fry, or go into a light stew.",
+      badge: null,
+      image: "assets/products/frozen-fish.webp",
+    },
+    {
+      id: "p28",
+      name: "Frozen turkey",
+      cat: "Frozen",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 10.5,
+      desc: "Turkey cuts — peppersoup, stew, or jollof on a big cook day.",
+      badge: null,
+      image: "assets/products/frozen-turkey.jpg",
+    },
+    {
+      id: "p29",
+      name: "Long bell pepper",
+      cat: "Fresh",
+      origin: "Ghana",
+      size: "200g",
+      price: 1.8,
+      desc: "Sweet and mild heat — roast into stew base or eat fresh.",
+      badge: "Fresh",
+      image: "assets/products/long-bell-pepper.webp",
+    },
+    {
+      id: "p30",
+      name: "Fresh tomatoes",
+      cat: "Fresh",
+      origin: "Nigeria",
+      size: "500g",
+      price: 2.2,
+      desc: "Plum tomatoes off the Friday truck — the stew starts here.",
+      badge: "Fresh",
+      image: "assets/products/tomatoes.webp",
+    },
+    {
+      id: "p31",
+      name: "JUMBO jollof rice seasoning",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "100g",
+      price: 2.5,
+      desc: "All-in-one jollof spice blend — tomato, bay leaf, thyme.",
+      badge: null,
+      image: "assets/products/jumbo-jollof-rice-seasoning.jpg",
+    },
+    {
+      id: "p32",
+      name: "Maggi seasoning cubes",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "100-pack",
+      price: 3.8,
+      desc: "The universal West-African kitchen staple — stock, stew, soup.",
+      badge: null,
+      image: "assets/products/maggi-seasoning.webp",
+    },
+    {
+      id: "p33",
+      name: "Peak milk",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "2500g",
+      price: 26.0,
+      desc: "Full-cream powdered milk, the big catering tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p34",
+      name: "Peak milk",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "900g",
+      price: 10.5,
+      desc: "Full-cream powdered milk for the week ahead.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p35",
+      name: "Peak milk",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "400g",
+      price: 4.99,
+      desc: "Full-cream powdered milk, the everyday size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p36",
+      name: "Peak milk evaporated",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "can",
+      price: 1.5,
+      desc: "Evaporated milk for tea, custard, and stews.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p37",
+      name: "Peak milk evaporated",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "mini can",
+      price: 1.0,
+      desc: "Smaller evaporated milk tin, just enough for one pot.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p38",
+      name: "Nido",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "2.4kg",
+      price: 24.0,
+      desc: "Full-cream instant milk powder, catering size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p39",
+      name: "Nido",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "1.8kg",
+      price: 22.0,
+      desc: "Full-cream instant milk powder, family size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p40",
+      name: "Nido",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "900g",
+      price: 10.99,
+      desc: "Full-cream instant milk powder, the weekly tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p41",
+      name: "Nido",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "400g",
+      price: 4.99,
+      desc: "Full-cream instant milk powder, the everyday size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p42",
+      name: "Tropical Sun milk",
+      cat: "Pantry",
+      origin: "UK",
+      size: "large",
+      price: 19.99,
+      desc: "Full-cream powdered milk, catering size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p43",
+      name: "Tropical Sun milk",
+      cat: "Pantry",
+      origin: "UK",
+      size: "900g",
+      price: 8.99,
+      desc: "Full-cream powdered milk for the week.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p44",
+      name: "Tropical Sun milk",
+      cat: "Pantry",
+      origin: "UK",
+      size: "400g",
+      price: 4.39,
+      desc: "Full-cream powdered milk, the everyday size.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p45",
+      name: "Cerelac",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 7.99,
+      desc: "Infant cereal, the trusted first-foods brand.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p46",
+      name: "Golden Morn",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "500g",
+      price: 3.99,
+      desc: "Maize and soya breakfast cereal, a Nigerian morning classic.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p47",
+      name: "Quaker white oat",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "500g",
+      price: 2.5,
+      desc: "Rolled oats for a quick, filling breakfast.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p48",
+      name: "Ghana Best hausa koko",
+      cat: "Pantry",
+      origin: "Ghana",
+      size: "400g",
+      price: null,
+      desc: "Spiced millet porridge flour, a Northern Ghanaian street-food breakfast.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p49",
+      name: "Lady B custard",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "400g",
+      price: 7.99,
+      desc: "Classic custard powder for a sweet teatime treat.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p50",
+      name: "Checkers custard 3-in-1",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 7.99,
+      desc: "Instant custard, milk, and sugar in one, just add water.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p51",
+      name: "Checkers custard 3-in-1 (vanilla)",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "1kg",
+      price: 7.0,
+      desc: "Vanilla instant custard, milk, and sugar in one.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p52",
+      name: "Checkers custard 3-in-1",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "400g",
+      price: 2.99,
+      desc: "Instant custard, milk, and sugar in one, the small tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p53",
+      name: "Dunn's River coconut milk",
+      cat: "Pantry",
+      origin: "UK",
+      size: "400ml",
+      price: null,
+      desc: "Creamy tinned coconut milk for soups and stews.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p54",
+      name: "Maggi coconut milk powder",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "300g",
+      price: 8.5,
+      desc: "Powdered coconut milk, just add water for instant coconut cream.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p55",
+      name: "Geisha mackerel",
+      cat: "Pantry",
+      origin: "Norway",
+      size: "big tin",
+      price: 2.5,
+      desc: "Mackerel in tomato sauce, a store-cupboard staple with rice.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p56",
+      name: "Sardine",
+      cat: "Pantry",
+      origin: "Morocco",
+      size: "125g",
+      price: 1.99,
+      desc: "Tinned sardines, quick protein for rice or bread.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p57",
+      name: "Corned beef Exeter",
+      cat: "Pantry",
+      origin: "UK",
+      size: "340g",
+      price: null,
+      desc: "Classic tinned corned beef for stew, sandwiches, or fried rice.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p58",
+      name: "Tropical Sun pure honey",
+      cat: "Pantry",
+      origin: "UK",
+      size: "370g",
+      price: null,
+      desc: "Pure honey, unblended and naturally sweet.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p59",
+      name: "Tropical Sun blossom honey",
+      cat: "Pantry",
+      origin: "UK",
+      size: "370g",
+      price: null,
+      desc: "Blossom honey, light and floral.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p60",
+      name: "Africa Finest peanut butter",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "510g",
+      price: null,
+      desc: "Smooth peanut butter, ground the traditional way.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p61",
+      name: "Tropical Sun crunchy peanut butter",
+      cat: "Pantry",
+      origin: "UK",
+      size: "350g",
+      price: 3.25,
+      desc: "Crunchy peanut butter with real peanut pieces.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p62",
+      name: "Blue Band margarine",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "500g",
+      price: 5.99,
+      desc: "Everyday spreadable margarine for bread and baking.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p63",
+      name: "Blue Band margarine",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "250g",
+      price: 3.99,
+      desc: "Everyday spreadable margarine, the smaller tub.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p64",
+      name: "STK Royal yeast",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "11g sachet",
+      price: null,
+      desc: "Baker's yeast for bread, buns, and puff-puff.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p65",
+      name: "Oluys pure cocoa powder",
+      cat: "Pantry",
+      origin: "Ghana",
+      size: "200g",
+      price: null,
+      desc: "Unsweetened cocoa powder for baking and hot chocolate.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p66",
+      name: "St Louis sugar",
+      cat: "Pantry",
+      origin: "Senegal",
+      size: "1kg",
+      price: 2.5,
+      desc: "Fine white sugar from Senegal's own St Louis mills.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p67",
+      name: "Golden Penny spaghetti",
+      cat: "Pantry",
+      origin: "Nigeria",
+      size: "500g",
+      price: 1.5,
+      desc: "Everyday spaghetti from Nigeria's biggest pasta brand.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p68",
+      name: "Rice stick",
+      cat: "Pantry",
+      origin: "Vietnam",
+      size: "400g",
+      price: 2.97,
+      desc: "Flat rice noodles for stir-fries and soups.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p69",
+      name: "Tropical Sun hominy corn",
+      cat: "Pantry",
+      origin: "UK",
+      size: "400g",
+      price: 4.99,
+      desc: "Tinned hominy corn for soups and stews.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p70",
+      name: "Bournvita",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "900g",
+      price: 8.99,
+      desc: "Chocolate malt drink, a Nigerian breakfast-table staple.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p71",
+      name: "Bournvita",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "500g",
+      price: 4.5,
+      desc: "Chocolate malt drink, the smaller tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p72",
+      name: "Nestle Milo",
+      cat: "Drinks",
+      origin: "Ghana",
+      size: "1.4kg",
+      price: 13.0,
+      desc: "Chocolate-malt classic, the big family tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p73",
+      name: "Nestle Milo",
+      cat: "Drinks",
+      origin: "Ghana",
+      size: "400g",
+      price: 4.0,
+      desc: "Chocolate-malt classic, the everyday tin.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p74",
+      name: "Nestle Milo sachet",
+      cat: "Drinks",
+      origin: "Ghana",
+      size: "400g sachets",
+      price: 5.5,
+      desc: "Chocolate-malt drink in individual sachets.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p75",
+      name: "Nestle Milo sachet",
+      cat: "Drinks",
+      origin: "Ghana",
+      size: "900g sachets",
+      price: 9.5,
+      desc: "Chocolate-malt drink in individual sachets, family pack.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p76",
+      name: "Ovaltine Original",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "800g",
+      price: 12.99,
+      desc: "Malted milk drink, a classic bedtime favourite.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p77",
+      name: "Tropical Sun drinking chocolate",
+      cat: "Drinks",
+      origin: "UK",
+      size: "400g",
+      price: 14.0,
+      desc: "Rich drinking chocolate for a proper mug of cocoa.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p78",
+      name: "Nestle Original 3-in-1",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "10 sachets",
+      price: null,
+      desc: "Instant coffee, creamer, and sugar in one sachet.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p79",
+      name: "Lipton Yellow Label",
+      cat: "Drinks",
+      origin: "Kenya",
+      size: "100 teabags",
+      price: 4.99,
+      desc: "The everyday black tea, 100 bags to keep you going.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p80",
+      name: "Kopiko coffee",
+      cat: "Drinks",
+      origin: "Indonesia",
+      size: "10 sticks",
+      price: 3.99,
+      desc: "Instant coffee sachets from the coffee-candy brand.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p81",
+      name: "Tropical Sun coffee",
+      cat: "Drinks",
+      origin: "UK",
+      size: "100g",
+      price: 3.25,
+      desc: "Instant coffee, smooth and reliable.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p82",
+      name: "Gold Killi ginger drink",
+      cat: "Drinks",
+      origin: "Malaysia",
+      size: "sachet",
+      price: 4.0,
+      desc: "Instant ginger tea powder, steep and stir.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p83",
+      name: "Village Pride ginger drink",
+      cat: "Drinks",
+      origin: "Nigeria",
+      size: "sachet",
+      price: 2.99,
+      desc: "Instant ginger drink powder, warming and spiced.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p84",
+      name: "Tropical Sun ginger drink",
+      cat: "Drinks",
+      origin: "UK",
+      size: "sachet",
+      price: 2.99,
+      desc: "Instant ginger drink powder, warming and spiced.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p85",
+      name: "Kopiko candy",
+      cat: "Snacks",
+      origin: "Indonesia",
+      size: "150g",
+      price: 1.5,
+      desc: "Coffee-flavoured hard candy, a little pick-me-up.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p86",
+      name: "Tom Tom",
+      cat: "Snacks",
+      origin: "Nigeria",
+      size: "200g",
+      price: 1.5,
+      desc: "Classic minty-menthol boiled sweets.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p87",
+      name: "Tropical Sun popcorn",
+      cat: "Snacks",
+      origin: "UK",
+      size: "100g",
+      price: 4.99,
+      desc: "Ready-to-eat popcorn for movie night.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p88",
+      name: "Ducros curry",
+      cat: "Spices",
+      origin: "France",
+      size: "25g",
+      price: 1.0,
+      desc: "Curry powder in the small jar, French-milled.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p89",
+      name: "Ducros thyme",
+      cat: "Spices",
+      origin: "France",
+      size: "15g",
+      price: 1.0,
+      desc: "Dried thyme in the small jar, French-milled.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p90",
+      name: "Tiger",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "25g",
+      price: 1.0,
+      desc: "Grouped with your curry and thyme on the list, flagging this one for you to confirm the full product name.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p91",
+      name: "Gino dried thyme",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "5g",
+      price: null,
+      desc: "Dried thyme sachet for soups and stews.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p92",
+      name: "Gino Asun cube",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "60g",
+      price: 1.5,
+      desc: "Spiced stock cube for asun and grilled meat.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
+    {
+      id: "p93",
+      name: "Nkulenu soup base",
+      cat: "Spices",
+      origin: "Ghana",
+      size: "780g",
+      price: 3.5,
+      desc: "Concentrated palm-nut cream for banga and palm-nut soup.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+    },
+    {
+      id: "p94",
+      name: "Africa Finest banga soup base",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "350g",
+      price: 3.5,
+      desc: "Concentrated palm-nut cream for banga soup.",
+      badge: null,
+      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+    },
+    {
+      id: "p95",
+      name: "Tropical Sun chicken cube",
+      cat: "Spices",
+      origin: "UK",
+      size: "100g",
+      price: 3.29,
+      desc: "Chicken stock cubes for everyday cooking.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+    },
+    {
+      id: "p96",
+      name: "Tasty Cube powder",
+      cat: "Spices",
+      origin: "China",
+      size: "1kg",
+      price: 4.99,
+      desc: "All-purpose seasoning powder, the catering tub.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+    },
+    {
+      id: "p97",
+      name: "Tasty Cube powder",
+      cat: "Spices",
+      origin: "China",
+      size: "400g",
+      price: 3.0,
+      desc: "All-purpose seasoning powder, the everyday tub.",
+      badge: null,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+    },
+    {
+      id: "p98",
+      name: "Tasty Cube",
+      cat: "Spices",
+      origin: "China",
+      size: "80g",
+      price: 1.5,
+      desc: "All-purpose seasoning cubes, the small pack.",
+      badge: null,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+    },
+    {
+      id: "p99",
+      name: "Knorr chicken and beef",
+      cat: "Spices",
+      origin: "Nigeria",
+      size: "8 cubes",
+      price: 2.5,
+      desc: "Chicken and beef stock cubes, the kitchen staple.",
+      badge: null,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+    },
+    {
+      id: "p100",
+      name: "Super Seasoning Vedan",
+      cat: "Spices",
+      origin: "Vietnam",
+      size: "454g",
+      price: 1.5,
+      desc: "MSG-based all-purpose seasoning for soups and stir-fries.",
+      badge: null,
+      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+    },
   ];
 
   // ---------- Deals (hero slideshow) ----------
   const DEALS = [
-    { name: 'Plantain (ripe)', sub: '3-pack · While stocks last', was: 2.20, now: 1.80, image: 'assets/products/ripe-plantain.webp' },
-    { name: 'Cocoyam',         sub: 'each · 20% off this week',   was: 3.50, now: 2.80, image: 'assets/products/cocoyam.webp' },
-    { name: 'Puna yam',        sub: 'whole tuber · 20% off',      was: 7.50, now: 6.00, image: 'assets/products/yam.webp' },
+    {
+      name: "Plantain (ripe)",
+      sub: "3-pack · While stocks last",
+      was: 2.2,
+      now: 1.8,
+      image: "assets/products/ripe-plantain.webp",
+    },
+    {
+      name: "Cocoyam",
+      sub: "each · 20% off this week",
+      was: 3.5,
+      now: 2.8,
+      image: "assets/products/cocoyam.webp",
+    },
+    {
+      name: "Puna yam",
+      sub: "whole tuber · 20% off",
+      was: 7.5,
+      now: 6.0,
+      image: "assets/products/yam.webp",
+    },
   ];
 
   // ---------- State ----------
   const state = {
-    query: '',
-    activeCat: 'All',
+    query: "",
+    activeCat: "All",
   };
 
   // ---------- Utils ----------
   const $ = (sel) => document.querySelector(sel);
   const fmtPrice = (n) => `£${n.toFixed(2)}`;
-  const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-  ));
+  const escapeHtml = (s) =>
+    String(s).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
 
   // ---------- Render: category bar (shop page) ----------
   function renderCatBar() {
-    const bar = $('#catBar');
+    const bar = $("#catBar");
     if (!bar) return;
-    bar.innerHTML = '';
+    bar.innerHTML = "";
     CATEGORIES.forEach((c) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'gh-catLink' + (state.activeCat === c ? ' is-active' : '');
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className =
+        "gh-catLink" + (state.activeCat === c ? " is-active" : "");
       btn.textContent = c;
-      btn.addEventListener('click', () => {
+      btn.addEventListener("click", () => {
         state.activeCat = c;
         renderCatBar();
         renderProducts();
@@ -104,13 +1219,13 @@
 
   // ---------- Render: category tiles (home page — link to shop) ----------
   function renderCatTiles() {
-    const grid = $('#catGrid');
+    const grid = $("#catGrid");
     if (!grid) return;
-    grid.innerHTML = '';
+    grid.innerHTML = "";
     CAT_TILES.forEach((c) => {
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = `shop.html?cat=${encodeURIComponent(c.label)}`;
-      a.className = 'gh-catTile';
+      a.className = "gh-catTile";
       a.innerHTML = `<div class="gh-catCircle" style="background:${c.bg}"></div><span class="gh-catLabel">${escapeHtml(c.label)}</span>`;
       grid.appendChild(a);
     });
@@ -118,22 +1233,28 @@
 
   // ---------- Render: countries ----------
   function renderCountries() {
-    const list = $('#countryList');
+    const list = $("#countryList");
     if (!list) return;
-    list.innerHTML = COUNTRIES.map((c) => `<span class="gh-countryChip">${escapeHtml(c)}</span>`).join('');
+    list.innerHTML = COUNTRIES.map(
+      (c) => `<span class="gh-countryChip">${escapeHtml(c)}</span>`,
+    ).join("");
   }
 
   // ---------- Render: product grid (shop page) ----------
   function renderProducts() {
-    const grid = $('#prodGrid');
+    const grid = $("#prodGrid");
     if (!grid) return;
-    const empty = $('#prodEmpty');
-    const title = $('#prodTitle');
-    if (title) title.textContent = (state.activeCat && state.activeCat !== 'All') ? state.activeCat : 'All products';
+    const empty = $("#prodEmpty");
+    const title = $("#prodTitle");
+    if (title)
+      title.textContent =
+        state.activeCat && state.activeCat !== "All"
+          ? state.activeCat
+          : "All products";
 
     const q = state.query.trim().toLowerCase();
     const filtered = PRODUCTS.filter((p) => {
-      if (state.activeCat !== 'All' && p.cat !== state.activeCat) return false;
+      if (state.activeCat !== "All" && p.cat !== state.activeCat) return false;
       if (!q) return true;
       return (
         p.name.toLowerCase().includes(q) ||
@@ -145,7 +1266,7 @@
 
     if (filtered.length === 0) {
       grid.hidden = true;
-      grid.innerHTML = '';
+      grid.innerHTML = "";
       if (empty) {
         empty.hidden = false;
         empty.innerHTML = q
@@ -157,13 +1278,21 @@
 
     if (empty) empty.hidden = true;
     grid.hidden = false;
-    grid.innerHTML = filtered.map((p) => {
-      const badgeCls = p.badge === 'Sale' ? 'is-sale' : p.badge === 'Fresh' ? 'is-fresh' : '';
-      const badge = p.badge ? `<span class="gh-pBadge ${badgeCls}">${escapeHtml(p.badge)}</span>` : '';
-      const visual = p.image
-        ? `<div class="gh-pimgBg gh-pimgBg--photo" style="background-image:url('${p.image}')" role="img" aria-label="${escapeHtml(p.name)}"></div>`
-        : `<div class="gh-pimgBg" style="background:${p.bg}"><span class="gh-pimgLabel">${escapeHtml(p.name)}</span></div>`;
-      return `
+    grid.innerHTML = filtered
+      .map((p) => {
+        const badgeCls =
+          p.badge === "Sale"
+            ? "is-sale"
+            : p.badge === "Fresh"
+              ? "is-fresh"
+              : "";
+        const badge = p.badge
+          ? `<span class="gh-pBadge ${badgeCls}">${escapeHtml(p.badge)}</span>`
+          : "";
+        const visual = p.image
+          ? `<div class="gh-pimgBg gh-pimgBg--photo" style="background-image:url('${p.image}')" role="img" aria-label="${escapeHtml(p.name)}"></div>`
+          : `<div class="gh-pimgBg" style="background:${p.bg}"><span class="gh-pimgLabel">${escapeHtml(p.name)}</span></div>`;
+        return `
         <article class="gh-pcard" data-id="${p.id}">
           <div class="gh-pimg">
             ${visual}
@@ -174,23 +1303,24 @@
             <div class="gh-pName">${escapeHtml(p.name)}</div>
             <p class="gh-pDesc">${escapeHtml(p.desc)}</p>
             <div class="gh-pFoot">
-              <span class="gh-pPrice">${fmtPrice(p.price)}</span>
+              <span class="gh-pPrice${p.price == null ? " is-poa" : ""}">${p.price == null ? "Ask in-store" : fmtPrice(p.price)}</span>
             </div>
           </div>
         </article>`;
-    }).join('');
+      })
+      .join("");
   }
 
   // ---------- Scroll helper ----------
   function scrollToProducts() {
-    const sec = $('#prodSection');
-    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const sec = $("#prodSection");
+    if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   // ---------- Read ?cat= from URL (shop page) ----------
   function applyCatFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const raw = params.get('cat');
+    const raw = params.get("cat");
     if (!raw) return;
     const match = CATEGORIES.find((c) => c.toLowerCase() === raw.toLowerCase());
     if (match) state.activeCat = match;
@@ -198,35 +1328,35 @@
 
   // ---------- Contact form ----------
   function bindContactForm() {
-    const form = $('#contactForm');
+    const form = $("#contactForm");
     if (!form) return;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const name = ($('#cfName').value || '').trim();
-      const message = ($('#cfMessage').value || '').trim();
+      const name = ($("#cfName").value || "").trim();
+      const message = ($("#cfMessage").value || "").trim();
       if (!name || !message) {
         form.reportValidity();
         return;
       }
       const text = `Hi Giottos, my name is ${name}.\n\n${message}`;
       const url = `${CONTACT.wa}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     });
   }
 
   // ---------- Render: deal slider (home page) ----------
   function initDealSlider() {
-    const slider = $('#dealSlider');
-    const dotsEl = $('#dealDots');
+    const slider = $("#dealSlider");
+    const dotsEl = $("#dealDots");
     if (!slider || !dotsEl || !DEALS.length) return;
 
     let current = 0;
 
     DEALS.forEach((deal, i) => {
-      const slide = document.createElement('div');
-      slide.className = 'gh-dealSlide' + (i === 0 ? ' is-active' : '');
-      slide.setAttribute('role', 'group');
-      slide.setAttribute('aria-label', `Deal ${i + 1} of ${DEALS.length}`);
+      const slide = document.createElement("div");
+      slide.className = "gh-dealSlide" + (i === 0 ? " is-active" : "");
+      slide.setAttribute("role", "group");
+      slide.setAttribute("aria-label", `Deal ${i + 1} of ${DEALS.length}`);
       slide.innerHTML = `
         <div class="gh-dealSlideImg" style="background-image:url('${escapeHtml(deal.image)}')"></div>
         <div class="gh-dealOverlay"></div>
@@ -244,24 +1374,24 @@
       slider.insertBefore(slide, dotsEl);
 
       if (DEALS.length > 1) {
-        const dot = document.createElement('button');
-        dot.className = 'gh-dealDot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', `Deal ${i + 1}`);
+        const dot = document.createElement("button");
+        dot.className = "gh-dealDot" + (i === 0 ? " is-active" : "");
+        dot.setAttribute("aria-label", `Deal ${i + 1}`);
         dot.dataset.idx = i;
-        dot.addEventListener('click', () => goTo(i));
+        dot.addEventListener("click", () => goTo(i));
         dotsEl.appendChild(dot);
       }
     });
 
-    const slides = slider.querySelectorAll('.gh-dealSlide');
-    const dots = dotsEl.querySelectorAll('.gh-dealDot');
+    const slides = slider.querySelectorAll(".gh-dealSlide");
+    const dots = dotsEl.querySelectorAll(".gh-dealDot");
 
     function goTo(idx) {
-      slides[current].classList.remove('is-active');
-      if (dots[current]) dots[current].classList.remove('is-active');
+      slides[current].classList.remove("is-active");
+      if (dots[current]) dots[current].classList.remove("is-active");
       current = idx;
-      slides[current].classList.add('is-active');
-      if (dots[current]) dots[current].classList.add('is-active');
+      slides[current].classList.add("is-active");
+      if (dots[current]) dots[current].classList.add("is-active");
     }
 
     if (DEALS.length > 1) {
@@ -271,9 +1401,9 @@
 
   // ---------- Bindings ----------
   function bind() {
-    const search = $('#search');
+    const search = $("#search");
     if (search) {
-      search.addEventListener('input', (e) => {
+      search.addEventListener("input", (e) => {
         state.query = e.target.value;
         renderProducts();
       });
@@ -283,47 +1413,53 @@
     bindContactForm();
     bindFab();
 
-    const yr = $('#year');
+    const yr = $("#year");
     if (yr) yr.textContent = new Date().getFullYear();
   }
 
   // ---------- Fill phone / WhatsApp links + visible number at runtime ----------
   function hydrateContacts() {
-    document.querySelectorAll('[data-tel]').forEach((el) => el.setAttribute('href', CONTACT.tel));
-    document.querySelectorAll('[data-wa]').forEach((el) => el.setAttribute('href', CONTACT.wa));
-    document.querySelectorAll('[data-phone]').forEach((el) => { el.textContent = CONTACT.display; });
+    document
+      .querySelectorAll("[data-tel]")
+      .forEach((el) => el.setAttribute("href", CONTACT.tel));
+    document
+      .querySelectorAll("[data-wa]")
+      .forEach((el) => el.setAttribute("href", CONTACT.wa));
+    document.querySelectorAll("[data-phone]").forEach((el) => {
+      el.textContent = CONTACT.display;
+    });
   }
 
   // ---------- Floating contact button ----------
   function bindFab() {
-    const fab = $('#fab');
-    const toggle = $('#fabToggle');
+    const fab = $("#fab");
+    const toggle = $("#fabToggle");
     if (!fab || !toggle) return;
 
     const close = () => {
-      fab.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+      fab.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
     };
     const open = () => {
-      fab.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
+      fab.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
     };
 
-    toggle.addEventListener('click', (e) => {
+    toggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      fab.classList.contains('is-open') ? close() : open();
+      fab.classList.contains("is-open") ? close() : open();
     });
     // Close when tapping outside or pressing Escape
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!fab.contains(e.target)) close();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
     });
   }
 
   // ---------- Boot ----------
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     applyCatFromUrl();
     renderCatBar();
     renderCatTiles();

@@ -800,25 +800,25 @@
   // ---------- Deals (hero slideshow) ----------
   const DEALS = [
     {
-      name: "Plantain (ripe)",
-      sub: "3-pack · While stocks last",
-      was: 2.2,
-      now: 1.8,
-      image: "assets/products/ripe-plantain.webp",
+      name: "Blue Band margarine",
+      sub: "500g · Save 20% this week",
+      was: 5.99,
+      now: 4.79,
+      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
     },
     {
-      name: "Cocoyam",
-      sub: "each · 20% off this week",
-      was: 3.5,
-      now: 2.8,
-      image: "assets/products/cocoyam.webp",
+      name: "Nestlé Milo",
+      sub: "1.4kg · The family tin, discounted",
+      was: 13.0,
+      now: 11.0,
+      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
     },
     {
-      name: "Puna yam",
-      sub: "whole tuber · 20% off",
-      was: 7.5,
-      now: 6.0,
-      image: "assets/products/yam.webp",
+      name: "Golden Penny spaghetti",
+      sub: "500g · Stock up and save",
+      was: 1.5,
+      now: 1.2,
+      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
     },
   ];
 
@@ -1005,8 +1005,11 @@
       slide.className = "gh-dealSlide" + (i === 0 ? " is-active" : "");
       slide.setAttribute("role", "group");
       slide.setAttribute("aria-label", `Deal ${i + 1} of ${DEALS.length}`);
+      const slideVisual = deal.image
+        ? `<div class="gh-dealSlideImg" style="background-image:url('${escapeHtml(deal.image)}')"></div>`
+        : `<div class="gh-dealSlideImg" style="background:${deal.bg}"></div>`;
       slide.innerHTML = `
-        <div class="gh-dealSlideImg" style="background-image:url('${escapeHtml(deal.image)}')"></div>
+        ${slideVisual}
         <div class="gh-dealOverlay"></div>
         <div class="gh-dealContent">
           <span class="gh-dealBadge">★ This week's deal</span>

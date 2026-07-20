@@ -52,11 +52,70 @@
           </svg>
           <span>Call us</span>
         </a>
+        <button
+          class="gh-burger"
+          id="burger"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <svg
+            class="gh-burgerOpen"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+          <svg
+            class="gh-burgerClose"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
       </div>
       <div class="gh-catBar">
         <div class="gh-catBarInner" id="catBar"></div>
       </div>
     </header>
+
+    <!-- ============ Mobile menu ============ -->
+    <div class="gh-mobileMenu" id="mobileMenu">
+      <div class="gh-mobileMenuInner">
+        <a href="index.html" class="gh-mobileMenuLink">Home</a>
+        <a href="shop.html" class="gh-mobileMenuLink is-active">What's in</a>
+        <a href="visit.html" class="gh-mobileMenuLink">Visit</a>
+        <a class="gh-mobileMenuCall" data-tel aria-label="Call the shop">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            />
+          </svg>
+          <span>Call us</span>
+        </a>
+      </div>
+    </div>
 
     <!-- ============ Page hero ============ -->
     <section class="gh-pageHero">
@@ -228,57 +287,6 @@
         </svg>
       </button>
     </div>
-
-    <!-- ============ Bottom nav (mobile) ============ -->
-    <nav class="gh-bottomNav" aria-label="Primary">
-      <div class="gh-bottomNavInner">
-        <a href="index.html" class="gh-bottomNavLink">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 11l9-8 9 8M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"
-            />
-          </svg>
-          <span>Home</span>
-        </a>
-        <a href="shop.html" class="gh-bottomNavLink is-active">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M6 8h12l1 12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 8z" />
-            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-          </svg>
-          <span>What's in</span>
-        </a>
-        <a href="visit.html" class="gh-bottomNavLink">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 21s-7-6.2-7-11A7 7 0 0 1 19 10c0 4.8-7 11-7 11z" />
-            <circle cx="12" cy="10" r="2.5" />
-          </svg>
-          <span>Visit</span>
-        </a>
-      </div>
-    </nav>
 
     <script src="app.js?v=5"></script>
   </body>

@@ -1164,6 +1164,7 @@
     hydrateContacts();
     bindContactForm();
     bindFab();
+    bindBurgerMenu();
 
     const yr = $("#year");
     if (yr) yr.textContent = new Date().getFullYear();
@@ -1208,6 +1209,47 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") close();
     });
+  }
+
+  // ---------- Hamburger menu (mobile) ----------
+  function bindBurgerMenu() {
+    const burger = $("#burger");
+    const menu = $("#mobileMenu");
+    if (!burger || !menu) return;
+
+    const close = () => {
+      burger.classList.remove("is-open");
+      menu.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    };
+    const open = () => {
+      burger.classList.add("is-open");
+      menu.classList.add("is-open");
+      burger.setAttribute("aria-expanded", "true");
+    };
+
+    burger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      burger.classList.contains("is-open") ? close() : open();
+    });
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", close);
+    });
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && !burger.contains(e.target)) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+    // Close on scroll so the menu never sits open (and blocking taps)
+    // over content the user has scrolled to.
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (burger.classList.contains("is-open")) close();
+      },
+      { passive: true },
+    );
   }
 
   // ---------- Boot ----------

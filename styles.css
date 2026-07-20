@@ -150,52 +150,101 @@ body {
   border-bottom-color: var(--brand-cream);
 }
 
-/* ============ Bottom nav (mobile) ============ */
-.gh-bottomNav {
+/* ============ Burger + mobile menu ============ */
+.gh-burger {
   display: none;
+  background: transparent;
+  border: none;
+  color: var(--brand-cream);
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  z-index: 61;
+}
+.gh-burger svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+.gh-burger .gh-burgerClose {
+  display: none;
+}
+.gh-burger.is-open .gh-burgerOpen {
+  display: none;
+}
+.gh-burger.is-open .gh-burgerClose {
+  display: block;
+}
+.gh-mobileMenu {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
-  z-index: 70;
-  background: var(--bg-deep);
-  border-top: 1px solid rgba(248, 239, 227, 0.14);
-  padding-bottom: env(safe-area-inset-bottom);
+  top: 0;
+  z-index: 55;
+  background: rgba(184, 36, 76, 0.3);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 239, 227, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    visibility 200ms;
 }
-.gh-bottomNavInner {
+.gh-mobileMenu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (min-width: 769px) {
+  .gh-mobileMenu {
+    display: none;
+  }
+}
+.gh-mobileMenuInner {
   max-width: 1280px;
   margin: 0 auto;
-  display: flex;
-  height: 64px;
-}
-.gh-bottomNavLink {
-  flex: 1;
+  padding: 96px 24px 28px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  color: var(--fg-on-dark-muted);
-  text-decoration: none;
-  min-height: 44px;
+  gap: 4px;
 }
-.gh-bottomNavLink svg {
-  width: 22px;
-  height: 22px;
-  transition: transform 160ms;
-}
-.gh-bottomNavLink span {
+.gh-mobileMenuLink {
   font-family: var(--ff-display);
-  font-size: 10.5px;
-  font-weight: 600;
+  font-size: 20px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  color: var(--brand-cream);
+  text-decoration: none;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(255, 239, 227, 0.16);
 }
-.gh-bottomNavLink.is-active {
+.gh-mobileMenuLink.is-active {
   color: var(--acc-mustard);
 }
-.gh-bottomNavLink.is-active svg {
-  transform: translateY(-1px);
+.gh-mobileMenuCall {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ff-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brand-cream);
+  text-decoration: none;
+  background: rgba(255, 239, 227, 0.14);
+  padding: 12px 18px;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+.gh-mobileMenuCall svg {
+  width: 18px;
+  height: 18px;
 }
 
 .gh-search {
@@ -323,13 +372,13 @@ body {
   background-image:
     linear-gradient(
       120deg,
-      rgba(42, 17, 23, 0.92) 0%,
-      rgba(42, 17, 23, 0.6) 42%,
-      rgba(42, 17, 23, 0.88) 100%
+      rgba(42, 17, 23, 0.9) 0%,
+      rgba(42, 17, 23, 0.78) 42%,
+      rgba(42, 17, 23, 0.93) 100%
     ),
     url("assets/hero-banner.webp");
   background-size: cover;
-  background-position: center top;
+  background-position: 78% 15%;
 }
 .gh-heroBg::after {
   content: "";
@@ -349,10 +398,16 @@ body {
   margin: 0 auto;
   padding: 80px 24px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 0.9fr 1.1fr;
   gap: 48px;
   align-items: center;
   z-index: 2;
+}
+.gh-heroText {
+  order: 2;
+}
+.gh-dealSlider {
+  order: 1;
 }
 .gh-heroKicker {
   font-family: var(--ff-display);
@@ -1592,14 +1647,8 @@ body {
   .gh-nav {
     display: none;
   }
-  .gh-bottomNav {
+  .gh-burger {
     display: block;
-  }
-  body {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom));
-  }
-  .gh-fab {
-    bottom: calc(64px + 16px + env(safe-area-inset-bottom));
   }
   .gh-catBarInner {
     padding: 10px 16px;
@@ -1644,6 +1693,12 @@ body {
     grid-template-columns: 1fr;
     padding: 56px 20px;
     gap: 32px;
+  }
+  .gh-heroText {
+    order: 1;
+  }
+  .gh-dealSlider {
+    order: 2;
   }
   .gh-heroImg {
     aspect-ratio: 4/3;
@@ -1731,6 +1786,6 @@ body {
   }
   .gh-fab {
     right: 16px;
-    bottom: calc(64px + 16px + env(safe-area-inset-bottom));
+    bottom: 16px;
   }
 }

@@ -485,7 +485,7 @@
       price: 13.0,
       desc: "Chocolate-malt classic, the big family tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/nestle-milo.webp",
     },
     {
       id: "p73",
@@ -496,7 +496,7 @@
       price: 4.0,
       desc: "Chocolate-malt classic, the everyday tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/nestle-milo.webp",
     },
     {
       id: "p74",

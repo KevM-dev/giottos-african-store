@@ -1046,8 +1046,10 @@
             ${badge}
           </div>
           <div class="gh-pBody">
-            <div class="gh-pMeta">From ${escapeHtml(p.origin)} · ${escapeHtml(p.size)}</div>
-            <div class="gh-pName">${escapeHtml(p.name)}</div>
+            <div class="gh-pNameRow">
+              <div class="gh-pName">${escapeHtml(p.name)}</div>
+              <span class="gh-pSize">${escapeHtml(p.size)}</span>
+            </div>
             <p class="gh-pDesc">${escapeHtml(p.desc)}</p>
             <div class="gh-pFoot">
               <span class="gh-pPrice${p.price == null ? " is-poa" : ""}">${p.price == null ? "Ask in-store" : fmtPrice(p.price)}</span>

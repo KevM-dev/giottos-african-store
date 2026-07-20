@@ -56,7 +56,7 @@
       price: 26.0,
       desc: "Full-cream powdered milk, the big catering tin.",
       badge: null,
-      image: "assets/products/peak-milk.webp",
+      image: "assets/products/pantry/peak-milk.webp",
     },
     {
       id: "p34",
@@ -67,7 +67,7 @@
       price: 10.5,
       desc: "Full-cream powdered milk for the week ahead.",
       badge: null,
-      image: "assets/products/peak-milk.webp",
+      image: "assets/products/pantry/peak-milk.webp",
     },
     {
       id: "p35",
@@ -78,7 +78,7 @@
       price: 4.99,
       desc: "Full-cream powdered milk, the everyday size.",
       badge: null,
-      image: "assets/products/peak-milk.webp",
+      image: "assets/products/pantry/peak-milk.webp",
     },
     {
       id: "p36",
@@ -89,7 +89,7 @@
       price: 1.5,
       desc: "Evaporated milk for tea, custard, and stews.",
       badge: null,
-      image: "assets/products/peak-milk-evaporated.webp",
+      image: "assets/products/pantry/peak-milk-evaporated.webp",
     },
     {
       id: "p37",
@@ -100,7 +100,7 @@
       price: 1.0,
       desc: "Smaller evaporated milk tin, just enough for one pot.",
       badge: null,
-      image: "assets/products/peak-milk-evaporated.webp",
+      image: "assets/products/pantry/peak-milk-evaporated.webp",
     },
     {
       id: "p38",
@@ -111,7 +111,7 @@
       price: 24.0,
       desc: "Full-cream instant milk powder, catering size.",
       badge: null,
-      image: "assets/products/nido.webp",
+      image: "assets/products/pantry/nido.webp",
     },
     {
       id: "p39",
@@ -122,7 +122,7 @@
       price: 22.0,
       desc: "Full-cream instant milk powder, family size.",
       badge: null,
-      image: "assets/products/nido.webp",
+      image: "assets/products/pantry/nido.webp",
     },
     {
       id: "p40",
@@ -133,7 +133,7 @@
       price: 10.99,
       desc: "Full-cream instant milk powder, the weekly tin.",
       badge: null,
-      image: "assets/products/nido.webp",
+      image: "assets/products/pantry/nido.webp",
     },
     {
       id: "p41",
@@ -144,7 +144,7 @@
       price: 4.99,
       desc: "Full-cream instant milk powder, the everyday size.",
       badge: null,
-      image: "assets/products/nido.webp",
+      image: "assets/products/pantry/nido.webp",
     },
     {
       id: "p42",
@@ -155,7 +155,7 @@
       price: 19.99,
       desc: "Full-cream powdered milk, catering size.",
       badge: null,
-      image: "assets/products/tropical-sun-milk.webp",
+      image: "assets/products/pantry/tropical-sun-milk.webp",
     },
     {
       id: "p43",
@@ -166,7 +166,7 @@
       price: 8.99,
       desc: "Full-cream powdered milk for the week.",
       badge: null,
-      image: "assets/products/tropical-sun-milk.webp",
+      image: "assets/products/pantry/tropical-sun-milk.webp",
     },
     {
       id: "p44",
@@ -177,7 +177,7 @@
       price: 4.39,
       desc: "Full-cream powdered milk, the everyday size.",
       badge: null,
-      image: "assets/products/tropical-sun-milk.webp",
+      image: "assets/products/pantry/tropical-sun-milk.webp",
     },
     {
       id: "p45",
@@ -188,7 +188,7 @@
       price: 7.99,
       desc: "Infant cereal, the trusted first-foods brand.",
       badge: null,
-      image: "assets/products/cerelac.webp",
+      image: "assets/products/pantry/cerelac.webp",
     },
     {
       id: "p46",
@@ -210,7 +210,7 @@
       price: 2.5,
       desc: "Rolled oats for a quick, filling breakfast.",
       badge: null,
-      image: "assets/products/quaker-white-oat.webp",
+      image: "assets/products/pantry/quaker-white-oat.webp",
     },
     {
       id: "p48",
@@ -221,7 +221,7 @@
       price: null,
       desc: "Spiced millet porridge flour, a Northern Ghanaian street-food breakfast.",
       badge: null,
-      image: "assets/products/ghana-best-hausa-koko.webp",
+      image: "assets/products/pantry/ghana-best-hausa-koko.webp",
     },
     {
       id: "p49",
@@ -232,7 +232,7 @@
       price: 7.99,
       desc: "Classic custard powder for a sweet teatime treat.",
       badge: null,
-      image: "assets/products/lady-b-custard.webp",
+      image: "assets/products/pantry/lady-b-custard.webp",
     },
     {
       id: "p50",
@@ -243,7 +243,7 @@
       price: 7.99,
       desc: "Instant custard, milk, and sugar in one, just add water.",
       badge: null,
-      image: "assets/products/checkers-custard-original.webp",
+      image: "assets/products/pantry/checkers-custard-original.webp",
     },
     {
       id: "p51",
@@ -254,7 +254,7 @@
       price: 7.0,
       desc: "Vanilla instant custard, milk, and sugar in one.",
       badge: null,
-      image: "assets/products/checkers-custard-vanilla.webp",
+      image: "assets/products/pantry/checkers-custard-vanilla.webp",
     },
     {
       id: "p52",
@@ -265,7 +265,7 @@
       price: 2.99,
       desc: "Instant custard, milk, and sugar in one, the small tin.",
       badge: null,
-      image: "assets/products/checkers-custard-400g.webp",
+      image: "assets/products/pantry/checkers-custard-400g.webp",
     },
     {
       id: "p53",
@@ -276,7 +276,7 @@
       price: null,
       desc: "Creamy tinned coconut milk for soups and stews.",
       badge: null,
-      image: "assets/products/dunns-river-coconut-milk.webp",
+      image: "assets/products/pantry/dunns-river-coconut-milk.webp",
     },
     {
       id: "p54",
@@ -287,7 +287,7 @@
       price: 8.5,
       desc: "Powdered coconut milk, just add water for instant coconut cream.",
       badge: null,
-      image: "assets/products/maggi-coconut-milk-powder.webp",
+      image: "assets/products/pantry/maggi-coconut-milk-powder.webp",
     },
     {
       id: "p55",
@@ -298,7 +298,7 @@
       price: 2.5,
       desc: "Mackerel in tomato sauce, a store-cupboard staple with rice.",
       badge: null,
-      image: "assets/products/geisha-mackerel.webp",
+      image: "assets/products/pantry/geisha-mackerel.webp",
     },
     {
       id: "p56",
@@ -309,7 +309,7 @@
       price: 1.99,
       desc: "Tinned sardines, quick protein for rice or bread.",
       badge: null,
-      image: "assets/products/sardine.webp",
+      image: "assets/products/pantry/sardine.webp",
     },
     {
       id: "p57",
@@ -320,7 +320,7 @@
       price: null,
       desc: "Classic tinned corned beef for stew, sandwiches, or fried rice.",
       badge: null,
-      image: "assets/products/corned-beef-exeter.webp",
+      image: "assets/products/pantry/corned-beef-exeter.webp",
     },
     {
       id: "p58",
@@ -331,7 +331,7 @@
       price: null,
       desc: "Pure honey, unblended and naturally sweet.",
       badge: null,
-      image: "assets/products/tropical-sun-pure-honey.webp",
+      image: "assets/products/pantry/tropical-sun-pure-honey.webp",
     },
     {
       id: "p59",
@@ -342,7 +342,7 @@
       price: null,
       desc: "Blossom honey, light and floral.",
       badge: null,
-      image: "assets/products/tropical-sun-blossom-honey.webp",
+      image: "assets/products/pantry/tropical-sun-blossom-honey.webp",
     },
     {
       id: "p60",
@@ -353,7 +353,7 @@
       price: null,
       desc: "Smooth peanut butter, ground the traditional way.",
       badge: null,
-      image: "assets/products/africa-finest-peanut-butter.webp",
+      image: "assets/products/pantry/africa-finest-peanut-butter.webp",
     },
     {
       id: "p61",
@@ -364,7 +364,7 @@
       price: 3.25,
       desc: "Crunchy peanut butter with real peanut pieces.",
       badge: null,
-      image: "assets/products/tropical-sun-crunchy-peanut-butter.webp",
+      image: "assets/products/pantry/tropical-sun-crunchy-peanut-butter.webp",
     },
     {
       id: "p62",
@@ -375,7 +375,7 @@
       price: 5.99,
       desc: "Everyday spreadable margarine for bread and baking.",
       badge: null,
-      image: "assets/products/blue-band-margarine.webp",
+      image: "assets/products/pantry/blue-band-margarine.webp",
     },
     {
       id: "p63",
@@ -386,7 +386,7 @@
       price: 3.99,
       desc: "Everyday spreadable margarine, the smaller tub.",
       badge: null,
-      image: "assets/products/blue-band-margarine.webp",
+      image: "assets/products/pantry/blue-band-margarine.webp",
     },
     {
       id: "p64",
@@ -397,7 +397,7 @@
       price: null,
       desc: "Baker's yeast for bread, buns, and puff-puff.",
       badge: null,
-      image: "assets/products/stk-royal-yeast.webp",
+      image: "assets/products/pantry/stk-royal-yeast.webp",
     },
     {
       id: "p65",
@@ -408,7 +408,7 @@
       price: null,
       desc: "Unsweetened cocoa powder for baking and hot chocolate.",
       badge: null,
-      image: "assets/products/oluys-cocoa-powder.webp",
+      image: "assets/products/pantry/oluys-cocoa-powder.webp",
     },
     {
       id: "p66",
@@ -419,7 +419,7 @@
       price: 2.5,
       desc: "Fine white sugar from Senegal's own St Louis mills.",
       badge: null,
-      image: "assets/products/st-louis-sugar.webp",
+      image: "assets/products/pantry/st-louis-sugar.webp",
     },
     {
       id: "p67",
@@ -430,7 +430,7 @@
       price: 1.5,
       desc: "Everyday spaghetti from Nigeria's biggest pasta brand.",
       badge: null,
-      image: "assets/products/golden-penny-spaghetti.webp",
+      image: "assets/products/pantry/golden-penny-spaghetti.webp",
     },
     {
       id: "p68",
@@ -441,7 +441,7 @@
       price: 2.97,
       desc: "Flat rice noodles for stir-fries and soups.",
       badge: null,
-      image: "assets/products/rice-stick.webp",
+      image: "assets/products/pantry/rice-stick.webp",
     },
     {
       id: "p69",
@@ -452,7 +452,7 @@
       price: 4.99,
       desc: "Tinned hominy corn for soups and stews.",
       badge: null,
-      image: "assets/products/tropical-sun-hominy-corn.webp",
+      image: "assets/products/pantry/tropical-sun-hominy-corn.webp",
     },
     {
       id: "p70",
@@ -485,7 +485,7 @@
       price: 13.0,
       desc: "Chocolate-malt classic, the big family tin.",
       badge: null,
-      image: "assets/products/nestle-milo.webp",
+      image: "assets/products/drinks/nestle-milo.webp",
     },
     {
       id: "p73",
@@ -496,7 +496,7 @@
       price: 4.0,
       desc: "Chocolate-malt classic, the everyday tin.",
       badge: null,
-      image: "assets/products/nestle-milo.webp",
+      image: "assets/products/drinks/nestle-milo.webp",
     },
     {
       id: "p74",
@@ -815,7 +815,7 @@
       price: null,
       desc: "Sweet for dodo, fry low and slow.",
       badge: null,
-      image: "assets/products/ripe-plantain.webp",
+      image: "assets/products/fresh/ripe-plantain.webp",
     },
     {
       id: "p103",
@@ -837,7 +837,7 @@
       price: null,
       desc: "Fierce, fruity heat — the soul of jollof and pepper soup.",
       badge: "Fresh",
-      image: "assets/products/chillies.webp",
+      image: "assets/products/fresh/chillies.webp",
     },
     {
       id: "p105",
@@ -848,7 +848,7 @@
       price: null,
       desc: "Firm and starchy — for boli, kelewele, or chips.",
       badge: null,
-      image: "assets/products/green-plantain.webp",
+      image: "assets/products/fresh/green-plantain.webp",
     },
     {
       id: "p106",
@@ -859,7 +859,7 @@
       price: null,
       desc: "Whole West-African yam — pound it, fry it, boil it.",
       badge: null,
-      image: "assets/products/yam.webp",
+      image: "assets/products/fresh/yam.webp",
     },
     {
       id: "p107",
@@ -870,7 +870,7 @@
       price: null,
       desc: "Earthy and starchy — great in pepper soup or boiled as a side.",
       badge: null,
-      image: "assets/products/cocoyam.webp",
+      image: "assets/products/fresh/cocoyam.webp",
     },
     {
       id: "p108",
@@ -881,7 +881,7 @@
       price: null,
       desc: "Sweet and mild heat — roast into stew base or eat fresh.",
       badge: "Fresh",
-      image: "assets/products/long-bell-pepper.webp",
+      image: "assets/products/fresh/long-bell-pepper.webp",
     },
     {
       id: "p109",
@@ -892,7 +892,7 @@
       price: null,
       desc: "Plum tomatoes off the Friday truck — the stew starts here.",
       badge: "Fresh",
-      image: "assets/products/tomatoes.webp",
+      image: "assets/products/fresh/tomatoes.webp",
     },
   ];
 

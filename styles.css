@@ -149,6 +149,55 @@ body {
 .gh-navLink.is-active {
   border-bottom-color: var(--brand-cream);
 }
+
+/* ============ Bottom nav (mobile) ============ */
+.gh-bottomNav {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: var(--bg-deep);
+  border-top: 1px solid rgba(248, 239, 227, 0.14);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.gh-bottomNavInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  height: 64px;
+}
+.gh-bottomNavLink {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--fg-on-dark-muted);
+  text-decoration: none;
+  min-height: 44px;
+}
+.gh-bottomNavLink svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 160ms;
+}
+.gh-bottomNavLink span {
+  font-family: var(--ff-display);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.gh-bottomNavLink.is-active {
+  color: var(--acc-mustard);
+}
+.gh-bottomNavLink.is-active svg {
+  transform: translateY(-1px);
+}
+
 .gh-search {
   width: 100%;
   max-width: 560px;
@@ -1641,22 +1690,19 @@ body {
     letter-spacing: 0.16em;
   }
   .gh-iconBtn {
-    margin-left: auto;
-    padding: 6px 8px;
+    display: none;
   }
   .gh-nav {
-    order: 99;
-    flex-basis: 100%;
-    gap: 28px;
-    justify-content: center;
-    margin-top: 8px;
-    padding: 8px 0;
-    border-top: 1px solid rgba(255, 239, 227, 0.18);
+    display: none;
   }
-  .gh-navLink {
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    padding: 2px 0;
+  .gh-bottomNav {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+  .gh-fab {
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom));
   }
   .gh-catBarInner {
     padding: 10px 16px;
@@ -1788,6 +1834,6 @@ body {
   }
   .gh-fab {
     right: 16px;
-    bottom: 16px;
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom));
   }
 }

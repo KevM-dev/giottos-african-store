@@ -56,7 +56,7 @@
       price: 26.0,
       desc: "Full-cream powdered milk, the big catering tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/peak-milk.webp",
     },
     {
       id: "p34",
@@ -67,7 +67,7 @@
       price: 10.5,
       desc: "Full-cream powdered milk for the week ahead.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/peak-milk.webp",
     },
     {
       id: "p35",
@@ -78,7 +78,7 @@
       price: 4.99,
       desc: "Full-cream powdered milk, the everyday size.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/peak-milk.webp",
     },
     {
       id: "p36",
@@ -89,7 +89,7 @@
       price: 1.5,
       desc: "Evaporated milk for tea, custard, and stews.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/peak-milk-evaporated.webp",
     },
     {
       id: "p37",
@@ -100,7 +100,7 @@
       price: 1.0,
       desc: "Smaller evaporated milk tin, just enough for one pot.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/peak-milk-evaporated.webp",
     },
     {
       id: "p38",
@@ -111,7 +111,7 @@
       price: 24.0,
       desc: "Full-cream instant milk powder, catering size.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/nido.webp",
     },
     {
       id: "p39",
@@ -122,7 +122,7 @@
       price: 22.0,
       desc: "Full-cream instant milk powder, family size.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/nido.webp",
     },
     {
       id: "p40",
@@ -133,7 +133,7 @@
       price: 10.99,
       desc: "Full-cream instant milk powder, the weekly tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/nido.webp",
     },
     {
       id: "p41",
@@ -144,7 +144,7 @@
       price: 4.99,
       desc: "Full-cream instant milk powder, the everyday size.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/nido.webp",
     },
     {
       id: "p42",
@@ -155,7 +155,7 @@
       price: 19.99,
       desc: "Full-cream powdered milk, catering size.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/tropical-sun-milk.webp",
     },
     {
       id: "p43",
@@ -166,7 +166,7 @@
       price: 8.99,
       desc: "Full-cream powdered milk for the week.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/tropical-sun-milk.webp",
     },
     {
       id: "p44",
@@ -177,7 +177,7 @@
       price: 4.39,
       desc: "Full-cream powdered milk, the everyday size.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/tropical-sun-milk.webp",
     },
     {
       id: "p45",
@@ -188,7 +188,7 @@
       price: 7.99,
       desc: "Infant cereal, the trusted first-foods brand.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/cerelac.webp",
     },
     {
       id: "p46",
@@ -210,7 +210,7 @@
       price: 2.5,
       desc: "Rolled oats for a quick, filling breakfast.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/quaker-white-oat.webp",
     },
     {
       id: "p48",
@@ -221,7 +221,7 @@
       price: null,
       desc: "Spiced millet porridge flour, a Northern Ghanaian street-food breakfast.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/ghana-best-hausa-koko.webp",
     },
     {
       id: "p49",
@@ -232,7 +232,7 @@
       price: 7.99,
       desc: "Classic custard powder for a sweet teatime treat.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/lady-b-custard.webp",
     },
     {
       id: "p50",
@@ -243,7 +243,7 @@
       price: 7.99,
       desc: "Instant custard, milk, and sugar in one, just add water.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/checkers-custard-original.webp",
     },
     {
       id: "p51",
@@ -254,7 +254,7 @@
       price: 7.0,
       desc: "Vanilla instant custard, milk, and sugar in one.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/checkers-custard-vanilla.webp",
     },
     {
       id: "p52",
@@ -265,7 +265,7 @@
       price: 2.99,
       desc: "Instant custard, milk, and sugar in one, the small tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/checkers-custard-400g.webp",
     },
     {
       id: "p53",
@@ -276,7 +276,7 @@
       price: null,
       desc: "Creamy tinned coconut milk for soups and stews.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/dunns-river-coconut-milk.webp",
     },
     {
       id: "p54",
@@ -287,7 +287,7 @@
       price: 8.5,
       desc: "Powdered coconut milk, just add water for instant coconut cream.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/maggi-coconut-milk-powder.webp",
     },
     {
       id: "p55",
@@ -298,7 +298,7 @@
       price: 2.5,
       desc: "Mackerel in tomato sauce, a store-cupboard staple with rice.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/geisha-mackerel.webp",
     },
     {
       id: "p56",
@@ -309,7 +309,7 @@
       price: 1.99,
       desc: "Tinned sardines, quick protein for rice or bread.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/sardine.webp",
     },
     {
       id: "p57",
@@ -320,7 +320,7 @@
       price: null,
       desc: "Classic tinned corned beef for stew, sandwiches, or fried rice.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/corned-beef-exeter.webp",
     },
     {
       id: "p58",
@@ -331,7 +331,7 @@
       price: null,
       desc: "Pure honey, unblended and naturally sweet.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/tropical-sun-pure-honey.webp",
     },
     {
       id: "p59",
@@ -342,7 +342,7 @@
       price: null,
       desc: "Blossom honey, light and floral.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/tropical-sun-blossom-honey.webp",
     },
     {
       id: "p60",
@@ -353,7 +353,7 @@
       price: null,
       desc: "Smooth peanut butter, ground the traditional way.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/africa-finest-peanut-butter.webp",
     },
     {
       id: "p61",
@@ -364,7 +364,7 @@
       price: 3.25,
       desc: "Crunchy peanut butter with real peanut pieces.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/tropical-sun-crunchy-peanut-butter.webp",
     },
     {
       id: "p62",
@@ -375,7 +375,7 @@
       price: 5.99,
       desc: "Everyday spreadable margarine for bread and baking.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/blue-band-margarine.webp",
     },
     {
       id: "p63",
@@ -386,7 +386,7 @@
       price: 3.99,
       desc: "Everyday spreadable margarine, the smaller tub.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/blue-band-margarine.webp",
     },
     {
       id: "p64",
@@ -397,7 +397,7 @@
       price: null,
       desc: "Baker's yeast for bread, buns, and puff-puff.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/stk-royal-yeast.webp",
     },
     {
       id: "p65",
@@ -408,7 +408,7 @@
       price: null,
       desc: "Unsweetened cocoa powder for baking and hot chocolate.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/oluys-cocoa-powder.webp",
     },
     {
       id: "p66",
@@ -419,7 +419,7 @@
       price: 2.5,
       desc: "Fine white sugar from Senegal's own St Louis mills.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/st-louis-sugar.webp",
     },
     {
       id: "p67",
@@ -430,7 +430,7 @@
       price: 1.5,
       desc: "Everyday spaghetti from Nigeria's biggest pasta brand.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/golden-penny-spaghetti.webp",
     },
     {
       id: "p68",
@@ -441,7 +441,7 @@
       price: 2.97,
       desc: "Flat rice noodles for stir-fries and soups.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/rice-stick.webp",
     },
     {
       id: "p69",
@@ -452,7 +452,7 @@
       price: 4.99,
       desc: "Tinned hominy corn for soups and stews.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/tropical-sun-hominy-corn.webp",
     },
     {
       id: "p70",

@@ -1159,6 +1159,14 @@
         state.query = e.target.value;
         renderProducts();
       });
+      search.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          state.query = search.value;
+          renderProducts();
+          search.blur();
+        }
+      });
     }
 
     hydrateContacts();

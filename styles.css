@@ -276,7 +276,7 @@ body {
   outline: none;
   color: var(--brand-cream);
   font-family: var(--ff-body);
-  font-size: 15px;
+  font-size: 16px;
 }
 .gh-search input::placeholder {
   color: rgba(248, 239, 227, 0.6);
@@ -1307,7 +1307,7 @@ body {
 .gh-fieldLabel input,
 .gh-fieldLabel textarea {
   font-family: var(--ff-body);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--fg-1);
   background: var(--bg);
   border: 1px solid var(--border-1);

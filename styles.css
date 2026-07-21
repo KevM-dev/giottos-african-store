@@ -116,7 +116,7 @@ body {
 }
 .gh-logoSub {
   font-family: var(--ff-display);
-  color: var(--brand-pink);
+  color: var(--brand-raspberry-dk);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -157,7 +157,7 @@ body {
   border: none;
   color: var(--brand-cream);
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   margin-left: auto;
   z-index: 61;
 }
@@ -189,6 +189,8 @@ body {
   visibility: hidden;
   transform: translateY(-8px);
   pointer-events: none;
+  min-height: 100vh;
+  min-height: 100dvh;
   transition:
     opacity 200ms ease,
     transform 200ms ease,
@@ -1628,7 +1630,7 @@ body {
 
 @media (max-width: 768px) {
   .gh-headerInner {
-    padding: 10px 16px 0;
+    padding: 12px 16px 14px;
     gap: 8px;
   }
   .gh-logoPill {

@@ -1236,6 +1236,12 @@
       link.addEventListener("click", close);
     });
     document.addEventListener("click", (e) => {
+      // The menu now spans the full viewport height, so a tap on its own
+      // backdrop (not on a link) counts as "outside the nav content" too.
+      if (e.target === menu) {
+        close();
+        return;
+      }
       if (!menu.contains(e.target) && !burger.contains(e.target)) close();
     });
     document.addEventListener("keydown", (e) => {

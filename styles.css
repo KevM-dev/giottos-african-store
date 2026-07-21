@@ -79,7 +79,7 @@ body {
 
 /* ============ Header ============ */
 .gh-header {
-  background: var(--brand-raspberry);
+  background: var(--acc-cocoa);
   color: var(--brand-cream);
   position: sticky;
   top: 0;
@@ -670,12 +670,12 @@ body {
   transform: scale(0.98);
 }
 .gh-btnPrimary {
-  background: var(--brand-raspberry);
+  background: var(--acc-cocoa);
   color: var(--brand-cream);
   box-shadow: var(--sh-2), var(--sh-inset);
 }
 .gh-btnPrimary:hover {
-  background: var(--brand-raspberry-dk);
+  background: var(--acc-charcoal);
   box-shadow: var(--sh-3), var(--sh-inset);
 }
 .gh-btnSecondary {
@@ -1567,7 +1567,7 @@ body {
   background: #25d366;
 }
 .gh-fabAction--call .gh-fabIcon {
-  background: var(--brand-raspberry);
+  background: var(--acc-cocoa);
 }
 .gh-fabToggle {
   width: 62px;
@@ -1575,7 +1575,7 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: var(--brand-raspberry);
+  background: var(--acc-cocoa);
   color: var(--brand-cream);
   box-shadow: var(--sh-3);
   position: relative;
@@ -1587,7 +1587,7 @@ body {
     transform 200ms;
 }
 .gh-fabToggle:hover {
-  background: var(--brand-raspberry-dk);
+  background: var(--acc-charcoal);
   transform: translateY(-2px);
 }
 .gh-fabToggle:active {
@@ -1614,7 +1614,7 @@ body {
   transform: rotate(0);
 }
 .gh-fab.is-open .gh-fabToggle {
-  background: var(--brand-raspberry-dk);
+  background: var(--acc-charcoal);
 }
 @media (prefers-reduced-motion: reduce) {
   .gh-fabActions,

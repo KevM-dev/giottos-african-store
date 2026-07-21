@@ -1067,6 +1067,18 @@ body {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.gh-mapCard {
+  margin-top: 28px;
+  border: 1px solid var(--border-1);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--sh-2);
+}
+.gh-mapCard iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
 
 /* ============ Contact card (home page) ============ */
 /* ============ Reviews ============ */
@@ -1758,6 +1770,9 @@ body {
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 22px;
+  }
+  .gh-mapCard iframe {
+    height: 280px;
   }
 
   .gh-footer {

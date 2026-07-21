@@ -802,7 +802,7 @@
       origin: "Nigeria",
       size: "bunch",
       price: null,
-      desc: "Off the Friday truck — best in two days.",
+      desc: "Off the Friday truck, best in two days.",
       badge: "Fresh",
       bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
     },
@@ -824,7 +824,7 @@
       origin: "Kenya",
       size: "each",
       price: null,
-      desc: "Whole, fresh — great in stews.",
+      desc: "Whole, fresh, great in stews.",
       badge: null,
       bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
     },
@@ -835,7 +835,7 @@
       origin: "Ghana",
       size: "200g",
       price: null,
-      desc: "Fierce, fruity heat — the soul of jollof and pepper soup.",
+      desc: "Fierce, fruity heat, the soul of jollof and pepper soup.",
       badge: "Fresh",
       image: "assets/products/fresh/chillies.webp",
     },
@@ -846,7 +846,7 @@
       origin: "Cameroon",
       size: "3-pack",
       price: null,
-      desc: "Firm and starchy — for boli, kelewele, or chips.",
+      desc: "Firm and starchy, for boli, kelewele, or chips.",
       badge: null,
       image: "assets/products/fresh/green-plantain.webp",
     },
@@ -857,7 +857,7 @@
       origin: "Ghana",
       size: "tuber",
       price: null,
-      desc: "Whole West-African yam — pound it, fry it, boil it.",
+      desc: "Whole West-African yam, pound it, fry it, boil it.",
       badge: null,
       image: "assets/products/fresh/yam.webp",
     },
@@ -868,7 +868,7 @@
       origin: "Nigeria",
       size: "each",
       price: null,
-      desc: "Earthy and starchy — great in pepper soup or boiled as a side.",
+      desc: "Earthy and starchy, great in pepper soup or boiled as a side.",
       badge: null,
       image: "assets/products/fresh/cocoyam.webp",
     },
@@ -879,7 +879,7 @@
       origin: "Ghana",
       size: "200g",
       price: null,
-      desc: "Sweet and mild heat — roast into stew base or eat fresh.",
+      desc: "Sweet and mild heat, roast into stew base or eat fresh.",
       badge: "Fresh",
       image: "assets/products/fresh/long-bell-pepper.webp",
     },
@@ -890,7 +890,7 @@
       origin: "Nigeria",
       size: "500g",
       price: null,
-      desc: "Plum tomatoes off the Friday truck — the stew starts here.",
+      desc: "Plum tomatoes off the Friday truck, the stew starts here.",
       badge: "Fresh",
       image: "assets/products/fresh/tomatoes.webp",
     },
@@ -1018,7 +1018,7 @@
         empty.hidden = false;
         empty.innerHTML = q
           ? `<p>Nothing matches "${escapeHtml(state.query)}". Try "egusi", "palm oil", or "ugu".</p>`
-          : `<p>No products in this category just now — check back Friday.</p>`;
+          : `<p>No products in this category just now. Check back Friday.</p>`;
       }
       return;
     }

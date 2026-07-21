@@ -903,21 +903,21 @@
       sub: "500g · Save 20% this week",
       was: 5.99,
       now: 4.79,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/pantry/blue-band-margarine.webp",
     },
     {
       name: "Nestlé Milo",
       sub: "1.4kg · The family tin, discounted",
       was: 13.0,
       now: 11.0,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/drinks/nestle-milo.webp",
     },
     {
       name: "Golden Penny spaghetti",
       sub: "500g · Stock up and save",
       was: 1.5,
       now: 1.2,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/pantry/golden-penny-spaghetti.webp",
     },
   ];
 

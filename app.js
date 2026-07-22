@@ -507,7 +507,7 @@
       price: 5.5,
       desc: "Chocolate-malt drink in individual sachets.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/drinks/nestle-milo-sachet.webp",
     },
     {
       id: "p75",
@@ -518,7 +518,7 @@
       price: 9.5,
       desc: "Chocolate-malt drink in individual sachets, family pack.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/drinks/nestle-milo-sachet.webp",
     },
     {
       id: "p76",
@@ -529,7 +529,7 @@
       price: 12.99,
       desc: "Malted milk drink, a classic bedtime favourite.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/drinks/ovaltine-original.webp",
     },
     {
       id: "p77",
@@ -540,7 +540,7 @@
       price: 14.0,
       desc: "Rich drinking chocolate for a proper mug of cocoa.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/drinks/tropical-sun-drinking-chocolate.webp",
     },
     {
       id: "p78",
@@ -551,7 +551,7 @@
       price: null,
       desc: "Instant coffee, creamer, and sugar in one sachet.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/drinks/nestle-3in1.webp",
     },
     {
       id: "p79",
@@ -562,7 +562,7 @@
       price: 4.99,
       desc: "The everyday black tea, 100 bags to keep you going.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/drinks/lipton-yellow-label.webp",
     },
     {
       id: "p80",
@@ -573,7 +573,7 @@
       price: 3.99,
       desc: "Instant coffee sachets from the coffee-candy brand.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/drinks/kopiko-coffee.webp",
     },
     {
       id: "p81",
@@ -595,7 +595,7 @@
       price: 4.0,
       desc: "Instant ginger tea powder, steep and stir.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/drinks/gold-killi-ginger-drink.webp",
     },
     {
       id: "p83",
@@ -617,7 +617,7 @@
       price: 2.99,
       desc: "Instant ginger drink powder, warming and spiced.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/drinks/tropical-sun-ginger-drink.webp",
     },
     {
       id: "p85",

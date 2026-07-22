@@ -463,7 +463,7 @@
       price: 8.99,
       desc: "Chocolate malt drink, a Nigerian breakfast-table staple.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/drinks/bournvita.webp",
     },
     {
       id: "p71",
@@ -474,7 +474,7 @@
       price: 4.5,
       desc: "Chocolate malt drink, the smaller tin.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/drinks/bournvita.webp",
     },
     {
       id: "p72",
@@ -584,7 +584,7 @@
       price: 3.25,
       desc: "Instant coffee, smooth and reliable.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/drinks/tropical-sun-coffee.webp",
     },
     {
       id: "p82",
@@ -606,7 +606,7 @@
       price: 2.99,
       desc: "Instant ginger drink powder, warming and spiced.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/drinks/village-pride-ginger-drink.webp",
     },
     {
       id: "p84",

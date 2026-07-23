@@ -628,7 +628,7 @@
       price: 1.5,
       desc: "Coffee-flavoured hard candy, a little pick-me-up.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/snacks/kopiko-candy.webp",
     },
     {
       id: "p86",
@@ -639,7 +639,7 @@
       price: 1.5,
       desc: "Classic minty-menthol boiled sweets.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/snacks/tom-tom.webp",
     },
     {
       id: "p87",
@@ -650,7 +650,7 @@
       price: 4.99,
       desc: "Ready-to-eat popcorn for movie night.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/snacks/tropical-sun-popcorn.webp",
     },
     {
       id: "p88",

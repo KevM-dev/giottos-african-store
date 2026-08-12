@@ -199,7 +199,7 @@
       price: 3.99,
       desc: "Maize and soya breakfast cereal, a Nigerian morning classic.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/pantry/golden-morn.webp",
     },
     {
       id: "p47",
@@ -661,7 +661,7 @@
       price: 1.0,
       desc: "Curry powder in the small jar, French-milled.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/spices/ducros-curry.webp",
     },
     {
       id: "p89",
@@ -672,18 +672,18 @@
       price: 1.0,
       desc: "Dried thyme in the small jar, French-milled.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/spices/ducros-thyme.webp",
     },
     {
       id: "p90",
-      name: "Tiger",
+      name: "Tiger thyme",
       cat: "Spices",
       origin: "Nigeria",
       size: "25g",
       price: 1.0,
-      desc: "Grouped with your curry and thyme on the list, flagging this one for you to confirm the full product name.",
+      desc: "Dried thyme, the Tiger-brand pack.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/spices/tiger-thyme.webp",
     },
     {
       id: "p91",
@@ -694,7 +694,7 @@
       price: null,
       desc: "Dried thyme sachet for soups and stews.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/spices/gino-dried-thyme.webp",
     },
     {
       id: "p92",
@@ -705,7 +705,7 @@
       price: 1.5,
       desc: "Spiced stock cube for asun and grilled meat.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/spices/gino-asun-cube.webp",
     },
     {
       id: "p93",
@@ -716,7 +716,7 @@
       price: 3.5,
       desc: "Concentrated palm-nut cream for banga and palm-nut soup.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#2a3f1c)",
+      image: "assets/products/spices/nkulenu-soup-base.webp",
     },
     {
       id: "p94",
@@ -727,7 +727,7 @@
       price: 3.5,
       desc: "Concentrated palm-nut cream for banga soup.",
       badge: null,
-      bg: "linear-gradient(135deg,#b8244c,#4a2618)",
+      image: "assets/products/spices/africa-finest-banga-soup-base.webp",
     },
     {
       id: "p95",
@@ -738,7 +738,7 @@
       price: 3.29,
       desc: "Chicken stock cubes for everyday cooking.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#4a6d8c)",
+      image: "assets/products/spices/tropical-sun-chicken-cube.webp",
     },
     {
       id: "p96",
@@ -749,7 +749,7 @@
       price: 4.99,
       desc: "All-purpose seasoning powder, the catering tub.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#b8244c)",
+      image: "assets/products/spices/tasty-cube-powder-1kg.webp",
     },
     {
       id: "p97",
@@ -760,7 +760,7 @@
       price: 3.0,
       desc: "All-purpose seasoning powder, the everyday tub.",
       badge: null,
-      bg: "linear-gradient(135deg,#e6a531,#c45a2c)",
+      image: "assets/products/spices/tasty-cube-powder-400g.webp",
     },
     {
       id: "p98",
@@ -771,7 +771,7 @@
       price: 1.5,
       desc: "All-purpose seasoning cubes, the small pack.",
       badge: null,
-      bg: "linear-gradient(135deg,#6e8b4a,#3f5028)",
+      image: "assets/products/spices/tasty-cube.webp",
     },
     {
       id: "p99",
@@ -782,7 +782,7 @@
       price: 2.5,
       desc: "Chicken and beef stock cubes, the kitchen staple.",
       badge: null,
-      bg: "linear-gradient(135deg,#c45a2c,#8a1a39)",
+      image: "assets/products/spices/knorr-chicken-and-beef.webp",
     },
     {
       id: "p100",
@@ -793,7 +793,7 @@
       price: 1.5,
       desc: "MSG-based all-purpose seasoning for soups and stir-fries.",
       badge: null,
-      bg: "linear-gradient(135deg,#4a2618,#1f1a18)",
+      image: "assets/products/spices/super-seasoning-vedan.webp",
     },
     {
       id: "p102",

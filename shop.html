@@ -10,7 +10,7 @@
     />
     <meta name="theme-color" content="#4a2618" />
     <link rel="icon" href="assets/logo-raspberry.png" />
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=8" />
   </head>
   <body>
     <!-- ============ Header ============ -->
@@ -144,9 +144,33 @@
           <input
             id="search"
             type="search"
-            placeholder="Search egusi, palm oil, garri…"
+            placeholder="Search Peak milk, scotch bonnet, thyme…"
             aria-label="Search products"
+            autocomplete="off"
+            enterkeyhint="search"
           />
+          <button
+            type="button"
+            class="gh-searchClear"
+            id="searchClear"
+            aria-label="Clear search"
+            hidden
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+          <kbd class="gh-searchHint" aria-hidden="true">/</kbd>
         </div>
       </div>
     </section>
@@ -155,7 +179,12 @@
     <section class="gh-prodSection" id="prodSection">
       <div class="gh-sectionHead">
         <h2 class="gh-sectionTitle" id="prodTitle">All products</h2>
-        <span class="gh-sectionLink gh-sectionNote">In store now</span>
+        <span
+          class="gh-sectionLink gh-sectionNote"
+          id="prodCount"
+          aria-live="polite"
+          >In store now</span
+        >
       </div>
       <div class="gh-grid" id="prodGrid"></div>
       <div class="gh-empty" id="prodEmpty" hidden></div>
@@ -288,6 +317,6 @@
       </button>
     </div>
 
-    <script src="app.js?v=5"></script>
+    <script src="app.js?v=6"></script>
   </body>
 </html>

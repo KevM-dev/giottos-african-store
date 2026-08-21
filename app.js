@@ -920,26 +920,121 @@
           "'": "&#39;",
         })[c],
     );
+  const escapeRe = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  // Lower-case and strip accents so "cote" finds "Côte d'Ivoire".
+  const normalise = (s) =>
+    String(s)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+  // Every whitespace-separated word must appear somewhere in the product,
+  // so "milk peak" finds "Peak milk" just as well as "peak milk" does.
+  const queryTokens = (q) => normalise(q).split(/\s+/).filter(Boolean);
+
+  // Searchable text is built once per product and cached on it.
+  function haystack(p) {
+    if (!p._hay) {
+      p._hay = normalise([p.name, p.cat, p.origin, p.size, p.desc].join(" "));
+    }
+    return p._hay;
+  }
+
+  const matches = (p, toks) => toks.every((t) => haystack(p).includes(t));
+
+  // Wrap query hits in <mark>. Input is escaped first, so this stays safe.
+  function highlight(text, toks) {
+    let html = escapeHtml(text);
+    if (!toks.length) return html;
+    const re = new RegExp(`(${toks.map(escapeRe).join("|")})`, "gi");
+    // Never mark inside an HTML entity such as &amp; or &#39;.
+    return html.replace(/&[a-z#0-9]+;|[^&]+/gi, (chunk) =>
+      chunk.charAt(0) === "&" ? chunk : chunk.replace(re, "<mark>$1</mark>"),
+    );
+  }
+
+  // ---------- Category placeholder icons ----------
+  // Used when a product has no photo yet, or when its photo fails to load,
+  // so a card is never a bare block of text.
+  const CAT_ICONS = {
+    Fresh:
+      '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    Pantry:
+      '<path d="M5 8h14v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/><path d="M9 13h6"/>',
+    Spices:
+      '<path d="M7 3h10l-1 5H8Z"/><path d="M8 8h8l1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z"/><path d="M11 5.5h.01M13 5.5h.01M12 6.8h.01"/>',
+    Frozen:
+      '<path d="M12 2v20M4.2 7l15.6 10M19.8 7 4.2 17"/><path d="m9 4 3 2 3-2M9 20l3-2 3 2"/>',
+    Drinks:
+      '<path d="M6 3h12l-1.2 16a2 2 0 0 1-2 1.9H9.2a2 2 0 0 1-2-1.9Z"/><path d="M6.5 9h11"/>',
+    Snacks:
+      '<path d="M4 9h16l-1.4 10a2 2 0 0 1-2 1.7H7.4a2 2 0 0 1-2-1.7Z"/><path d="m4 9 2.5-5h11L20 9"/><path d="M10 13v4M14 13v4"/>',
+  };
+
+  function placeholderMarkup(p) {
+    const glyph = CAT_ICONS[p.cat] || CAT_ICONS.Pantry;
+    return `<div class="gh-pimgPh" data-cat="${escapeHtml(p.cat)}" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${glyph}</svg>
+        <span>${escapeHtml(p.cat)}</span>
+      </div>`;
+  }
+
+  // ---------- Search / filter core ----------
+  // Products matching the current query, ignoring the category filter.
+  function queryMatches() {
+    const toks = queryTokens(state.query);
+    return toks.length ? PRODUCTS.filter((p) => matches(p, toks)) : PRODUCTS;
+  }
+
+  // How many of those sit in each category, so the bar can show live counts.
+  function countsByCat(pool) {
+    const counts = { All: pool.length };
+    CATEGORIES.forEach((c) => {
+      if (c !== "All") counts[c] = 0;
+    });
+    pool.forEach((p) => {
+      if (counts[p.cat] != null) counts[p.cat] += 1;
+    });
+    return counts;
+  }
 
   // ---------- Render: category bar (shop page) ----------
   function renderCatBar() {
     const bar = $("#catBar");
     if (!bar) return;
+    const counts = countsByCat(queryMatches());
+    // The strip scrolls sideways on mobile; keep the reader's place across
+    // the rebuild that every keystroke triggers.
+    const scrollLeft = bar.scrollLeft;
     bar.innerHTML = "";
     CATEGORIES.forEach((c) => {
+      const n = counts[c] || 0;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className =
-        "gh-catLink" + (state.activeCat === c ? " is-active" : "");
-      btn.textContent = c;
+        "gh-catLink" +
+        (state.activeCat === c ? " is-active" : "") +
+        (n === 0 ? " is-empty" : "");
+      btn.innerHTML = `${escapeHtml(c)}<span class="gh-catCount">${n}</span>`;
+      btn.setAttribute(
+        "aria-pressed",
+        state.activeCat === c ? "true" : "false",
+      );
+      btn.title = n === 1 ? `${c}: 1 item` : `${c}: ${n} items`;
       btn.addEventListener("click", () => {
-        state.activeCat = c;
-        renderCatBar();
-        renderProducts();
+        setCat(c);
         scrollToProducts();
       });
       bar.appendChild(btn);
     });
+    bar.scrollLeft = scrollLeft;
+  }
+
+  function setCat(c) {
+    state.activeCat = c;
+    render();
+    syncUrl();
   }
 
   // ---------- Render: category tiles (home page — link to shop) ----------
@@ -971,53 +1066,81 @@
     if (!grid) return;
     const empty = $("#prodEmpty");
     const title = $("#prodTitle");
-    if (title)
-      title.textContent =
-        state.activeCat && state.activeCat !== "All"
-          ? state.activeCat
-          : "All products";
+    const count = $("#prodCount");
+    const inCat = state.activeCat && state.activeCat !== "All";
+    if (title) title.textContent = inCat ? state.activeCat : "All products";
 
-    const q = state.query.trim().toLowerCase();
-    const filtered = PRODUCTS.filter((p) => {
-      if (state.activeCat !== "All" && p.cat !== state.activeCat) return false;
-      if (!q) return true;
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.origin.toLowerCase().includes(q) ||
-        p.cat.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q)
-      );
-    });
+    const toks = queryTokens(state.query);
+    const pool = queryMatches();
+    const filtered = inCat
+      ? pool.filter((p) => p.cat === state.activeCat)
+      : pool;
+
+    if (count) {
+      count.textContent = toks.length
+        ? `${filtered.length} ${filtered.length === 1 ? "match" : "matches"}`
+        : `${filtered.length} in store now`;
+    }
 
     if (filtered.length === 0) {
       grid.hidden = true;
       grid.innerHTML = "";
       if (empty) {
         empty.hidden = false;
-        empty.innerHTML = q
-          ? `<p>Nothing matches "${escapeHtml(state.query)}". Try "egusi", "palm oil", or "ugu".</p>`
-          : `<p>No products in this category just now. Check back Friday.</p>`;
+        // If the query does match elsewhere, offer a way out of the category
+        // filter rather than leaving a dead end.
+        if (toks.length && inCat && pool.length > 0) {
+          empty.innerHTML = `<p>Nothing in <strong>${escapeHtml(state.activeCat)}</strong> matches "${escapeHtml(state.query.trim())}", but ${pool.length} ${pool.length === 1 ? "item matches" : "items match"} elsewhere.</p>
+            <button type="button" class="gh-emptyBtn" id="emptyShowAll">Search all categories</button>`;
+          const btn = $("#emptyShowAll");
+          if (btn) btn.addEventListener("click", () => setCat("All"));
+        } else if (toks.length) {
+          empty.innerHTML = `<p>Nothing matches "${escapeHtml(state.query.trim())}". Try ${suggestionHtml()} — or ring us and we'll check the back.</p>
+            <button type="button" class="gh-emptyBtn" id="emptyClear">Clear search</button>`;
+          const btn = $("#emptyClear");
+          if (btn) btn.addEventListener("click", clearSearch);
+        } else {
+          empty.innerHTML = `<p>Nothing in ${escapeHtml(state.activeCat)} on the shelves this week. Check back Friday, or give us a ring.</p>`;
+        }
       }
       return;
     }
 
     if (empty) empty.hidden = true;
     grid.hidden = false;
-    grid.innerHTML = filtered
-      .map((p) => {
-        const badgeCls =
-          p.badge === "Sale"
-            ? "is-sale"
-            : p.badge === "Fresh"
-              ? "is-fresh"
-              : "";
-        const badge = p.badge
-          ? `<span class="gh-pBadge ${badgeCls}">${escapeHtml(p.badge)}</span>`
-          : "";
-        const visual = p.image
-          ? `<div class="gh-pimgBg gh-pimgBg--photo" style="background-image:url('${p.image}')" role="img" aria-label="${escapeHtml(p.name)}"></div>`
-          : `<div class="gh-pimgBg" style="background:${p.bg}"><span class="gh-pimgLabel">${escapeHtml(p.name)}</span></div>`;
-        return `
+    grid.innerHTML = filtered.map((p) => cardMarkup(p, toks)).join("");
+    // A photo served straight from cache can finish before its onload runs,
+    // which would leave the card faded out. Catch those here.
+    grid.querySelectorAll(".gh-pimgPhoto").forEach((img) => {
+      if (img.complete && img.naturalWidth > 0) img.classList.add("is-loaded");
+    });
+  }
+
+  function cardMarkup(p, toks) {
+    const badgeCls =
+      p.badge === "Sale" ? "is-sale" : p.badge === "Fresh" ? "is-fresh" : "";
+    const badge = p.badge
+      ? `<span class="gh-pBadge ${badgeCls}">${escapeHtml(p.badge)}</span>`
+      : "";
+    const alt = escapeHtml(`${p.name}, ${p.size}`);
+    // Images load lazily and fall back to a branded category icon, so a slow
+    // connection or a missing file never leaves an empty card.
+    const visual = p.image
+      ? `${placeholderMarkup(p)}<img class="gh-pimgPhoto" src="${escapeHtml(p.image)}" alt="${alt}" loading="lazy" decoding="async"
+           onload="this.classList.add('is-loaded')"
+           onerror="this.remove()" />`
+      : placeholderMarkup(p);
+
+    // Fixed prices read as a price; "Ask in-store" reads as a note, so nobody
+    // mistakes a variable-weight item for a missing price.
+    const price =
+      p.price == null
+        ? `<span class="gh-pPrice is-poa" title="Priced by weight or size on the day, just ask at the counter">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg>
+             Ask in-store</span>`
+        : `<span class="gh-pPrice is-fixed">${fmtPrice(p.price)}</span>`;
+
+    return `
         <article class="gh-pcard" data-id="${p.id}">
           <div class="gh-pimg">
             ${visual}
@@ -1025,17 +1148,29 @@
           </div>
           <div class="gh-pBody">
             <div class="gh-pNameRow">
-              <div class="gh-pName">${escapeHtml(p.name)}</div>
+              <div class="gh-pName">${highlight(p.name, toks)}</div>
               <span class="gh-pSize">${escapeHtml(p.size)}</span>
             </div>
             <p class="gh-pDesc">${escapeHtml(p.desc)}</p>
             <div class="gh-pFoot">
-              <span class="gh-pPrice${p.price == null ? " is-poa" : ""}">${p.price == null ? "Ask in-store" : fmtPrice(p.price)}</span>
+              ${price}
             </div>
           </div>
         </article>`;
-      })
-      .join("");
+  }
+
+  // Suggestions pulled from the live catalogue, so they always lead somewhere.
+  function suggestionHtml() {
+    const picks = ["milk", "thyme", "plantain", "milo"].filter((t) =>
+      PRODUCTS.some((p) => haystack(p).includes(t)),
+    );
+    return picks
+      .slice(0, 3)
+      .map(
+        (t) =>
+          `<button type="button" class="gh-emptySuggest" data-q="${t}">${t}</button>`,
+      )
+      .join(" ");
   }
 
   // ---------- Scroll helper ----------
@@ -1044,13 +1179,59 @@
     if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // ---------- Read ?cat= from URL (shop page) ----------
-  function applyCatFromUrl() {
+  // ---------- Read ?cat= / ?q= from URL (shop page) ----------
+  function applyStateFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const raw = params.get("cat");
-    if (!raw) return;
-    const match = CATEGORIES.find((c) => c.toLowerCase() === raw.toLowerCase());
-    if (match) state.activeCat = match;
+    if (raw) {
+      const match = CATEGORIES.find(
+        (c) => c.toLowerCase() === raw.toLowerCase(),
+      );
+      if (match) state.activeCat = match;
+    }
+    const q = params.get("q");
+    if (q) {
+      state.query = q;
+      const search = $("#search");
+      if (search) search.value = q;
+    }
+  }
+
+  // Keep the address bar in step so a filtered view can be shared or bookmarked.
+  function syncUrl() {
+    if (!$("#prodGrid")) return;
+    const params = new URLSearchParams();
+    if (state.activeCat && state.activeCat !== "All")
+      params.set("cat", state.activeCat);
+    const q = state.query.trim();
+    if (q) params.set("q", q);
+    const qs = params.toString();
+    history.replaceState(
+      null,
+      "",
+      qs ? `${location.pathname}?${qs}` : location.pathname,
+    );
+  }
+
+  // ---------- Render both halves of the catalogue together ----------
+  function render() {
+    renderCatBar();
+    renderProducts();
+    const clear = $("#searchClear");
+    if (clear) clear.hidden = !state.query.trim();
+  }
+
+  function setQuery(q) {
+    state.query = q;
+    render();
+    syncUrl();
+  }
+
+  function clearSearch() {
+    const search = $("#search");
+    if (search) search.value = "";
+    setQuery("");
+    if (search) search.focus();
   }
 
   // ---------- Contact form ----------
@@ -1133,17 +1314,47 @@
   function bind() {
     const search = $("#search");
     if (search) {
+      // Re-render on the next frame so fast typing costs one paint, not ten.
+      let frame = 0;
       search.addEventListener("input", (e) => {
-        state.query = e.target.value;
-        renderProducts();
+        const value = e.target.value;
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => setQuery(value));
       });
       search.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          state.query = search.value;
-          renderProducts();
+          setQuery(search.value);
           search.blur();
         }
+        if (e.key === "Escape" && search.value) {
+          e.preventDefault();
+          clearSearch();
+        }
+      });
+
+      const clear = $("#searchClear");
+      if (clear) clear.addEventListener("click", clearSearch);
+
+      // "/" jumps to the search box the way it does in most catalogues.
+      document.addEventListener("keydown", (e) => {
+        const tag = (document.activeElement || {}).tagName;
+        if (e.key === "/" && tag !== "INPUT" && tag !== "TEXTAREA") {
+          e.preventDefault();
+          search.focus();
+          search.select();
+        }
+      });
+    }
+
+    // Suggested searches inside the empty state.
+    const empty = $("#prodEmpty");
+    if (empty) {
+      empty.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-q]");
+        if (!btn) return;
+        if (search) search.value = btn.dataset.q;
+        setQuery(btn.dataset.q);
       });
     }
 
@@ -1246,12 +1457,12 @@
 
   // ---------- Boot ----------
   document.addEventListener("DOMContentLoaded", () => {
-    applyCatFromUrl();
-    renderCatBar();
+    applyStateFromUrl();
     renderCatTiles();
     renderCountries();
-    renderProducts();
     initDealSlider();
     bind();
+    // Last, so the clear button and counts reflect any ?cat= / ?q= in the URL.
+    render();
   });
 })();

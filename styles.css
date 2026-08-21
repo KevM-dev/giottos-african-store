@@ -360,6 +360,68 @@ body {
   color: var(--brand-raspberry);
   border-bottom-color: var(--brand-raspberry);
 }
+.gh-catCount {
+  display: inline-block;
+  margin-left: 7px;
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(74, 38, 24, 0.1);
+  color: var(--acc-cocoa);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  vertical-align: 1px;
+}
+.gh-catLink.is-active .gh-catCount {
+  background: var(--brand-raspberry);
+  color: var(--brand-cream);
+}
+/* Nothing in stock under this heading this week. */
+.gh-catLink.is-empty {
+  opacity: 0.42;
+}
+.gh-catLink.is-empty:hover {
+  opacity: 0.7;
+  color: var(--acc-cocoa);
+}
+
+/* Clear button inside the search field */
+.gh-searchClear {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(74, 38, 24, 0.09);
+  color: var(--fg-2);
+  cursor: pointer;
+  transition:
+    background 160ms,
+    color 160ms;
+}
+.gh-searchClear:hover {
+  background: var(--brand-raspberry);
+  color: var(--brand-cream);
+}
+.gh-searchClear[hidden] {
+  display: none;
+}
+.gh-searchHint {
+  flex-shrink: 0;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--fg-3);
+  border: 1px solid var(--border-1);
+  border-radius: 5px;
+  padding: 1px 6px;
+  line-height: 1.6;
+}
 
 /* ============ Hero ============ */
 .gh-hero {
@@ -810,33 +872,73 @@ body {
   position: relative;
   overflow: hidden;
 }
-.gh-pimgBg {
+
+/* Product photo sits over the category placeholder and fades in once
+   decoded; if the file is missing the <img> removes itself and the
+   placeholder underneath is what you see. */
+.gh-pimg {
+  background: var(--bg-tint);
+}
+.gh-pimgPhoto {
   position: absolute;
   inset: 0;
-  transition: transform 280ms ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--bg-tint);
+  opacity: 0;
+  transition:
+    opacity 240ms ease,
+    transform 280ms ease;
 }
-.gh-pimgBg--photo {
-  background-color: var(--bg-tint);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+.gh-pimgPhoto.is-loaded {
+  opacity: 1;
 }
-.gh-pcard:hover .gh-pimgBg {
+.gh-pcard:hover .gh-pimgPhoto {
   transform: scale(1.04);
 }
-.gh-pimgLabel {
+.gh-pimgPh {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bg-tint);
+  color: var(--acc-cocoa);
+}
+.gh-pimgPh svg {
+  width: 38px;
+  height: 38px;
+  opacity: 0.55;
+}
+.gh-pimgPh span {
   font-family: var(--ff-display);
-  font-size: 12px;
-  color: rgba(248, 239, 227, 0.75);
-  letter-spacing: 0.12em;
+  font-size: 11px;
   text-transform: uppercase;
-  padding: 8px 14px;
-  background: rgba(42, 17, 23, 0.4);
-  border-radius: 9999px;
-  text-align: center;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+}
+.gh-pimgPh[data-cat="Fresh"] {
+  background: #eef3e6;
+  color: var(--acc-sage);
+}
+.gh-pimgPh[data-cat="Spices"] {
+  background: #fbf0da;
+  color: var(--acc-mustard-dk);
+}
+.gh-pimgPh[data-cat="Frozen"] {
+  background: #e8eef3;
+  color: #3f6a8a;
+}
+.gh-pimgPh[data-cat="Drinks"] {
+  background: #f6e8ea;
+  color: var(--brand-raspberry);
+}
+.gh-pimgPh[data-cat="Snacks"] {
+  background: #f7ece4;
+  color: var(--acc-terracotta);
 }
 .gh-pBadge {
   position: absolute;
@@ -910,12 +1012,74 @@ body {
   font-size: 22px;
   color: var(--brand-raspberry);
 }
+/* A firm shelf price. */
+.gh-pPrice.is-fixed {
+  color: var(--brand-raspberry);
+}
+/* Priced on the day: reads as a note, not as a missing price. */
 .gh-pPrice.is-poa {
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--fg-3);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--acc-mustard-dk);
+  background: #fbf0da;
+  border: 1px solid #edd6a4;
+  border-radius: 9999px;
+  padding: 5px 12px;
+  cursor: help;
+}
+.gh-pPrice.is-poa svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Search-term highlighting on product names */
+.gh-pName mark {
+  background: var(--brand-pink-soft);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+/* Empty-state actions */
+.gh-empty p {
+  margin: 0 0 16px;
+}
+.gh-emptyBtn {
+  font-family: var(--ff-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brand-cream);
+  background: var(--brand-raspberry);
+  border: none;
+  border-radius: 9999px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition: background 160ms;
+}
+.gh-emptyBtn:hover {
+  background: var(--brand-raspberry-dk);
+}
+.gh-emptySuggest {
+  font-family: var(--ff-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand-raspberry);
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 9999px;
+  padding: 2px 12px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.gh-emptySuggest:hover {
+  background: var(--bg-tint);
 }
 .gh-prodFootnote {
   margin: 32px 0 0;
@@ -1641,6 +1805,17 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* No physical keyboard, so the "/" shortcut hint is just noise. */
+  .gh-searchHint {
+    display: none;
+  }
+  /* Counts stay, but tighter, so six categories still fit the scroll strip. */
+  .gh-catCount {
+    margin-left: 5px;
+    min-width: 18px;
+    padding: 1px 5px;
+    font-size: 10px;
+  }
   .gh-headerInner {
     padding: 12px 16px 14px;
     gap: 8px;

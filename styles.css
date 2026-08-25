@@ -1789,6 +1789,408 @@ body {
   }
 }
 
+/* ============ Shopping list ============ */
+/* Add-to-list button on the product card */
+.gh-addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  font-family: var(--ff-display);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acc-cocoa);
+  background: transparent;
+  border: 1.5px solid var(--border-2);
+  border-radius: 9999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition:
+    background 160ms,
+    border-color 160ms,
+    color 160ms;
+}
+.gh-addBtn svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.gh-addBtn .gh-addIconTick,
+.gh-addBtn.is-added .gh-addIconPlus {
+  display: none;
+}
+.gh-addBtn.is-added .gh-addIconTick {
+  display: block;
+}
+.gh-addBtn:hover {
+  background: var(--bg-tint);
+  border-color: var(--acc-cocoa);
+}
+.gh-addBtn.is-added {
+  background: var(--acc-sage);
+  border-color: var(--acc-sage);
+  color: #fff;
+}
+.gh-addBtn.is-added:hover {
+  background: #5c7540;
+  border-color: #5c7540;
+}
+
+/* Floating launcher, bottom-left so it never fouls the contact FAB's
+   speed-dial as it expands upward on the right. */
+.gh-listFab {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 58;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 9999px;
+  background: var(--acc-cocoa);
+  color: var(--brand-cream);
+  font-family: var(--ff-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: var(--sh-3);
+  transition:
+    background 200ms,
+    transform 200ms;
+}
+.gh-listFab[hidden] {
+  display: none;
+}
+.gh-listFab:hover {
+  background: var(--acc-charcoal);
+  transform: translateY(-2px);
+}
+.gh-listFab svg {
+  width: 19px;
+  height: 19px;
+}
+.gh-listFabCount {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 9999px;
+  background: var(--acc-mustard);
+  color: var(--acc-cocoa);
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+/* Drawer */
+.gh-listDrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+}
+.gh-listDrawer[hidden] {
+  display: none;
+}
+.gh-listBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 26, 24, 0.55);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.gh-listDrawer.is-open .gh-listBackdrop {
+  opacity: 1;
+}
+.gh-listPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  box-shadow: var(--sh-4);
+  transform: translateX(100%);
+  transition: transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.gh-listDrawer.is-open .gh-listPanel {
+  transform: translateX(0);
+}
+.gh-listHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 22px 12px;
+  background: var(--acc-cocoa);
+  color: var(--brand-cream);
+}
+.gh-listTitle {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.gh-listClose {
+  background: rgba(255, 239, 227, 0.14);
+  border: none;
+  color: var(--brand-cream);
+  cursor: pointer;
+  border-radius: 9999px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: background 160ms;
+}
+.gh-listClose:hover {
+  background: rgba(255, 239, 227, 0.26);
+}
+.gh-listClose svg {
+  width: 19px;
+  height: 19px;
+}
+.gh-listIntro {
+  margin: 0;
+  padding: 14px 22px;
+  background: var(--acc-cocoa);
+  color: var(--fg-on-dark-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.gh-listBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 16px;
+}
+.gh-listEmpty {
+  color: var(--fg-2);
+  font-size: 15px;
+  text-align: center;
+  padding: 48px 20px;
+  margin: 0;
+}
+.gh-listItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gh-listItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 6px;
+  border-bottom: 1px solid var(--border-1);
+}
+.gh-listItem:last-child {
+  border-bottom: none;
+}
+.gh-listThumb {
+  width: 54px;
+  height: 54px;
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gh-listThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+/* The card placeholder carries a text label that will not fit a 54px tile. */
+.gh-listThumb .gh-pimgPh {
+  position: static;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+.gh-listThumb .gh-pimgPh span {
+  display: none;
+}
+.gh-listThumb .gh-pimgPh svg {
+  width: 24px;
+  height: 24px;
+}
+.gh-listInfo {
+  flex: 1;
+  min-width: 0;
+}
+.gh-listName {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--fg-1);
+  line-height: 1.3;
+}
+.gh-listMeta {
+  font-size: 12px;
+  color: var(--fg-3);
+  margin-top: 2px;
+}
+.gh-listQty {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  border: 1px solid var(--border-2);
+  border-radius: 9999px;
+  padding: 2px;
+  background: var(--bg-elev);
+}
+.gh-listQty button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--acc-cocoa);
+  cursor: pointer;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 140ms;
+}
+.gh-listQty button:hover {
+  background: var(--bg-tint);
+}
+.gh-listQty svg {
+  width: 13px;
+  height: 13px;
+}
+.gh-listQtyNum {
+  min-width: 20px;
+  text-align: center;
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  color: var(--fg-1);
+}
+.gh-listDrop {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border: none;
+  background: transparent;
+  color: var(--fg-3);
+  cursor: pointer;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 140ms,
+    background 140ms;
+}
+.gh-listDrop:hover {
+  color: var(--brand-raspberry);
+  background: var(--brand-pink-soft);
+}
+.gh-listDrop svg {
+  width: 15px;
+  height: 15px;
+}
+.gh-listFoot {
+  border-top: 1px solid var(--border-1);
+  padding: 16px 22px calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg-elev);
+}
+.gh-listFoot:empty {
+  display: none;
+}
+.gh-listTotal {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--ff-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: var(--fg-2);
+}
+.gh-listTotal strong {
+  font-size: 24px;
+  color: var(--fg-1);
+  letter-spacing: 0;
+}
+.gh-listNote {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--fg-3);
+  line-height: 1.45;
+}
+.gh-listSend {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 9999px;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--ff-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: var(--sh-2);
+  transition:
+    background 160ms,
+    transform 160ms;
+}
+.gh-listSend:hover {
+  background: #1eb457;
+  transform: translateY(-1px);
+}
+.gh-listSend svg {
+  width: 19px;
+  height: 19px;
+  flex: none;
+}
+.gh-listClearBtn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: var(--fg-3);
+  font-family: var(--ff-body);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 140ms;
+}
+.gh-listClearBtn:hover {
+  color: var(--brand-raspberry);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Locks the page behind the open drawer so only the list scrolls. */
+body.gh-noScroll {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gh-listPanel,
+  .gh-listBackdrop,
+  .gh-listFab,
+  .gh-addBtn {
+    transition: none;
+  }
+}
+
 /* ============ Responsive ============ */
 @media (max-width: 1024px) {
   .gh-catGrid {
@@ -1925,6 +2327,16 @@ body {
   .gh-pPrice {
     font-size: 18px;
   }
+  /* Cards drop to ~160px here, too narrow for price and button side by side. */
+  .gh-pFoot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .gh-addBtn {
+    justify-content: center;
+    width: 100%;
+  }
 
   .gh-originInner {
     grid-template-columns: 1fr;
@@ -1979,5 +2391,15 @@ body {
   .gh-fab {
     right: 16px;
     bottom: 16px;
+  }
+  /* Drops the "My list" wording so the pill stays clear of the contact FAB
+     on a narrow screen; the bag icon and count still read as a list. */
+  .gh-listFab {
+    left: 16px;
+    bottom: 16px;
+    padding: 12px 16px;
+  }
+  .gh-listFabText {
+    display: none;
   }
 }

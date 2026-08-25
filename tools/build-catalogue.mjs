@@ -287,7 +287,14 @@ try {
 
   const stamp = new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC";
   const body = renderProductsJs(products, stamp);
-  const version = hash(body);
+
+  // Compare on catalogue content alone: never the "Last built" line, and never
+  // line endings. Hashing the whole file gave a fresh cache-buster every run,
+  // which restamped the pages and committed a no-op change every 30 minutes.
+  // Ignoring \r matters on Windows, where core.autocrlf checks the file out as
+  // CRLF while this script writes LF, so every line would otherwise "differ".
+  const strip = (s) => s.replace(/\r\n/g, "\n").replace(/^\/\/ Last built:.*$/m, "");
+  const version = hash(strip(body));
 
   console.log(`\nValidated ${products.length} products.`);
   console.log(`  with a photo : ${products.filter((p) => p.image).length}`);
@@ -301,7 +308,6 @@ try {
 
   // Compare ignoring the timestamp line, so an unchanged sheet is a no-op
   // rather than a pointless commit every 30 minutes.
-  const strip = (s) => s.replace(/^\/\/ Last built:.*$/m, "");
   const prev = fs.existsSync(OUT) ? fs.readFileSync(OUT, "utf8") : "";
   const changed = strip(prev) !== strip(body);
 

@@ -1,0 +1,70 @@
+name: Update catalogue from sheet
+
+# Rebuilds products.js from the Giottos Inventory Google Sheet.
+# If the sheet has a bad row the build fails and nothing is published, so the
+# live shop keeps serving the last good catalogue.
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub runs these on a best-effort basis, so a busy
+    # period can push a run a few minutes late.
+    - cron: "*/30 * * * *"
+  workflow_dispatch: # the "Run workflow" button, for changes wanted right now
+
+permissions:
+  contents: write # commit the rebuilt catalogue
+  pages: write # ask Pages to redeploy after the commit
+
+concurrency:
+  group: catalogue
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rebuild catalogue from the sheet
+        run: node tools/build-catalogue.mjs
+
+      - name: Commit if the catalogue changed
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Sheet matches the live catalogue, nothing to do."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add products.js index.html shop.html visit.html
+          git commit -m "Update catalogue from the Giottos Inventory sheet"
+          # Someone may have pushed while this ran; rebase rather than clobber.
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Ask GitHub Pages to redeploy
+        # A push authenticated with GITHUB_TOKEN does not reliably trigger the
+        # legacy Pages build, which would leave the commit landed but the live
+        # site unchanged. Requesting the build explicitly removes that doubt.
+        if: steps.commit.outputs.changed == 'true'
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.commit.outputs.changed }}" = "true" ]; then
+            echo "### Catalogue updated :white_check_mark:" >> "$GITHUB_STEP_SUMMARY"
+            echo "The sheet changed, products.js was rebuilt and pushed." >> "$GITHUB_STEP_SUMMARY"
+            echo "Allow a minute or two for GitHub Pages to serve it." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### No change" >> "$GITHUB_STEP_SUMMARY"
+            echo "The sheet already matches the live catalogue." >> "$GITHUB_STEP_SUMMARY"
+          fi

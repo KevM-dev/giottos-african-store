@@ -1,10 +1,10 @@
 // GENERATED FILE — do not edit by hand.
 // Source: the "Products" tab of the Giottos Inventory Google Sheet.
 // Rebuilt by tools/build-catalogue.mjs via .github/workflows/catalogue.yml
-// Last built: 2026-08-25 17:30 UTC
+// Last built: 2026-08-25 18:25 UTC
 // To change a price, name or description, edit the sheet, not this file.
 window.__GIOTTOS_PRODUCTS = [
-  { id: "p33", name: "Peak milk", cat: "Pantry", origin: "Nigeria", size: "2500g", price: 26, desc: "Full-cream powdered milk, the big catering tin.", badge: null, image: "assets/products/pantry/peak-milk.webp" },
+  { id: "p33", name: "Peak milk", cat: "Pantry", origin: "Nigeria", size: "2500g", price: 27, desc: "Full-cream powdered milk, the big catering tin.", badge: null, image: "assets/products/pantry/peak-milk.webp" },
   { id: "p34", name: "Peak milk", cat: "Pantry", origin: "Nigeria", size: "900g", price: 10.5, desc: "Full-cream powdered milk for the week ahead.", badge: null, image: "assets/products/pantry/peak-milk.webp" },
   { id: "p35", name: "Peak milk", cat: "Pantry", origin: "Nigeria", size: "400g", price: 4.99, desc: "Full-cream powdered milk, the everyday size.", badge: null, image: "assets/products/pantry/peak-milk.webp" },
   { id: "p36", name: "Peak milk evaporated", cat: "Pantry", origin: "Nigeria", size: "can", price: 1.5, desc: "Evaporated milk for tea, custard, and stews.", badge: null, image: "assets/products/pantry/peak-milk-evaporated.webp" },

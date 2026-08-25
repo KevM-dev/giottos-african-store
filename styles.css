@@ -1161,16 +1161,6 @@ body {
   box-shadow: var(--sh-3);
   overflow: hidden;
   background: url("assets/inside-shop.webp") center/cover no-repeat;
-  display: flex;
-  align-items: flex-end;
-  padding: 24px;
-}
-.gh-originImageLabel {
-  font-family: var(--ff-display);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(248, 239, 227, 0.7);
 }
 
 /* ============ Visit us ============ */

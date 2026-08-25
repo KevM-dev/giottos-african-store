@@ -1,0 +1,76 @@
+﻿ID,Name,Size,Category,Price,Description,Image,Badge,Origin
+p33,Peak milk,2500g,Pantry,26,"Full-cream powdered milk, the big catering tin.",assets/products/pantry/peak-milk.webp,,Nigeria
+p34,Peak milk,900g,Pantry,10.5,Full-cream powdered milk for the week ahead.,assets/products/pantry/peak-milk.webp,,Nigeria
+p35,Peak milk,400g,Pantry,4.99,"Full-cream powdered milk, the everyday size.",assets/products/pantry/peak-milk.webp,,Nigeria
+p36,Peak milk evaporated,can,Pantry,1.5,"Evaporated milk for tea, custard, and stews.",assets/products/pantry/peak-milk-evaporated.webp,,Nigeria
+p37,Peak milk evaporated,mini can,Pantry,1,"Smaller evaporated milk tin, just enough for one pot.",assets/products/pantry/peak-milk-evaporated.webp,,Nigeria
+p38,Nido,2.4kg,Pantry,24,"Full-cream instant milk powder, catering size.",assets/products/pantry/nido.webp,,Nigeria
+p39,Nido,1.8kg,Pantry,22,"Full-cream instant milk powder, family size.",assets/products/pantry/nido.webp,,Nigeria
+p40,Nido,900g,Pantry,10.99,"Full-cream instant milk powder, the weekly tin.",assets/products/pantry/nido.webp,,Nigeria
+p41,Nido,400g,Pantry,4.99,"Full-cream instant milk powder, the everyday size.",assets/products/pantry/nido.webp,,Nigeria
+p42,Tropical Sun milk,large,Pantry,19.99,"Full-cream powdered milk, catering size.",assets/products/pantry/tropical-sun-milk.webp,,UK
+p43,Tropical Sun milk,900g,Pantry,8.99,Full-cream powdered milk for the week.,assets/products/pantry/tropical-sun-milk.webp,,UK
+p44,Tropical Sun milk,400g,Pantry,4.39,"Full-cream powdered milk, the everyday size.",assets/products/pantry/tropical-sun-milk.webp,,UK
+p45,Cerelac,1kg,Pantry,7.99,"Infant cereal, the trusted first-foods brand.",assets/products/pantry/cerelac.webp,,Nigeria
+p46,Golden Morn,500g,Pantry,3.99,"Maize and soya breakfast cereal, a Nigerian morning classic.",assets/products/pantry/golden-morn.webp,,Nigeria
+p47,Quaker white oat,500g,Pantry,2.5,"Rolled oats for a quick, filling breakfast.",assets/products/pantry/quaker-white-oat.webp,,Nigeria
+p48,Ghana Best hausa koko,400g,Pantry,,"Spiced millet porridge flour, a Northern Ghanaian street-food breakfast.",assets/products/pantry/ghana-best-hausa-koko.webp,,Ghana
+p49,Lady B custard,400g,Pantry,7.99,Classic custard powder for a sweet teatime treat.,assets/products/pantry/lady-b-custard.webp,,Nigeria
+p50,Checkers custard 3-in-1,1kg,Pantry,7.99,"Instant custard, milk, and sugar in one, just add water.",assets/products/pantry/checkers-custard-original.webp,,Nigeria
+p51,Checkers custard 3-in-1 (vanilla),1kg,Pantry,7,"Vanilla instant custard, milk, and sugar in one.",assets/products/pantry/checkers-custard-vanilla.webp,,Nigeria
+p52,Checkers custard 3-in-1,400g,Pantry,2.99,"Instant custard, milk, and sugar in one, the small tin.",assets/products/pantry/checkers-custard-400g.webp,,Nigeria
+p53,Dunn's River coconut milk,400ml,Pantry,,Creamy tinned coconut milk for soups and stews.,assets/products/pantry/dunns-river-coconut-milk.webp,,UK
+p54,Maggi coconut milk powder,300g,Pantry,8.5,"Powdered coconut milk, just add water for instant coconut cream.",assets/products/pantry/maggi-coconut-milk-powder.webp,,Nigeria
+p55,Geisha mackerel,big tin,Pantry,2.5,"Mackerel in tomato sauce, a store-cupboard staple with rice.",assets/products/pantry/geisha-mackerel.webp,,Norway
+p56,Sardine,125g,Pantry,1.99,"Tinned sardines, quick protein for rice or bread.",assets/products/pantry/sardine.webp,,Morocco
+p57,Corned beef Exeter,340g,Pantry,,"Classic tinned corned beef for stew, sandwiches, or fried rice.",assets/products/pantry/corned-beef-exeter.webp,,UK
+p58,Tropical Sun pure honey,370g,Pantry,,"Pure honey, unblended and naturally sweet.",assets/products/pantry/tropical-sun-pure-honey.webp,,UK
+p59,Tropical Sun blossom honey,370g,Pantry,,"Blossom honey, light and floral.",assets/products/pantry/tropical-sun-blossom-honey.webp,,UK
+p60,Africa Finest peanut butter,510g,Pantry,,"Smooth peanut butter, ground the traditional way.",assets/products/pantry/africa-finest-peanut-butter.webp,,Nigeria
+p61,Tropical Sun crunchy peanut butter,350g,Pantry,3.25,Crunchy peanut butter with real peanut pieces.,assets/products/pantry/tropical-sun-crunchy-peanut-butter.webp,,UK
+p62,Blue Band margarine,500g,Pantry,5.99,Everyday spreadable margarine for bread and baking.,assets/products/pantry/blue-band-margarine.webp,,Nigeria
+p63,Blue Band margarine,250g,Pantry,3.99,"Everyday spreadable margarine, the smaller tub.",assets/products/pantry/blue-band-margarine.webp,,Nigeria
+p64,STK Royal yeast,11g sachet,Pantry,,"Baker's yeast for bread, buns, and puff-puff.",assets/products/pantry/stk-royal-yeast.webp,,Nigeria
+p65,Oluys pure cocoa powder,200g,Pantry,,Unsweetened cocoa powder for baking and hot chocolate.,assets/products/pantry/oluys-cocoa-powder.webp,,Ghana
+p66,St Louis sugar,1kg,Pantry,2.5,Fine white sugar from Senegal's own St Louis mills.,assets/products/pantry/st-louis-sugar.webp,,Senegal
+p67,Golden Penny spaghetti,500g,Pantry,1.5,Everyday spaghetti from Nigeria's biggest pasta brand.,assets/products/pantry/golden-penny-spaghetti.webp,,Nigeria
+p68,Rice stick,400g,Pantry,2.97,Flat rice noodles for stir-fries and soups.,assets/products/pantry/rice-stick.webp,,Vietnam
+p69,Tropical Sun hominy corn,400g,Pantry,4.99,Tinned hominy corn for soups and stews.,assets/products/pantry/tropical-sun-hominy-corn.webp,,UK
+p70,Bournvita,900g,Drinks,8.99,"Chocolate malt drink, a Nigerian breakfast-table staple.",assets/products/drinks/bournvita.webp,,Nigeria
+p71,Bournvita,500g,Drinks,4.5,"Chocolate malt drink, the smaller tin.",assets/products/drinks/bournvita.webp,,Nigeria
+p72,Nestle Milo,1.4kg,Drinks,13,"Chocolate-malt classic, the big family tin.",assets/products/drinks/nestle-milo.webp,,Ghana
+p73,Nestle Milo,400g,Drinks,4,"Chocolate-malt classic, the everyday tin.",assets/products/drinks/nestle-milo.webp,,Ghana
+p74,Nestle Milo sachet,400g sachets,Drinks,5.5,Chocolate-malt drink in individual sachets.,assets/products/drinks/nestle-milo-sachet.webp,,Ghana
+p75,Nestle Milo sachet,900g sachets,Drinks,9.5,"Chocolate-malt drink in individual sachets, family pack.",assets/products/drinks/nestle-milo-sachet.webp,,Ghana
+p76,Ovaltine Original,800g,Drinks,12.99,"Malted milk drink, a classic bedtime favourite.",assets/products/drinks/ovaltine-original.webp,,Nigeria
+p77,Tropical Sun drinking chocolate,400g,Drinks,14,Rich drinking chocolate for a proper mug of cocoa.,assets/products/drinks/tropical-sun-drinking-chocolate.webp,,UK
+p78,Nestle Original 3-in-1,10 sachets,Drinks,,"Instant coffee, creamer, and sugar in one sachet.",assets/products/drinks/nestle-3in1.webp,,Nigeria
+p79,Lipton Yellow Label,100 teabags,Drinks,4.99,"The everyday black tea, 100 bags to keep you going.",assets/products/drinks/lipton-yellow-label.webp,,Kenya
+p80,Kopiko coffee,10 sticks,Drinks,3.99,Instant coffee sachets from the coffee-candy brand.,assets/products/drinks/kopiko-coffee.webp,,Indonesia
+p81,Tropical Sun coffee,100g,Drinks,3.25,"Instant coffee, smooth and reliable.",assets/products/drinks/tropical-sun-coffee.webp,,UK
+p82,Gold Killi ginger drink,sachet,Drinks,4,"Instant ginger tea powder, steep and stir.",assets/products/drinks/gold-killi-ginger-drink.webp,,Malaysia
+p83,Village Pride ginger drink,sachet,Drinks,2.99,"Instant ginger drink powder, warming and spiced.",assets/products/drinks/village-pride-ginger-drink.webp,,Nigeria
+p84,Tropical Sun ginger drink,sachet,Drinks,2.99,"Instant ginger drink powder, warming and spiced.",assets/products/drinks/tropical-sun-ginger-drink.webp,,UK
+p85,Kopiko candy,150g,Snacks,1.5,"Coffee-flavoured hard candy, a little pick-me-up.",assets/products/snacks/kopiko-candy.webp,,Indonesia
+p86,Tom Tom,200g,Snacks,1.5,Classic minty-menthol boiled sweets.,assets/products/snacks/tom-tom.webp,,Nigeria
+p87,Tropical Sun popcorn,100g,Snacks,4.99,Ready-to-eat popcorn for movie night.,assets/products/snacks/tropical-sun-popcorn.webp,,UK
+p88,Ducros curry,25g,Spices,1,"Curry powder in the small jar, French-milled.",assets/products/spices/ducros-curry.webp,,France
+p89,Ducros thyme,15g,Spices,1,"Dried thyme in the small jar, French-milled.",assets/products/spices/ducros-thyme.webp,,France
+p90,Tiger thyme,25g,Spices,1,"Dried thyme, the Tiger-brand pack.",assets/products/spices/tiger-thyme.webp,,Nigeria
+p91,Gino dried thyme,5g,Spices,,Dried thyme sachet for soups and stews.,assets/products/spices/gino-dried-thyme.webp,,Nigeria
+p92,Gino Asun cube,60g,Spices,1.5,Spiced stock cube for asun and grilled meat.,assets/products/spices/gino-asun-cube.webp,,Nigeria
+p93,Nkulenu soup base,780g,Spices,3.5,Concentrated palm-nut cream for banga and palm-nut soup.,assets/products/spices/nkulenu-soup-base.webp,,Ghana
+p94,Africa Finest banga soup base,350g,Spices,3.5,Concentrated palm-nut cream for banga soup.,assets/products/spices/africa-finest-banga-soup-base.webp,,Nigeria
+p95,Tropical Sun chicken cube,100g,Spices,3.29,Chicken stock cubes for everyday cooking.,assets/products/spices/tropical-sun-chicken-cube.webp,,UK
+p96,Tasty Cube powder,1kg,Spices,4.99,"All-purpose seasoning powder, the catering tub.",assets/products/spices/tasty-cube-powder-1kg.webp,,China
+p97,Tasty Cube powder,400g,Spices,3,"All-purpose seasoning powder, the everyday tub.",assets/products/spices/tasty-cube-powder-400g.webp,,China
+p98,Tasty Cube,80g,Spices,1.5,"All-purpose seasoning cubes, the small pack.",assets/products/spices/tasty-cube.webp,,China
+p99,Knorr chicken and beef,8 cubes,Spices,2.5,"Chicken and beef stock cubes, the kitchen staple.",assets/products/spices/knorr-chicken-and-beef.webp,,Nigeria
+p100,Super Seasoning Vedan,454g,Spices,1.5,MSG-based all-purpose seasoning for soups and stir-fries.,assets/products/spices/super-seasoning-vedan.webp,,Vietnam
+p102,Plantain (ripe),3-pack,Fresh,,"Sweet for dodo, fry low and slow.",assets/products/fresh/ripe-plantain.webp,,Cameroon
+p104,Scotch bonnet chillies,200g,Fresh,,"Fierce, fruity heat, the soul of jollof and pepper soup.",assets/products/fresh/chillies.webp,Fresh,Ghana
+p105,Green plantain,3-pack,Fresh,,"Firm and starchy, for boli, kelewele, or chips.",assets/products/fresh/green-plantain.webp,,Cameroon
+p106,Puna yam,tuber,Fresh,,"Whole West-African yam, pound it, fry it, boil it.",assets/products/fresh/yam.webp,,Ghana
+p107,Cocoyam,each,Fresh,,"Earthy and starchy, great in pepper soup or boiled as a side.",assets/products/fresh/cocoyam.webp,,Nigeria
+p108,Long bell pepper,200g,Fresh,,"Sweet and mild heat, roast into stew base or eat fresh.",assets/products/fresh/long-bell-pepper.webp,Fresh,Ghana
+p109,Fresh tomatoes,500g,Fresh,,"Plum tomatoes off the Friday truck, the stew starts here.",assets/products/fresh/tomatoes.webp,Fresh,Nigeria

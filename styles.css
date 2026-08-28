@@ -1779,6 +1779,68 @@ body {
   }
 }
 
+/* ============ Legal / policy pages ============ */
+.gh-legal {
+  background: var(--bg);
+}
+.gh-legalInner {
+  /* Narrow measure: long prose is far easier to read than a full-width page. */
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+}
+.gh-legalUpdated {
+  font-family: var(--ff-display);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-3);
+  margin: 0 0 32px;
+}
+.gh-legalInner h2 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--fg-1);
+  margin: 40px 0 12px;
+}
+.gh-legalInner h2:first-of-type {
+  margin-top: 0;
+}
+.gh-legalInner p,
+.gh-legalInner li {
+  color: var(--fg-2);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+.gh-legalInner ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+.gh-legalInner strong {
+  color: var(--fg-1);
+}
+.gh-legalInner a {
+  color: var(--brand-raspberry);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.gh-legalInner a:hover {
+  color: var(--brand-raspberry-dk);
+}
+@media (max-width: 768px) {
+  .gh-legalInner {
+    padding: 40px 20px 56px;
+  }
+  .gh-legalInner h2 {
+    font-size: 19px;
+    margin-top: 32px;
+  }
+}
+
 /* ============ Shopping list ============ */
 /* Add-to-list button on the product card */
 .gh-addBtn {

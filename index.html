@@ -10,6 +10,85 @@
     />
     <meta name="theme-color" content="#4a2618" />
     <link rel="icon" href="assets/logo-raspberry.png" />
+    <link
+      rel="canonical"
+      href="https://kevm-dev.github.io/giottos-african-store/"
+    />
+
+    <!-- Sharing card. Absolute URLs are required: scrapers do not resolve
+         relative paths, and WhatsApp is how a shop link mostly gets passed on. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Giottos African Store" />
+    <meta property="og:locale" content="en_GB" />
+    <meta
+      property="og:url"
+      content="https://kevm-dev.github.io/giottos-african-store/"
+    />
+    <meta property="og:title" content="Giottos African Store, Norwich" />
+    <meta
+      property="og:description"
+      content="The neighbourhood African grocery in Norwich. Pantry staples, fresh produce, spices and frozen meats from across the continent, on Aylsham Road."
+    />
+    <meta
+      property="og:image"
+      content="https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="African groceries on the counter at Giottos African Store, Norwich"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Local business data for search results. The telephone is deliberately
+         absent here and added by app.js at runtime, so the number still never
+         appears in the served HTML. No aggregateRating: the 4.6 belongs to
+         Google's own reviews, and marking up ratings you did not collect is
+         against their structured data guidelines. -->
+    <script type="application/ld+json" id="ldBusiness">
+      {
+        "@context": "https://schema.org",
+        "@type": "GroceryStore",
+        "name": "Giottos African Store",
+        "description": "African grocery in Norwich selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
+        "url": "https://kevm-dev.github.io/giottos-african-store/",
+        "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
+        "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-raspberry.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "355B Aylsham Road",
+          "addressLocality": "Norwich",
+          "postalCode": "NR3 2RX",
+          "addressCountry": "GB"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "21:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
+        "priceRange": "££",
+        "currenciesAccepted": "GBP",
+        "areaServed": "Norwich"
+      }
+    </script>
+
     <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body>
@@ -346,7 +425,7 @@
             <a href="visit.html">Find the shop</a>
             <a data-tel>Call us</a>
             <a href="mailto:hello@giottos.co.uk">Email us</a>
-            <a href="visit.html">About Giottos</a>
+            <a href="privacy.html">Privacy</a>
           </div>
         </div>
         <div class="gh-footerBase">

@@ -56,7 +56,9 @@
 
   if (!PRODUCTS.length) {
     // Better a loud console error than a shop page that looks simply empty.
-    console.error("Giottos: products.js failed to load, the catalogue is empty.");
+    console.error(
+      "Giottos: products.js failed to load, the catalogue is empty.",
+    );
   }
 
   // ---------- Deals (hero slideshow) ----------
@@ -886,6 +888,7 @@
 
   // ---------- Fill phone / WhatsApp links + visible number at runtime ----------
   function hydrateContacts() {
+    hydrateBusinessSchema();
     document
       .querySelectorAll("[data-tel]")
       .forEach((el) => el.setAttribute("href", CONTACT.tel));
@@ -895,6 +898,21 @@
     document.querySelectorAll("[data-phone]").forEach((el) => {
       el.textContent = CONTACT.display;
     });
+  }
+
+  // Adds the telephone to the LocalBusiness block after load. The markup ships
+  // without it so the number stays out of the served HTML; search engines run
+  // JS before reading structured data, scrapers of static source do not.
+  function hydrateBusinessSchema() {
+    const tag = $("#ldBusiness");
+    if (!tag) return;
+    try {
+      const data = JSON.parse(tag.textContent);
+      data.telephone = "+" + CONTACT.tel.replace(/\D/g, "");
+      tag.textContent = JSON.stringify(data);
+    } catch (e) {
+      /* malformed block, leave the valid original in place */
+    }
   }
 
   // ---------- Floating contact button ----------

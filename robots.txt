@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kevm-dev.github.io/giottos-african-store/sitemap.xml

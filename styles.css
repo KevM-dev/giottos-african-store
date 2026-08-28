@@ -210,10 +210,30 @@ body {
 .gh-mobileMenuInner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 96px 24px 28px;
+  /* Set from JS to the header bar's real height; the fallback covers the
+     unstyled first paint. */
+  padding: var(--gh-menuTop, 96px) 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* The header (z-index 56) and the floating buttons (58, 60) all paint above the
+   menu (55). The buttons are position:fixed so hiding them costs no layout, but
+   the category strip is in flow: collapsing it resized the sticky header, which
+   fired a scroll event, which the close-on-scroll handler read as the reader
+   scrolling away, so the menu shut the instant it opened on any scrolled page.
+   The strip therefore stays put, and the menu starts below the whole header
+   instead. */
+body.gh-menuOpen .gh-fab {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+body.gh-menuOpen .gh-listFab {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 .gh-mobileMenuLink {
   font-family: var(--ff-display);

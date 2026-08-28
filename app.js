@@ -953,8 +953,19 @@
       burger.classList.remove("is-open");
       menu.classList.remove("is-open");
       burger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("gh-menuOpen");
     };
     const open = () => {
+      document.body.classList.add("gh-menuOpen");
+      // Measure <header> itself, not the inner bar: it paints the cocoa
+      // background across the whole block, so that is what a link has to clear.
+      // Measured after the class lands, so the collapsed category strip is
+      // already out of the height.
+      const hdr = document.querySelector("header.gh-header");
+      if (hdr) {
+        const h = Math.round(hdr.getBoundingClientRect().height);
+        menu.style.setProperty("--gh-menuTop", `${h + 22}px`);
+      }
       burger.classList.add("is-open");
       menu.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");

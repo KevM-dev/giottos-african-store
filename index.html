@@ -6,7 +6,7 @@
     <title>Giottos African Store, Norwich</title>
     <meta
       name="description"
-      content="The neighbourhood African grocery in Norwich, pantry staples, fresh produce, spices and frozen meats, sourced from across the continent. Come and visit us."
+      content="The neighbourhood African grocery, pantry staples, fresh produce, spices and frozen meats sourced from across the continent. Two shops, in Norwich and Great Yarmouth."
     />
     <meta name="theme-color" content="#4a2618" />
     <link rel="icon" href="assets/logo-raspberry.png" />
@@ -27,7 +27,7 @@
     <meta property="og:title" content="Giottos African Store, Norwich" />
     <meta
       property="og:description"
-      content="The neighbourhood African grocery in Norwich. Pantry staples, fresh produce, spices and frozen meats from across the continent, on Aylsham Road."
+      content="The neighbourhood African grocery. Pantry staples, fresh produce, spices and frozen meats from across the continent. Two shops, in Norwich and Great Yarmouth."
     />
     <meta
       property="og:image"
@@ -49,47 +49,94 @@
     <script type="application/ld+json" id="ldBusiness">
       {
         "@context": "https://schema.org",
-        "@type": "GroceryStore",
-        "name": "Giottos African Store",
-        "description": "African grocery in Norwich selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
-        "url": "https://kevm-dev.github.io/giottos-african-store/",
-        "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
-        "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-raspberry.png",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "355B Aylsham Road",
-          "addressLocality": "Norwich",
-          "postalCode": "NR3 2RX",
-          "addressCountry": "GB"
-        },
-        "openingHoursSpecification": [
+        "@graph": [
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
+            "@type": "GroceryStore",
+            "@id": "https://kevm-dev.github.io/giottos-african-store/#norwich",
+            "name": "Giottos African Store, Norwich",
+            "description": "African grocery in Norwich selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
+            "url": "https://kevm-dev.github.io/giottos-african-store/",
+            "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
+            "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-raspberry.png",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "355B Aylsham Road",
+              "addressLocality": "Norwich",
+              "addressRegion": "Norfolk",
+              "postalCode": "NR3 2RX",
+              "addressCountry": "GB"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "08:00",
+                "closes": "21:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "10:00",
+                "closes": "18:00"
+              }
             ],
-            "opens": "08:00",
-            "closes": "21:00"
+            "priceRange": "££",
+            "currenciesAccepted": "GBP",
+            "areaServed": "Norwich"
           },
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Sunday",
-            "opens": "10:00",
-            "closes": "18:00"
+            "@type": "GroceryStore",
+            "@id": "https://kevm-dev.github.io/giottos-african-store/#great-yarmouth",
+            "name": "Giottos African Store, Great Yarmouth",
+            "description": "African grocery in Great Yarmouth selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
+            "url": "https://kevm-dev.github.io/giottos-african-store/visit.html",
+            "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
+            "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-raspberry.png",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "5/6 Middle Market Road",
+              "addressLocality": "Great Yarmouth",
+              "addressRegion": "Norfolk",
+              "postalCode": "NR30 2DT",
+              "addressCountry": "GB"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "08:00",
+                "closes": "21:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "10:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "££",
+            "currenciesAccepted": "GBP",
+            "areaServed": "Great Yarmouth"
           }
-        ],
-        "priceRange": "££",
-        "currenciesAccepted": "GBP",
-        "areaServed": "Norwich"
+        ]
       }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=11" />
+    <link rel="stylesheet" href="styles.css?v=12" />
   </head>
   <body>
     <!-- ============ Header ============ -->
@@ -204,8 +251,8 @@
           </h1>
           <p class="gh-heroSub">
             Fresh produce, pantry staples and spices sourced from across Africa.
-            On our shelves at 355B Aylsham Road. Pop in, have a look, ask for
-            what you can't find.
+            On our shelves in Norwich and Great Yarmouth. Pop in, have a look,
+            ask for what you can't find.
           </p>
           <div class="gh-heroCtas">
             <a class="gh-btn gh-btnPrimary" href="shop.html">See what's in</a>
@@ -379,7 +426,7 @@
         <div>
           <h2 class="gh-visitTeaserTitle">Come and visit.</h2>
           <p class="gh-visitTeaserSub">
-            355B Aylsham Road, Norwich NR3 2RX · Mon – Sat 8am – 9pm · Sun 10am
+            Norwich and Great Yarmouth · Mon – Sat 8am – 9pm · Sun 10am
             – 6pm
           </p>
           <div
@@ -418,6 +465,7 @@
           <div class="gh-footerCol">
             <h4>Visit us</h4>
             <p>355B Aylsham Road<br />Norwich NR3 2RX</p>
+            <p>5/6 Middle Market Road<br />Great Yarmouth NR30 2DT</p>
             <p>Mon – Sat · 8am – 9pm<br />Sunday · 10am – 6pm</p>
           </div>
           <div class="gh-footerCol">
@@ -519,6 +567,6 @@
     </div>
 
     <script src="products.js?v=7d6948"></script>
-    <script src="app.js?v=9"></script>
+    <script src="app.js?v=10"></script>
   </body>
 </html>

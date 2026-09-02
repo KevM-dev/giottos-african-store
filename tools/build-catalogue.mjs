@@ -19,7 +19,10 @@ const SHEET_CSV =
 const CATEGORIES = ["Fresh", "Pantry", "Spices", "Frozen", "Drinks", "Snacks"];
 const BADGES = ["Fresh", "Sale"];
 const OUT = path.join(ROOT, "products.js");
-const PAGES = ["index.html", "shop.html", "visit.html"];
+// Every page that loads products.js has to be stamped, or it serves a cached
+// catalogue forever. All four do: the shopping-list drawer is site-wide and
+// needs the product data to turn saved ids back into names and prices.
+const PAGES = ["index.html", "shop.html", "visit.html", "privacy.html"];
 
 // A sheet that suddenly loses most of its rows is far more likely to be a
 // botched edit or a half-loaded fetch than a real decision to shut the shop.

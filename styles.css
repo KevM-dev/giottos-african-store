@@ -1241,6 +1241,91 @@ body.gh-menuOpen .gh-listFab {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+/* ============ Locations (two shops) ============ */
+.gh-locations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.gh-location {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-1);
+  border-radius: 18px;
+  box-shadow: var(--sh-2);
+  overflow: hidden;
+}
+.gh-locationBody {
+  padding: 26px 28px 22px;
+  flex: 1;
+}
+.gh-locationName {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--fg-1);
+  margin: 0 0 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--acc-mustard);
+}
+.gh-locationBody h4 {
+  font-family: var(--ff-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-raspberry);
+  margin: 20px 0 8px;
+}
+.gh-locationBody h4:first-of-type {
+  margin-top: 0;
+}
+.gh-locationBody p {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: var(--fg-1);
+  line-height: 1.55;
+}
+.gh-locationBody a {
+  color: var(--fg-1);
+  text-decoration: none;
+}
+.gh-locationBody a:hover {
+  color: var(--brand-raspberry);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.gh-locationMap iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+/* The contact block sits below both shops, since one number covers them. */
+.gh-contactRow {
+  margin-top: 24px;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 768px) {
+  .gh-locations {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .gh-locationBody {
+    padding: 22px 22px 18px;
+  }
+  .gh-locationName {
+    font-size: 22px;
+  }
+  .gh-locationMap iframe {
+    height: 240px;
+  }
+  .gh-contactRow {
+    grid-template-columns: 1fr;
+  }
+}
+
 .gh-mapCard {
   margin-top: 28px;
   border: 1px solid var(--border-1);

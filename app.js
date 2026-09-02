@@ -908,7 +908,12 @@
     if (!tag) return;
     try {
       const data = JSON.parse(tag.textContent);
-      data.telephone = "+" + CONTACT.tel.replace(/\D/g, "");
+      const tel = "+" + CONTACT.tel.replace(/\D/g, "");
+      // One number covers both shops, so every location in the graph gets it.
+      const nodes = Array.isArray(data["@graph"]) ? data["@graph"] : [data];
+      nodes.forEach((node) => {
+        node.telephone = tel;
+      });
       tag.textContent = JSON.stringify(data);
     } catch (e) {
       /* malformed block, leave the valid original in place */

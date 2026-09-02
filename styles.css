@@ -2287,6 +2287,81 @@ body.gh-menuOpen .gh-listFab {
   color: var(--fg-3);
   line-height: 1.45;
 }
+/* ============ Which-shop picker ============ */
+.gh-storePick {
+  margin-top: 14px;
+}
+.gh-storePickLabel {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-2);
+  margin-bottom: 8px;
+}
+.gh-storeBtns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.gh-storeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px 10px;
+  border: 1.5px solid var(--border-2);
+  border-radius: 12px;
+  background: var(--bg-elev);
+  color: var(--fg-1);
+  font-family: var(--ff-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition:
+    border-color 160ms,
+    background 160ms,
+    color 160ms;
+}
+.gh-storeBtn:hover {
+  border-color: var(--acc-cocoa);
+  background: var(--bg-tint);
+}
+.gh-storeBtn.is-on {
+  background: var(--acc-sage);
+  border-color: var(--acc-sage);
+  color: #fff;
+}
+.gh-storeBtnTick {
+  display: none;
+  width: 14px;
+  height: 14px;
+}
+.gh-storeBtnTick svg {
+  width: 100%;
+  height: 100%;
+}
+.gh-storeBtn.is-on .gh-storeBtnTick {
+  display: block;
+}
+/* Raised only when someone tries to send without choosing. */
+.gh-storePick.is-missing .gh-storeBtn {
+  border-color: var(--brand-raspberry);
+}
+.gh-storePick.is-missing .gh-storePickLabel {
+  color: var(--brand-raspberry);
+}
+.gh-storePick.is-missing .gh-storePickLabel::after {
+  content: " — pick one to send";
+  letter-spacing: 0.04em;
+}
+/* The contact form sits on a light card, so its picker needs its own spacing. */
+.gh-contactForm .gh-storePick {
+  margin-top: 4px;
+}
+
 .gh-listSend {
   margin-top: 14px;
   display: flex;
@@ -2311,6 +2386,18 @@ body.gh-menuOpen .gh-listFab {
 .gh-listSend:hover {
   background: #1eb457;
   transform: translateY(-1px);
+}
+/* No href until a shop is picked, so this is a visual match for that state
+   rather than the thing preventing the click. */
+.gh-listSend.is-blocked {
+  background: var(--border-2);
+  color: var(--fg-3);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.gh-listSend.is-blocked:hover {
+  background: var(--border-2);
+  transform: none;
 }
 .gh-listSend svg {
   width: 19px;

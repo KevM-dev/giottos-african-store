@@ -13,6 +13,87 @@
     };
   })();
 
+  // ---------- Stores ----------
+  // Two shops now, so anything the customer sends has to say which one, or the
+  // owner is left guessing which counter to put an order behind.
+  const STORES = [
+    {
+      id: "norwich",
+      label: "Norwich",
+      where: "355B Aylsham Road, Norwich NR3 2RX",
+    },
+    {
+      id: "yarmouth",
+      label: "Great Yarmouth",
+      where: "5/6 Middle Market Road, Great Yarmouth NR30 2DT",
+    },
+  ];
+  const STORE_KEY = "giottos.store.v1";
+
+  // Deliberately starts empty rather than defaulting to Norwich: a default
+  // people do not notice sends the owner confidently wrong information, which
+  // is worse than sending none. Remembered afterwards, since most customers
+  // use the same shop every time.
+  const storeChoice = (() => {
+    let id = null;
+    try {
+      const saved = localStorage.getItem(STORE_KEY);
+      if (STORES.some((s) => s.id === saved)) id = saved;
+    } catch (e) {
+      /* private browsing, choose per session */
+    }
+    return {
+      get: () => STORES.find((s) => s.id === id) || null,
+      set(next) {
+        if (!STORES.some((s) => s.id === next)) return;
+        id = next;
+        try {
+          localStorage.setItem(STORE_KEY, next);
+        } catch (e) {
+          /* session only */
+        }
+      },
+    };
+  })();
+
+  function storePickerMarkup(group) {
+    const cur = storeChoice.get();
+    const buttons = STORES.map((s) => {
+      const on = cur && cur.id === s.id;
+      return `<button type="button" class="gh-storeBtn${on ? " is-on" : ""}" role="radio"
+                aria-checked="${on ? "true" : "false"}" data-store="${s.id}" data-group="${group}">
+                <span class="gh-storeBtnTick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                ${escapeHtml(s.label)}
+              </button>`;
+    }).join("");
+    return `<div class="gh-storePick" data-picker="${group}">
+        <span class="gh-storePickLabel" id="storeLbl-${group}">Which shop?</span>
+        <div class="gh-storeBtns" role="radiogroup" aria-labelledby="storeLbl-${group}">${buttons}</div>
+      </div>`;
+  }
+
+  // One delegated listener covers every picker on the page, including the one
+  // the drawer rebuilds on each render.
+  function bindStorePickers() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-store]");
+      if (!btn) return;
+      storeChoice.set(btn.dataset.store);
+      // Repaint every picker, so the drawer and the contact form agree.
+      document.querySelectorAll("[data-store]").forEach((b) => {
+        const on = b.dataset.store === btn.dataset.store;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-checked", on ? "true" : "false");
+      });
+      document
+        .querySelectorAll(".gh-storePick")
+        .forEach((p) => p.classList.remove("is-missing"));
+      refreshSendState();
+    });
+  }
+
   // ---------- Data ----------
   const CATEGORIES = [
     "All",
@@ -509,7 +590,9 @@
     const asking = entries.length - priced.length;
     const total = priced.reduce((sum, e) => sum + e.p.price * e.qty, 0);
 
-    let msg = `Hi Giottos, please could you set these aside for me?\n\n${lines.join("\n")}`;
+    const shop = storeChoice.get();
+    const at = shop ? `\nShop: ${shop.label} (${shop.where})\n` : "";
+    let msg = `Hi Giottos, please could you set these aside for me?\n${at}\n${lines.join("\n")}`;
     if (priced.length) {
       msg += `\n\nRough total from the website: ${fmtPrice(total)}`;
       if (asking) {
@@ -715,16 +798,33 @@
           ? `<p class="gh-listNote">${asking} item${asking === 1 ? " is" : "s are"} priced in store, so not counted above.</p>`
           : ""
       }
+      ${storePickerMarkup("list")}
       <a class="gh-listSend" id="listSend" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05.18C5.5.18.16 5.51.16 12.07c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.49-8.42"/></svg>
         Send list on WhatsApp
       </a>
       <button type="button" class="gh-listClearBtn" id="listClear">Clear list</button>`;
 
-    // Built at runtime so the shop's number never sits in the page source.
+    refreshSendState();
+  }
+
+  // The send link only carries an href once a shop is chosen, so it cannot be
+  // followed early: an <a> with no href is not a link. Built at runtime either
+  // way, so the shop's number never sits in the page source.
+  function refreshSendState() {
     const send = $("#listSend");
-    if (send) {
+    if (!send) return;
+    const shop = storeChoice.get();
+    if (shop) {
       send.href = `${CONTACT.wa}?text=${encodeURIComponent(listMessage())}`;
+      send.classList.remove("is-blocked");
+      send.removeAttribute("aria-disabled");
+      send.title = `Send your list to the ${shop.label} shop`;
+    } else {
+      send.removeAttribute("href");
+      send.classList.add("is-blocked");
+      send.setAttribute("aria-disabled", "true");
+      send.title = "Choose a shop first";
     }
   }
 
@@ -744,6 +844,10 @@
   function bindContactForm() {
     const form = $("#contactForm");
     if (!form) return;
+
+    const slot = $("#cfStore");
+    if (slot) slot.innerHTML = storePickerMarkup("contact");
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = ($("#cfName").value || "").trim();
@@ -752,7 +856,17 @@
         form.reportValidity();
         return;
       }
-      const text = `Hi Giottos, my name is ${name}.\n\n${message}`;
+      const shop = storeChoice.get();
+      if (!shop) {
+        // Flag the picker rather than sending an enquiry the owner cannot place.
+        const picker = form.querySelector(".gh-storePick");
+        if (picker) {
+          picker.classList.add("is-missing");
+          picker.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        return;
+      }
+      const text = `Hi Giottos, my name is ${name}.\n\nShop: ${shop.label} (${shop.where})\n\n${message}`;
       const url = `${CONTACT.wa}?text=${encodeURIComponent(text)}`;
       window.open(url, "_blank");
     });
@@ -880,6 +994,7 @@
     bindContactForm();
     bindFab();
     bindBurgerMenu();
+    bindStorePickers();
     mountList();
 
     const yr = $("#year");

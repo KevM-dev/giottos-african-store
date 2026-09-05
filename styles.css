@@ -77,6 +77,42 @@ body {
   border-radius: 4px;
 }
 
+/* ============ Shopfront banner ============ */
+/* Option A: full-bleed band on the homepage. The band carries the artwork's
+   own purple so the strip runs to the viewport edge on wide screens. */
+.gh-bannerBand {
+  background: #a53694;
+  overflow: hidden;
+}
+.gh-bannerBandInner {
+  line-height: 0;
+}
+.gh-bannerImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* On very wide screens the artwork would tower; crop the patterned edges
+   rather than let the band swallow the page. */
+@media (min-width: 1600px) {
+  .gh-bannerBand .gh-bannerImg {
+    height: 24vw;
+    max-height: 420px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Option B: framed sign at the top of the Visit page. */
+.gh-bannerSign {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--sh-2, 0 10px 30px rgba(0, 0, 0, 0.16));
+  line-height: 0;
+}
+
 /* ============ Header ============ */
 .gh-header {
   background: var(--acc-cocoa);

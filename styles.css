@@ -96,32 +96,19 @@ body {
 }
 .gh-logoPill {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   background: #f4e4cc;
-  border: 1.5px solid var(--brand-pink);
-  padding: 6px 22px 7px;
+  padding: 6px 16px;
   border-radius: 9999px;
   text-decoration: none;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 0;
+  flex-shrink: 0;
   box-shadow: var(--sh-inset);
 }
-.gh-logoMark {
-  font-family: "Kaushan Script", var(--ff-script);
-  color: var(--brand-pink);
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-}
-.gh-logoSub {
-  font-family: var(--ff-display);
-  color: var(--brand-raspberry-dk);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-top: 1px;
+.gh-logoImg {
+  display: block;
+  height: 42px;
+  width: auto;
 }
 .gh-nav {
   flex: 1;
@@ -1718,11 +1705,18 @@ body.gh-menuOpen .gh-listFab {
   color: var(--brand-cream);
 }
 .gh-footerWordmark {
-  font-family: "Kaushan Script", var(--ff-script);
-  color: var(--brand-cream);
-  font-size: 32px;
-  line-height: 1;
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  background: #f4e4cc;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  line-height: 0;
+  margin-bottom: 14px;
+}
+.gh-footerLogoImg {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 .gh-footerBlurb {
   color: var(--fg-on-dark-muted);
@@ -2467,14 +2461,10 @@ body.gh-noScroll {
     gap: 8px;
   }
   .gh-logoPill {
-    padding: 5px 18px 6px;
+    padding: 5px 12px;
   }
-  .gh-logoMark {
-    font-size: 23px;
-  }
-  .gh-logoSub {
-    font-size: 9px;
-    letter-spacing: 0.16em;
+  .gh-logoImg {
+    height: 32px;
   }
   .gh-iconBtn {
     display: none;

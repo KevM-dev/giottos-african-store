@@ -12,7 +12,7 @@
     <link rel="icon" href="assets/favicon-giottos.png" />
     <link
       rel="canonical"
-      href="https://kevm-dev.github.io/giottos-african-store/shop.html"
+      href="https://giottosafricanstore.com/shop.html"
     />
 
     <meta property="og:type" content="website" />
@@ -20,7 +20,7 @@
     <meta property="og:locale" content="en_GB" />
     <meta
       property="og:url"
-      content="https://kevm-dev.github.io/giottos-african-store/shop.html"
+      content="https://giottosafricanstore.com/shop.html"
     />
     <meta
       property="og:title"
@@ -32,7 +32,7 @@
     />
     <meta
       property="og:image"
-      content="https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg"
+      content="https://giottosafricanstore.com/assets/og-hero.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -42,7 +42,17 @@
     />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <!-- Fonts. Requested here rather than @import-ed from styles.css: an
+         @import cannot even begin until the stylesheet has been fetched and
+         parsed, which holds the text back through two round trips instead of
+         one. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;family=Pacifico&amp;family=Oswald:wght@500;600;700&amp;family=Nunito:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <!-- ============ Header ============ -->
@@ -160,8 +170,9 @@
         <div class="gh-pageHeroKicker">★ Authentic African groceries</div>
         <h1 class="gh-pageHeroTitle">What's <em>in store</em>.</h1>
         <p class="gh-pageHeroSub">
-          A look at what's on our shelves right now. Prices for reference, pop
-          into the shop to pick up.
+          Add what you're after to your list and send it on WhatsApp, and we'll
+          set it aside for you to collect and pay for in the shop. Nothing is
+          bought or paid for on this site, and the prices here are a guide.
         </p>
         <div class="gh-search gh-searchLight">
           <svg
@@ -220,15 +231,15 @@
           class="gh-sectionLink gh-sectionNote"
           id="prodCount"
           aria-live="polite"
-          >In store now</span
+          >On our list</span
         >
       </div>
       <div class="gh-grid" id="prodGrid"></div>
       <div class="gh-empty" id="prodEmpty" hidden></div>
       <p class="gh-prodFootnote">
         Can't see what you're after? Give us a ring on
-        <a data-tel data-phone></a>. If it's on the truck this week, we'll set
-        it aside.
+        <a data-tel data-phone>the shop number</a>. If it's on the truck this
+        week, we'll set it aside.
       </p>
     </section>
 
@@ -247,8 +258,8 @@
               />
             </div>
             <p class="gh-footerBlurb">
-              The neighbourhood African grocery, pantry staples, fresh produce,
-              spices and frozen meats, right here in Norwich.
+              The neighbourhood African grocery — pantry staples, fresh produce,
+              spices and frozen meats. Two shops, in Norwich and Great Yarmouth.
             </p>
           </div>
           <div class="gh-footerCol">
@@ -364,6 +375,6 @@
     </div>
 
     <script src="products.js?v=7d6948"></script>
-    <script src="app.js?v=11"></script>
+    <script src="app.js?v=12"></script>
   </body>
 </html>

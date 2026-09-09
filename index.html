@@ -12,7 +12,7 @@
     <link rel="icon" href="assets/favicon-giottos.png" />
     <link
       rel="canonical"
-      href="https://kevm-dev.github.io/giottos-african-store/"
+      href="https://giottosafricanstore.com/"
     />
 
     <!-- Sharing card. Absolute URLs are required: scrapers do not resolve
@@ -22,7 +22,7 @@
     <meta property="og:locale" content="en_GB" />
     <meta
       property="og:url"
-      content="https://kevm-dev.github.io/giottos-african-store/"
+      content="https://giottosafricanstore.com/"
     />
     <meta property="og:title" content="Giottos African Store, Norwich" />
     <meta
@@ -31,7 +31,7 @@
     />
     <meta
       property="og:image"
-      content="https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg"
+      content="https://giottosafricanstore.com/assets/og-hero.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -52,12 +52,12 @@
         "@graph": [
           {
             "@type": "GroceryStore",
-            "@id": "https://kevm-dev.github.io/giottos-african-store/#norwich",
+            "@id": "https://giottosafricanstore.com/#norwich",
             "name": "Giottos African Store, Norwich",
             "description": "African grocery in Norwich selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
-            "url": "https://kevm-dev.github.io/giottos-african-store/",
-            "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
-            "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-giottos.png",
+            "url": "https://giottosafricanstore.com/",
+            "image": "https://giottosafricanstore.com/assets/og-hero.jpg",
+            "logo": "https://giottosafricanstore.com/assets/logo-giottos.png",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "355B Aylsham Road",
@@ -93,12 +93,12 @@
           },
           {
             "@type": "GroceryStore",
-            "@id": "https://kevm-dev.github.io/giottos-african-store/#great-yarmouth",
+            "@id": "https://giottosafricanstore.com/#great-yarmouth",
             "name": "Giottos African Store, Great Yarmouth",
             "description": "African grocery in Great Yarmouth selling pantry staples, fresh produce, spices, drinks and snacks sourced from across the continent.",
-            "url": "https://kevm-dev.github.io/giottos-african-store/visit.html",
-            "image": "https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg",
-            "logo": "https://kevm-dev.github.io/giottos-african-store/assets/logo-giottos.png",
+            "url": "https://giottosafricanstore.com/visit.html",
+            "image": "https://giottosafricanstore.com/assets/og-hero.jpg",
+            "logo": "https://giottosafricanstore.com/assets/logo-giottos.png",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "5/6 Middle Market Road",
@@ -136,7 +136,17 @@
       }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <!-- Fonts. Requested here rather than @import-ed from styles.css: an
+         @import cannot even begin until the stylesheet has been fetched and
+         parsed, which holds the text back through two round trips instead of
+         one. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;family=Pacifico&amp;family=Oswald:wght@500;600;700&amp;family=Nunito:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <!-- ============ Header ============ -->
@@ -252,15 +262,18 @@
         <div class="gh-heroText">
           <div class="gh-heroKicker">★ Authentic African groceries</div>
           <h1 class="gh-heroTitle">
-            Taste of <em>home</em>, <br />right here in Norwich.
+            Taste of <em>home</em>, <br />right here in Norfolk.
           </h1>
           <p class="gh-heroSub">
-            Fresh produce, pantry staples and spices sourced from across Africa.
-            On our shelves in Norwich and Great Yarmouth. Pop in, have a look,
-            ask for what you can't find.
+            Fresh produce, pantry staples and spices sourced from across Africa,
+            on our shelves in Norwich and Great Yarmouth. Have a look through,
+            build a list and send it to us on WhatsApp, then collect and pay in
+            the shop. There's no online payment here.
           </p>
           <div class="gh-heroCtas">
-            <a class="gh-btn gh-btnPrimary" href="shop.html">See what's in</a>
+            <a class="gh-btn gh-btnPrimary" href="shop.html"
+              >Build a list to send us</a
+            >
             <a class="gh-btn gh-btnSecondary" href="visit.html"
               >Find the shop</a
             >
@@ -338,7 +351,9 @@
     <section class="gh-reviews">
       <div class="gh-reviewsInner">
         <div class="gh-reviewsHeader">
-          <div class="gh-reviewsKicker">★★★★★ &nbsp; 4.6 · Google Reviews</div>
+          <div class="gh-reviewsKicker">
+            <span aria-hidden="true">★★★★★</span> &nbsp; 4.6 · Google Reviews
+          </div>
           <h2 class="gh-reviewsTitle">What people <em>say.</em></h2>
         </div>
         <div class="gh-reviewsGrid">
@@ -392,7 +407,7 @@
             <div class="gh-contactMeta">
               <div>
                 <h4>Phone</h4>
-                <p><a data-tel data-phone></a></p>
+                <p><a data-tel data-phone>the shop number</a></p>
               </div>
               <div>
                 <h4>Email</h4>
@@ -414,6 +429,7 @@
                 name="name"
                 id="cfName"
                 required
+                maxlength="80"
                 autocomplete="name"
               />
             </label>
@@ -424,6 +440,7 @@
                 id="cfMessage"
                 rows="5"
                 required
+                maxlength="1200"
                 placeholder="Hi Giottos, I was wondering…"
               ></textarea>
             </label>
@@ -432,9 +449,13 @@
               Send on WhatsApp
             </button>
             <p class="gh-formNote">
-              Opens WhatsApp so you can send directly. We usually reply the same
-              day.
+              This opens WhatsApp with your message ready to go. Nothing is sent
+              until you press send there, and at that point your message and
+              your number reach the shop through WhatsApp, which is run by Meta.
+              We usually reply the same day.
+              <a href="privacy.html">How we handle your details</a>.
             </p>
+            <p class="gh-formNote" id="cfFallback" hidden></p>
           </form>
         </div>
       </div>
@@ -477,8 +498,8 @@
               />
             </div>
             <p class="gh-footerBlurb">
-              The neighbourhood African grocery, pantry staples, fresh produce,
-              spices and frozen meats, right here in Norwich.
+              The neighbourhood African grocery — pantry staples, fresh produce,
+              spices and frozen meats. Two shops, in Norwich and Great Yarmouth.
             </p>
           </div>
           <div class="gh-footerCol">
@@ -594,6 +615,6 @@
     </div>
 
     <script src="products.js?v=7d6948"></script>
-    <script src="app.js?v=11"></script>
+    <script src="app.js?v=12"></script>
   </body>
 </html>

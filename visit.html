@@ -12,7 +12,7 @@
     <link rel="icon" href="assets/favicon-giottos.png" />
     <link
       rel="canonical"
-      href="https://kevm-dev.github.io/giottos-african-store/visit.html"
+      href="https://giottosafricanstore.com/visit.html"
     />
 
     <meta property="og:type" content="website" />
@@ -20,7 +20,7 @@
     <meta property="og:locale" content="en_GB" />
     <meta
       property="og:url"
-      content="https://kevm-dev.github.io/giottos-african-store/visit.html"
+      content="https://giottosafricanstore.com/visit.html"
     />
     <meta
       property="og:title"
@@ -32,7 +32,7 @@
     />
     <meta
       property="og:image"
-      content="https://kevm-dev.github.io/giottos-african-store/assets/og-hero.jpg"
+      content="https://giottosafricanstore.com/assets/og-hero.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -42,7 +42,17 @@
     />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <!-- Fonts. Requested here rather than @import-ed from styles.css: an
+         @import cannot even begin until the stylesheet has been fetched and
+         parsed, which holds the text back through two round trips instead of
+         one. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;family=Pacifico&amp;family=Oswald:wght@500;600;700&amp;family=Nunito:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <!-- ============ Header ============ -->
@@ -154,16 +164,6 @@
     <!-- ============ Page hero ============ -->
     <section class="gh-pageHero">
       <div class="gh-pageHeroInner">
-        <div class="gh-bannerSign">
-          <img
-          src="assets/banner-african-store.png"
-          alt="African Store by Giottos, from Lagos"
-          class="gh-bannerImg"
-          width="845"
-          height="234"
-          loading="lazy"
-        />
-        </div>
         <div class="gh-pageHeroKicker">★ Two shops, open seven days</div>
         <h1 class="gh-pageHeroTitle">Come and <em>visit</em>.</h1>
         <p class="gh-pageHeroSub">
@@ -196,14 +196,19 @@
               </p>
             </div>
             <div class="gh-locationMap">
-              <iframe
-                src="https://www.google.com/maps?q=355B+Aylsham+Road+Norwich+NR3+2RX&output=embed"
-                width="100%"
-                height="300"
-                allowfullscreen
-                loading="lazy"
-                title="Giottos African Store, Norwich, on Google Maps"
-              ></iframe>
+              <div
+                class="gh-mapConsent"
+                data-map="https://www.google.com/maps?q=355B+Aylsham+Road+Norwich+NR3+2RX&amp;output=embed"
+                data-map-title="Giottos African Store, Norwich, on Google Maps"
+              >
+                <p class="gh-mapConsentText">
+                  The map comes from Google, which sets cookies on your device.
+                  We don't load it until you ask.
+                </p>
+                <button type="button" class="gh-btn gh-btnPrimary">
+                  Show map
+                </button>
+              </div>
             </div>
           </article>
 
@@ -225,14 +230,19 @@
               </p>
             </div>
             <div class="gh-locationMap">
-              <iframe
-                src="https://www.google.com/maps?q=5%2F6+Middle+Market+Road+Great+Yarmouth+NR30+2DT&output=embed"
-                width="100%"
-                height="300"
-                allowfullscreen
-                loading="lazy"
-                title="Giottos African Store, Great Yarmouth, on Google Maps"
-              ></iframe>
+              <div
+                class="gh-mapConsent"
+                data-map="https://www.google.com/maps?q=5%2F6+Middle+Market+Road+Great+Yarmouth+NR30+2DT&amp;output=embed"
+                data-map-title="Giottos African Store, Great Yarmouth, on Google Maps"
+              >
+                <p class="gh-mapConsentText">
+                  The map comes from Google, which sets cookies on your device.
+                  We don't load it until you ask.
+                </p>
+                <button type="button" class="gh-btn gh-btnPrimary">
+                  Show map
+                </button>
+              </div>
             </div>
           </article>
         </div>
@@ -240,7 +250,7 @@
         <div class="gh-visitGrid gh-contactRow">
           <div>
             <h4>Get in touch</h4>
-            <p><a data-tel data-phone></a></p>
+            <p><a data-tel data-phone>the shop number</a></p>
             <p><a href="mailto:hello@giottos.co.uk">hello@giottos.co.uk</a></p>
           </div>
           <div>
@@ -295,8 +305,8 @@
               />
             </div>
             <p class="gh-footerBlurb">
-              The neighbourhood African grocery, pantry staples, fresh produce,
-              spices and frozen meats, right here in Norwich.
+              The neighbourhood African grocery — pantry staples, fresh produce,
+              spices and frozen meats. Two shops, in Norwich and Great Yarmouth.
             </p>
           </div>
           <div class="gh-footerCol">
@@ -412,6 +422,6 @@
     </div>
 
     <script src="products.js?v=7d6948"></script>
-    <script src="app.js?v=11"></script>
+    <script src="app.js?v=12"></script>
   </body>
 </html>

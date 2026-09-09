@@ -3,7 +3,9 @@
    Tokens + components + responsive
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Pacifico&family=Oswald:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap");
+/* The Google Fonts request lives in each page's <head>, not here: an @import
+   cannot start until this file has been fetched and parsed, which delays the
+   text twice over. */
 
 :root {
   /* Brand */
@@ -29,7 +31,7 @@
 
   --fg-1: #2a1117;
   --fg-2: #5a3a3f;
-  --fg-3: #8a6c70;
+  --fg-3: #836268;
   --fg-on-dark: #f8efe3;
   --fg-on-dark-muted: #d9bcc3;
 
@@ -78,8 +80,8 @@ body {
 }
 
 /* ============ Shopfront banner ============ */
-/* Option A: full-bleed band on the homepage. The band carries the artwork's
-   own purple so the strip runs to the viewport edge on wide screens. */
+/* Full-bleed band on the homepage. The band carries the artwork's own purple
+   so the strip runs to the viewport edge on wide screens. */
 .gh-bannerBand {
   background: #a53694;
   overflow: hidden;
@@ -101,16 +103,6 @@ body {
     object-fit: cover;
     object-position: center;
   }
-}
-
-/* Option B: framed sign at the top of the Visit page. */
-.gh-bannerSign {
-  max-width: 640px;
-  margin: 0 auto 28px;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--sh-2, 0 10px 30px rgba(0, 0, 0, 0.16));
-  line-height: 0;
 }
 
 /* ============ Header ============ */
@@ -382,6 +374,11 @@ body.gh-menuOpen .gh-listFab {
   letter-spacing: 0.1em;
   color: var(--acc-cocoa);
   text-decoration: none;
+  /* 44px minimum tap target; the visual weight is unchanged, the padding
+     simply gives a thumb somewhere to land. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 4px 0;
   white-space: nowrap;
   border: none;
@@ -680,6 +677,7 @@ body.gh-menuOpen .gh-listFab {
   gap: 7px;
 }
 .gh-dealDot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -690,6 +688,17 @@ body.gh-menuOpen .gh-listFab {
   transition:
     background 0.3s,
     transform 0.3s;
+}
+/* An 8px dot is not a tap target. Keep the dot the size it looks, and hang a
+   44px invisible pad off it so a thumb actually lands. */
+.gh-dealDot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 .gh-dealDot.is-active {
   background: var(--brand-cream);
@@ -1321,6 +1330,29 @@ body.gh-menuOpen .gh-listFab {
   width: 100%;
   border: 0;
 }
+.gh-mapConsent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* Matches the iframe height exactly, so swapping one for the other does not
+     shift the page under the reader's finger. */
+  height: 300px;
+  padding: 20px 24px;
+  text-align: center;
+  background:
+    linear-gradient(rgba(74, 38, 24, 0.04), rgba(74, 38, 24, 0.04)),
+    var(--bg-tint);
+  border-top: 1px solid var(--border-1);
+}
+.gh-mapConsentText {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--fg-3);
+  font-size: 14px;
+  line-height: 1.5;
+}
 /* The contact block sits below both shops, since one number covers them. */
 .gh-contactRow {
   margin-top: 24px;
@@ -1338,6 +1370,9 @@ body.gh-menuOpen .gh-listFab {
     font-size: 22px;
   }
   .gh-locationMap iframe {
+    height: 240px;
+  }
+  .gh-mapConsent {
     height: 240px;
   }
   .gh-contactRow {
@@ -1937,6 +1972,15 @@ body.gh-menuOpen .gh-listFab {
 .gh-legalInner h2:first-of-type {
   margin-top: 0;
 }
+.gh-legalInner h3 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-1);
+  margin: 26px 0 10px;
+}
 .gh-legalInner p,
 .gh-legalInner li {
   color: var(--fg-2);
@@ -1984,7 +2028,9 @@ body.gh-menuOpen .gh-listFab {
   background: transparent;
   border: 1.5px solid var(--border-2);
   border-radius: 9999px;
-  padding: 8px 14px;
+  /* 44px minimum, so the button is reachable on a phone. */
+  min-height: 44px;
+  padding: 10px 16px;
   cursor: pointer;
   transition:
     background 160ms,

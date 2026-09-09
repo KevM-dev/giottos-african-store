@@ -1,0 +1,28 @@
+# This repo IS the live site: every tracked file is published at
+# giottosafricanstore.com. So the rule here is not "keep the repo tidy", it is
+# "do not put anything on the public web that was never meant to be there".
+
+# Working folders that are ours, not the shop's.
+ToReview/
+.claude/
+
+# A screenshot tool once wrote its output to a literal "undefined" folder.
+undefined/
+
+# The seed spreadsheet the catalogue was first built from. The live build reads
+# the Google Sheet, not this file, so it has no business being downloadable.
+data/products-seed.csv
+
+# OS cruft.
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor and tooling leftovers.
+node_modules/
+*.log

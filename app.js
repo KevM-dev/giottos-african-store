@@ -60,8 +60,8 @@
     const cur = storeChoice.get();
     const buttons = STORES.map((s) => {
       const on = cur && cur.id === s.id;
-      return `<button type="button" class="gh-storeBtn${on ? " is-on" : ""}" role="radio"
-                aria-checked="${on ? "true" : "false"}" data-store="${s.id}" data-group="${group}">
+      return `<button type="button" class="gh-storeBtn${on ? " is-on" : ""}"
+                aria-pressed="${on ? "true" : "false"}" data-store="${s.id}" data-group="${group}">
                 <span class="gh-storeBtnTick" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </span>
@@ -70,7 +70,7 @@
     }).join("");
     return `<div class="gh-storePick" data-picker="${group}">
         <span class="gh-storePickLabel" id="storeLbl-${group}">Which shop?</span>
-        <div class="gh-storeBtns" role="radiogroup" aria-labelledby="storeLbl-${group}">${buttons}</div>
+        <div class="gh-storeBtns" role="group" aria-labelledby="storeLbl-${group}">${buttons}</div>
       </div>`;
   }
 
@@ -85,7 +85,7 @@
       document.querySelectorAll("[data-store]").forEach((b) => {
         const on = b.dataset.store === btn.dataset.store;
         b.classList.toggle("is-on", on);
-        b.setAttribute("aria-checked", on ? "true" : "false");
+        b.setAttribute("aria-pressed", on ? "true" : "false");
       });
       document
         .querySelectorAll(".gh-storePick")
@@ -347,7 +347,7 @@
     if (count) {
       count.textContent = toks.length
         ? `${filtered.length} ${filtered.length === 1 ? "match" : "matches"}`
-        : `${filtered.length} in store now`;
+        : `${filtered.length} on our list`;
     }
 
     if (filtered.length === 0) {
@@ -368,7 +368,7 @@
           const btn = $("#emptyClear");
           if (btn) btn.addEventListener("click", clearSearch);
         } else {
-          empty.innerHTML = `<p>Nothing in ${escapeHtml(state.activeCat)} on the shelves this week. Check back Friday, or give us a ring.</p>`;
+          empty.innerHTML = `<p>We're not listing anything in ${escapeHtml(state.activeCat)} at the moment. Check back Friday, or give us a ring.</p>`;
         }
       }
       return;
@@ -578,6 +578,15 @@
       .filter((e) => e.p);
   }
 
+  // A wa.me link carries the whole message inside the URL, and each item line
+  // costs roughly 46 characters once encoded. A full-catalogue list runs past
+  // 3,500, and some Android WhatsApp handlers drop a link that long without
+  // saying anything, so the order is lost and nobody knows. Thirty lines keeps
+  // the worst case under 2,000, which is the length every handler we know of
+  // carries safely. Sending the order is the whole point of the site, so the
+  // cap sits below the risky threshold rather than near it.
+  const MAX_MESSAGE_LINES = 30;
+
   // The message the customer sends. Prices are quoted as "from the website"
   // because several items are weighed at the counter and the rest are only
   // ever advertised as a reference.
@@ -590,16 +599,28 @@
     const asking = entries.length - priced.length;
     const total = priced.reduce((sum, e) => sum + e.p.price * e.qty, 0);
 
+    // Trim the item lines, not the total: the total still covers the whole
+    // list, and the extra line tells the owner the rest is coming in person.
+    const shown = lines.slice(0, MAX_MESSAGE_LINES);
+    const dropped = lines.length - shown.length;
+    if (dropped > 0) {
+      shown.push(
+        `- and ${dropped} more item${dropped === 1 ? "" : "s"} - I'll bring the full list in with me.`,
+      );
+    }
+
     const shop = storeChoice.get();
     const at = shop ? `\nShop: ${shop.label} (${shop.where})\n` : "";
-    let msg = `Hi Giottos, please could you set these aside for me?\n${at}\n${lines.join("\n")}`;
+    let msg = `Hi Giottos, please could you put these by for me?\n${at}\n${shown.join("\n")}`;
     if (priced.length) {
       msg += `\n\nRough total from the website: ${fmtPrice(total)}`;
       if (asking) {
-        msg += `\n(${asking} item${asking === 1 ? "" : "s"} priced in store, so not counted.)`;
+        msg += `\n(${asking} item${asking === 1 ? "" : "s"} priced in store, so not counted above.)`;
       }
     }
-    return `${msg}\n\nThank you!`;
+    // Says out loud what the drawer says on screen, so the expectation travels
+    // with the message instead of staying behind on the website.
+    return `${msg}\n\nI'll collect and pay in the shop. Could you let me know what's in, and roughly when it'll be ready? Thank you!`;
   }
 
   // ---------- List: drawer ----------
@@ -848,8 +869,18 @@
     const slot = $("#cfStore");
     if (slot) slot.innerHTML = storePickerMarkup("contact");
 
+    // A blocked pop-up used to fail in complete silence: the form sat there
+    // full of typing with no way of knowing whether anything had happened.
+    const fallback = $("#cfFallback");
+    const showFallback = (url) => {
+      if (!fallback) return;
+      fallback.innerHTML = `Your browser blocked the WhatsApp window. <a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open WhatsApp yourself</a> and your message will be waiting.`;
+      fallback.hidden = false;
+    };
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      if (fallback) fallback.hidden = true;
       const name = ($("#cfName").value || "").trim();
       const message = ($("#cfMessage").value || "").trim();
       if (!name || !message) {
@@ -868,7 +899,14 @@
       }
       const text = `Hi Giottos, my name is ${name}.\n\nShop: ${shop.label} (${shop.where})\n\n${message}`;
       const url = `${CONTACT.wa}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
+      const win = window.open(url, "_blank");
+      if (!win) {
+        showFallback(url);
+        return;
+      }
+      // Cleared only once WhatsApp is genuinely open, so nothing is lost if the
+      // handoff failed and the visitor has to try again.
+      form.reset();
     });
   }
 
@@ -995,6 +1033,7 @@
     bindFab();
     bindBurgerMenu();
     bindStorePickers();
+    bindMapConsent();
     mountList();
 
     const yr = $("#year");
@@ -1063,20 +1102,58 @@
     });
   }
 
+  // ---------- Google Maps, on request only (visit page) ----------
+  // The embeds were the one thing on this site that reached a third party, and
+  // set its cookies, before anyone had asked for anything. They now wait for a
+  // press. The plain "Open in Google Maps" links above each panel are
+  // untouched, so directions never require loading the embed at all.
+  function bindMapConsent() {
+    document.querySelectorAll(".gh-mapConsent").forEach((panel) => {
+      const btn = panel.querySelector("button");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        const frame = document.createElement("iframe");
+        frame.src = panel.dataset.map;
+        frame.width = "100%";
+        frame.height = "300";
+        frame.allowFullscreen = true;
+        frame.loading = "lazy";
+        frame.title = panel.dataset.mapTitle || "Map";
+        panel.replaceWith(frame);
+        // The map is the thing they just asked for, so send them into it.
+        frame.focus();
+      });
+    });
+  }
+
   // ---------- Hamburger menu (mobile) ----------
   function bindBurgerMenu() {
     const burger = $("#burger");
     const menu = $("#mobileMenu");
     if (!burger || !menu) return;
 
+    // The menu is a full-viewport fixed overlay, exactly like the list drawer,
+    // so it has to behave like one: lock the page behind it and keep Tab
+    // inside it. Without this the page scrolls under the open menu and Tab
+    // walks off into links nobody can see.
+    let menuLastFocused = null;
+
     const close = () => {
+      if (!burger.classList.contains("is-open")) return;
       burger.classList.remove("is-open");
       menu.classList.remove("is-open");
       burger.setAttribute("aria-expanded", "false");
       document.body.classList.remove("gh-menuOpen");
+      document.body.classList.remove("gh-noScroll");
+      if (menuLastFocused && document.contains(menuLastFocused)) {
+        menuLastFocused.focus();
+      }
+      menuLastFocused = null;
     };
     const open = () => {
+      menuLastFocused = document.activeElement;
       document.body.classList.add("gh-menuOpen");
+      document.body.classList.add("gh-noScroll");
       // Measure <header> itself, not the inner bar: it paints the cocoa
       // background across the whole block, so that is what a link has to clear.
       // Measured after the class lands, so the collapsed category strip is
@@ -1089,6 +1166,18 @@
       burger.classList.add("is-open");
       menu.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");
+      // Two frames, not one. The menu fades in from visibility:hidden, and on
+      // the first frame after the class lands it still computes as hidden, so
+      // focus() is silently ignored. By the second frame the transition has
+      // started and the element can take focus.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const first = menu.querySelector(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+          if (first) first.focus();
+        });
+      });
     };
 
     burger.addEventListener("click", (e) => {
@@ -1108,7 +1197,13 @@
       if (!menu.contains(e.target) && !burger.contains(e.target)) close();
     });
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") close();
+      if (!burger.classList.contains("is-open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+      }
+      // Same helper the drawer uses, so there is one focus trap on the site.
+      if (e.key === "Tab") trapFocus(e, menu);
     });
     // Close on scroll so the menu never sits open (and blocking taps)
     // over content the user has scrolled to.

@@ -10,6 +10,9 @@
       tel: "tel:+" + cc + national, // +447423233050
       wa: "https://wa.me/" + cc + national, // wa.me/447423233050
       display: "0" + national.slice(0, 4) + " " + national.slice(4), // 07423 233050
+      // Split the same way, and for the same reason: a scraper reading the
+      // served HTML finds no address to harvest.
+      email: ["giottos", ".grafix"].join("") + "@" + ["gmail", "com"].join("."),
     };
   })();
 
@@ -1060,6 +1063,12 @@
       .forEach((el) => el.setAttribute("href", CONTACT.wa));
     document.querySelectorAll("[data-phone]").forEach((el) => {
       el.textContent = CONTACT.display;
+    });
+    document
+      .querySelectorAll("[data-mail]")
+      .forEach((el) => el.setAttribute("href", "mailto:" + CONTACT.email));
+    document.querySelectorAll("[data-email]").forEach((el) => {
+      el.textContent = CONTACT.email;
     });
   }
 

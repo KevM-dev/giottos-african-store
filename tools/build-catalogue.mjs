@@ -229,7 +229,7 @@ function renderProductsJs(products, stamp) {
     return `  { ${parts.join(", ")} },`;
   };
 
-  return `// GENERATED FILE — do not edit by hand.
+  return `// GENERATED FILE. Do not edit by hand.
 // Source: the "Products" tab of the Giottos Inventory Google Sheet.
 // Rebuilt by tools/build-catalogue.mjs via .github/workflows/catalogue.yml
 // Last built: ${stamp}
@@ -282,7 +282,7 @@ try {
   }
 
   if (errors.length) {
-    console.error(`\n${errors.length} error(s) — nothing was written:`);
+    console.error(`\n${errors.length} error(s), nothing was written:`);
     errors.forEach((e) => console.error(`  x ${e}`));
     console.error("\nThe live site is unchanged. Fix the sheet and run again.");
     process.exit(1);

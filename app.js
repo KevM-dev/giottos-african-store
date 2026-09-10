@@ -1,4 +1,4 @@
-// Giottos African Store — storefront app (vanilla JS, multi-page)
+// Giottos African Store: storefront app (vanilla JS, multi-page)
 (() => {
   "use strict";
 
@@ -305,7 +305,7 @@
     syncUrl();
   }
 
-  // ---------- Render: category tiles (home page — link to shop) ----------
+  // ---------- Render: category tiles (home page, link to shop) ----------
   function renderCatTiles() {
     const grid = $("#catGrid");
     if (!grid) return;
@@ -363,7 +363,7 @@
           const btn = $("#emptyShowAll");
           if (btn) btn.addEventListener("click", () => setCat("All"));
         } else if (toks.length) {
-          empty.innerHTML = `<p>Nothing matches "${escapeHtml(state.query.trim())}". Try ${suggestionHtml()} — or ring us and we'll check the back.</p>
+          empty.innerHTML = `<p>Nothing matches "${escapeHtml(state.query.trim())}". Try ${suggestionHtml()}, or ring us and we'll check the back.</p>
             <button type="button" class="gh-emptyBtn" id="emptyClear">Clear search</button>`;
           const btn = $("#emptyClear");
           if (btn) btn.addEventListener("click", clearSearch);

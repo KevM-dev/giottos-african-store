@@ -1,4 +1,4 @@
-// GENERATED FILE — do not edit by hand.
+// GENERATED FILE. Do not edit by hand.
 // Source: the "Products" tab of the Giottos Inventory Google Sheet.
 // Rebuilt by tools/build-catalogue.mjs via .github/workflows/catalogue.yml
 // Last built: 2026-08-28 23:18 UTC

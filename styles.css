@@ -1,5 +1,5 @@
 /* ============================================================
-   Giottos African Store — combined stylesheet
+   Giottos African Store: combined stylesheet
    Tokens + components + responsive
    ============================================================ */
 
@@ -2356,6 +2356,12 @@ body.gh-menuOpen .gh-listFab {
   color: var(--fg-3);
   line-height: 1.45;
 }
+/* The disabled Send button explains itself in a title attribute, which a
+   phone never shows. This says the same thing out loud, and only while
+   no shop has been picked. */
+.gh-listPickNote {
+  margin-top: 10px;
+}
 /* ============ Which-shop picker ============ */
 .gh-storePick {
   margin-top: 14px;
@@ -2423,7 +2429,7 @@ body.gh-menuOpen .gh-listFab {
   color: var(--brand-raspberry);
 }
 .gh-storePick.is-missing .gh-storePickLabel::after {
-  content: " — pick one to send";
+  content: ", pick one to send";
   letter-spacing: 0.04em;
 }
 /* The contact form sits on a light card, so its picker needs its own spacing. */

@@ -152,7 +152,7 @@
       image: "assets/products/pantry/blue-band-margarine.webp",
     },
     {
-      name: "Nestlé Milo",
+      name: "Nestle Milo",
       sub: "1.4kg · The family tin, discounted",
       was: 13.0,
       now: 11.0,
@@ -347,7 +347,7 @@
     if (count) {
       count.textContent = toks.length
         ? `${filtered.length} ${filtered.length === 1 ? "match" : "matches"}`
-        : `${filtered.length} on our list`;
+        : `${filtered.length} items`;
     }
 
     if (filtered.length === 0) {
@@ -399,13 +399,13 @@
            onerror="this.remove()" />`
       : placeholderMarkup(p);
 
-    // Fixed prices read as a price; "Ask in-store" reads as a note, so nobody
+    // Fixed prices read as a price; "Ask in store" reads as a note, so nobody
     // mistakes a variable-weight item for a missing price.
     const price =
       p.price == null
-        ? `<span class="gh-pPrice is-poa" title="Priced by weight or size on the day, just ask at the counter">
+        ? `<span class="gh-pPrice is-poa" title="Priced by weight or size on the day. Just ask at the counter.">
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg>
-             Ask in-store</span>`
+             Ask in store</span>`
         : `<span class="gh-pPrice is-fixed">${fmtPrice(p.price)}</span>`;
 
     const on = list.has(p.id);
@@ -605,13 +605,13 @@
     const dropped = lines.length - shown.length;
     if (dropped > 0) {
       shown.push(
-        `- and ${dropped} more item${dropped === 1 ? "" : "s"} - I'll bring the full list in with me.`,
+        `- and ${dropped} more item${dropped === 1 ? "" : "s"}. I'll bring the full list in with me.`,
       );
     }
 
     const shop = storeChoice.get();
-    const at = shop ? `\nShop: ${shop.label} (${shop.where})\n` : "";
-    let msg = `Hi Giottos, please could you put these by for me?\n${at}\n${shown.join("\n")}`;
+    const at = shop ? `Shop: ${shop.label} (${shop.where})\n\n` : "";
+    let msg = `Hi Giottos, please could you put these by for me?\n\n${at}${shown.join("\n")}`;
     if (priced.length) {
       msg += `\n\nRough total from the website: ${fmtPrice(total)}`;
       if (asking) {
@@ -650,14 +650,14 @@
       <div class="gh-listBackdrop" data-list-close></div>
       <aside class="gh-listPanel" role="dialog" aria-modal="true" aria-labelledby="listTitle">
         <header class="gh-listHead">
-          <h2 class="gh-listTitle" id="listTitle">Your list</h2>
+          <h2 class="gh-listTitle" id="listTitle">My list</h2>
           <button type="button" class="gh-listClose" data-list-close aria-label="Close list">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </button>
         </header>
-        <p class="gh-listIntro">Nothing is paid for on this website. Send us the list, we'll confirm what's in and set it aside, then you can pay by bank transfer or in the shop.</p>
+        <p class="gh-listIntro">Nothing is paid for on this website. Send us the list, we'll confirm what's in and put it by, then you can pay by bank transfer or in the shop.</p>
         <div class="gh-listBody" id="listBody"></div>
         <footer class="gh-listFoot" id="listFoot"></footer>
       </aside>`;
@@ -768,7 +768,7 @@
 
     const entries = listEntries();
     if (!entries.length) {
-      body.innerHTML = `<p class="gh-listEmpty">Your list is empty. Browse the shop and add anything you'd like us to put by.</p>`;
+      body.innerHTML = `<p class="gh-listEmpty">Your list is empty. Have a look round the shop and add anything you'd like us to put by.</p>`;
       foot.innerHTML = "";
       return;
     }
@@ -785,15 +785,15 @@
           <div class="gh-listInfo">
             <div class="gh-listName">${who}</div>
             <div class="gh-listMeta">${escapeHtml(p.size)} · ${
-              p.price == null ? "Ask in-store" : fmtPrice(p.price)
+              p.price == null ? "Ask in store" : fmtPrice(p.price)
             }</div>
           </div>
           <div class="gh-listQty">
-            <button type="button" data-step="${p.id}" data-by="-1" aria-label="One fewer ${who}">
+            <button type="button" data-step="${p.id}" data-by="-1" aria-label="Remove one ${who}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
             <span class="gh-listQtyNum">${qty}</span>
-            <button type="button" data-step="${p.id}" data-by="1" aria-label="One more ${who}">
+            <button type="button" data-step="${p.id}" data-by="1" aria-label="Add one more ${who}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
           </div>
@@ -820,6 +820,11 @@
           : ""
       }
       ${storePickerMarkup("list")}
+      ${
+        storeChoice.get()
+          ? ""
+          : `<p class="gh-listNote gh-listPickNote" id="listPickNote">Pick Norwich or Great Yarmouth above, then you can send your list.</p>`
+      }
       <a class="gh-listSend" id="listSend" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05.18C5.5.18.16 5.51.16 12.07c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.49-8.42"/></svg>
         Send list on WhatsApp
@@ -836,6 +841,10 @@
     const send = $("#listSend");
     if (!send) return;
     const shop = storeChoice.get();
+    // The title is invisible on a phone, so the drawer carries a visible note
+    // as well. It goes as soon as a shop is picked.
+    const pickNote = $("#listPickNote");
+    if (pickNote) pickNote.hidden = Boolean(shop);
     if (shop) {
       send.href = `${CONTACT.wa}?text=${encodeURIComponent(listMessage())}`;
       send.classList.remove("is-blocked");
@@ -874,7 +883,7 @@
     const fallback = $("#cfFallback");
     const showFallback = (url) => {
       if (!fallback) return;
-      fallback.innerHTML = `Your browser blocked the WhatsApp window. <a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open WhatsApp yourself</a> and your message will be waiting.`;
+      fallback.innerHTML = `Your browser blocked the WhatsApp window. <a href="${escapeHtml(url)}" target="_blank" rel="noopener">Open WhatsApp here</a> and your message will be waiting.`;
       fallback.hidden = false;
     };
 
@@ -930,7 +939,7 @@
         ${slideVisual}
         <div class="gh-dealOverlay"></div>
         <div class="gh-dealContent">
-          <span class="gh-dealBadge">★ This week's deal</span>
+          <span class="gh-dealBadge">★ In-shop deal, ask at the counter</span>
           <div class="gh-dealInfo">
             <div class="gh-dealName">${escapeHtml(deal.name)}</div>
             <div class="gh-dealPrices">

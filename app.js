@@ -620,7 +620,7 @@
     }
     // Says out loud what the drawer says on screen, so the expectation travels
     // with the message instead of staying behind on the website.
-    return `${msg}\n\nI'll collect and pay in the shop. Could you let me know what's in, and roughly when it'll be ready? Thank you!`;
+    return `${msg}\n\nCould you let me know what's in, and roughly when it'll be ready? I can pay by bank transfer or in the shop. Thank you!`;
   }
 
   // ---------- List: drawer ----------
@@ -657,7 +657,7 @@
             </svg>
           </button>
         </header>
-        <p class="gh-listIntro">Nothing is bought or paid for here. Send us the list and we'll set it aside for you to collect.</p>
+        <p class="gh-listIntro">Nothing is paid for on this website. Send us the list, we'll confirm what's in and set it aside, then you can pay by bank transfer or in the shop.</p>
         <div class="gh-listBody" id="listBody"></div>
         <footer class="gh-listFoot" id="listFoot"></footer>
       </aside>`;

@@ -2515,6 +2515,51 @@ body.gh-menuOpen .gh-listFab {
   height: 19px;
   flex: none;
 }
+/* Shown in place of the send button while WhatsApp sending is paused. Styled
+   as a notice rather than a disabled button: a button that cannot be pressed
+   reads as breakage, a notice reads as a decision. */
+.gh-listPaused {
+  border: 1px solid var(--border-1);
+  border-radius: 14px;
+  background: var(--bg-tint);
+  padding: 14px 16px;
+  margin-top: 4px;
+}
+.gh-listPaused p {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.gh-listPausedTitle {
+  font-family: var(--ff-display);
+  font-size: 14px !important;
+  color: var(--fg-1) !important;
+  letter-spacing: 0.01em;
+}
+.gh-listPaused p:last-of-type {
+  margin-bottom: 12px;
+}
+.gh-listCall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: var(--brand-raspberry, #b8244c);
+  color: #fff;
+  font-family: var(--ff-display);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.gh-listCall:hover {
+  filter: brightness(1.08);
+}
+
 .gh-listClearBtn {
   margin-top: 8px;
   width: 100%;

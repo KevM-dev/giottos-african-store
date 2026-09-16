@@ -16,6 +16,13 @@
     };
   })();
 
+  // ---------- Temporary: WhatsApp list sending is paused ----------
+  // The shop asked for order sending to stop on 16/09/2026, back on around
+  // 25/09/2026. Building a list still works and saved lists are untouched, so
+  // nobody loses what they put together. Flip this back to true to restore
+  // everything: nothing else needs editing in this file.
+  const LIST_SENDING_ENABLED = false;
+
   // ---------- Stores ----------
   // Two shops now, so anything the customer sends has to say which one, or the
   // owner is left guessing which counter to put an order behind.
@@ -660,7 +667,11 @@
             </svg>
           </button>
         </header>
-        <p class="gh-listIntro">Nothing is paid for on this website. Send us the list, we'll confirm what's in and put it by, then you can pay by bank transfer or in the shop.</p>
+        <p class="gh-listIntro">${
+          LIST_SENDING_ENABLED
+            ? "Nothing is paid for on this website. Send us the list, we'll confirm what's in and put it by, then you can pay by bank transfer or in the shop."
+            : "Nothing is paid for on this website. Your list is saved on this device, so you can keep adding to it and it will still be here later."
+        }</p>
         <div class="gh-listBody" id="listBody"></div>
         <footer class="gh-listFoot" id="listFoot"></footer>
       </aside>`;
@@ -822,16 +833,25 @@
           ? `<p class="gh-listNote">${asking} item${asking === 1 ? " is" : "s are"} priced in store, so not counted above.</p>`
           : ""
       }
-      ${storePickerMarkup("list")}
+      ${LIST_SENDING_ENABLED ? storePickerMarkup("list") : ""}
       ${
-        storeChoice.get()
+        !LIST_SENDING_ENABLED || storeChoice.get()
           ? ""
           : `<p class="gh-listNote gh-listPickNote" id="listPickNote">Pick Norwich or Great Yarmouth above, then you can send your list.</p>`
       }
-      <a class="gh-listSend" id="listSend" target="_blank" rel="noopener">
+      ${
+        LIST_SENDING_ENABLED
+          ? `<a class="gh-listSend" id="listSend" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05.18C5.5.18.16 5.51.16 12.07c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.49-8.42"/></svg>
         Send list on WhatsApp
-      </a>
+      </a>`
+          : `<div class="gh-listPaused">
+               <p class="gh-listPausedTitle">Sending lists on WhatsApp is paused just now.</p>
+               <p>It will be back on shortly. Your list stays saved on this device in the meantime, so nothing you have added is lost.</p>
+               <p>To order today, give us a ring and read your list down the phone, or bring it in with you. Tell us which shop you want and we'll put it by.</p>
+               <a class="gh-listCall" href="${CONTACT.tel}"><span aria-hidden="true">☎</span> Call the shop</a>
+             </div>`
+      }
       <button type="button" class="gh-listClearBtn" id="listClear">Clear list</button>`;
 
     refreshSendState();

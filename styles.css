@@ -1797,6 +1797,31 @@ body.gh-menuOpen .gh-listFab {
 .gh-footerCol a:hover {
   color: var(--brand-cream);
 }
+/* Each shop as its own bullet, so the two addresses read as two places
+   rather than one run of text. The marker is tinted to match the column
+   headings, otherwise a default black bullet disappears on the cocoa. */
+.gh-footerShops {
+  list-style: disc;
+  margin: 0;
+  padding-left: 18px;
+}
+.gh-footerShops li {
+  color: var(--fg-on-dark-muted);
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 4px 0;
+}
+.gh-footerShops li + li {
+  margin-top: 10px;
+}
+.gh-footerShops li::marker {
+  color: var(--brand-pink-soft);
+}
+.gh-footerShops strong {
+  color: var(--brand-cream);
+  font-weight: 600;
+}
+
 .gh-footerWordmark {
   display: inline-flex;
   align-items: center;
